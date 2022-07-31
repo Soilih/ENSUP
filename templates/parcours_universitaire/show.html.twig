@@ -1,0 +1,75 @@
+{% extends 'base.html.twig' %}
+{% block body %}
+
+<div class="wrapper">
+  <div class="content-wrapper">
+     <div class="row" style="padding-left:2%;padding-top:2%">
+          <div class="col-md-7">
+            <div class="card card-success">
+              <div class="card-header">
+                <h3 class="card-title">
+                  
+                 Description cursus 
+                </h3>
+              </div>
+              <!-- /.card-header -->
+              <div class="card-body">
+                  <table class="table table-boredered table-striped" style"width:100%">
+                    <tbody style="font-size:18px">
+                        <tr>
+                            <th>Une anneé d'etude supérieur : </th>
+                            <td>{{ parcours_universitaire.AnneInscription ? parcours_universitaire.AnneInscription|date('Y-m-d') : '' }}</td>
+                        </tr>
+                        <tr>
+                            <th>Filiere d'etude : </th>
+                            <td>{{ parcours_universitaire.filiere }}</td>
+                        </tr>
+                        <tr>
+                            <th>Mention obtenue : </th>
+                            <td>{{ parcours_universitaire.mention }}</td>
+                        </tr>
+                        <tr>
+                            <th>Justificatif : </th>
+                            <td>
+                              <a href="{{ asset('upload/'~ parcours_universitaire.fichier) }}">consulter</a>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>Description de votre cursus : </th>
+                            <td>{{ parcours_universitaire.detail }}</td>
+                        </tr>
+                        <tr>
+                            <th>Moyenne annuelle : </th>
+                            <td>{{ parcours_universitaire.moyenne }}</td>
+                        </tr>
+                        <tr>
+                            <th>Titre de l'univeriste etudié :  </th>
+                            <td>{{ parcours_universitaire.titreUniveriste }}</td>
+                        </tr>
+                         
+                        <tr>
+                            <th> Pays  :  </th>
+                            <td>{{ parcours_universitaire.pays}}</td>
+                        </tr>
+                        <tr>
+                            <th> Niveau d'etude:  </th>
+                            <td>{{ parcours_universitaire.niveau.libelle }}</td>
+                        </tr>
+                        <tr>
+                            <th> Type etablissement:  </th>
+                            <td>{{ parcours_universitaire.typeuniversite.libelle }}</td>
+                        </tr>
+                    </tbody>
+                  </table>
+                <br>
+                <br>
+
+              </div>
+              <!-- /.card-body -->
+            </div>
+          </div>  
+        </div>
+    </div>
+</div>
+
+{% endblock %}

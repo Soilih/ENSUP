@@ -1,0 +1,61 @@
+{% extends 'base.html.twig' %}
+{% block body %}
+<div class="wrapper">
+  <div class="content-wrapper">
+     <div class="row" style="padding-left:2%;padding-top:2%">
+          <div class="col-md-12">
+          
+           
+            <div class="card card-success">
+              <div class="card-header">
+                  <h3 class="card-title">   Gestion etudiants </h3>
+                </div>
+               
+              <!-- /.card-header -->
+              <div class="card-body">
+              
+               <table id="data"  class="table table-bordered table-striped">
+                <thead>
+                  <tr>
+                    <th>Nom de famille </th>
+                    <th>prenom  </th>
+                    <th>Numero de table </th>
+                    <th>Nin   </th>
+                    <th>Identifiant   </th>
+                    <th>Anneé de session </th>
+                    <th>E-mail </th>
+                    <th>Status compte </th>
+                    <th>Actions  </th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                
+                   {% for et  in nos_etudiant %}
+                       {% if (et.roles| length) < 1  %}
+                        <td>{{ et.nom }}</td>
+                        <td>{{ et.prenom }}</td> 
+                        <td>{{ et.num_table }}</td> 
+                        <td>{{ et.nin }}</td> 
+                        <td>{{ et.code }}</td>
+                        <td>{{ et.session }}</td>
+                        <td>{{ et.email }}</td>
+                        <td>{{ et.isVerified ? '<span class="badge badge-success">Activé</span> ' : '<span class="badge badge-danger"> desactivé </span>' }}</td>
+                        <td>
+                          <a href="{{ path('listetudiantDetailEtudiant' , {id: et.id} ) }}" ><i style="color:bleu ; font-size:24px" class="fa fa-eye"></i></a>       
+                        </td>
+                        </tr>
+                         {% endif %} 
+                   {% endfor %}
+                 
+                </tbody>
+              </table>
+              </div>
+              <!-- /.card-body -->
+            </div>
+          </div>  
+        </div>
+    </div>
+</div>
+
+{% endblock %}

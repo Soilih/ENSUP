@@ -1,0 +1,109 @@
+{% extends "base.html.twig" %}
+{% block body %}
+   <section>
+        <div class="section__content section__content--p100">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-lg-8 col-xl-8">
+                        <div class="card border-primary">
+                             <h5 class="card-header bg-primary mb-3">Informations personnelles </h5>
+                            <div class="card-body">
+                                <table class="table table-striped table-bordered" style=" width: 100%">
+                                    <tbody>
+                                        {% for etudiants  in app.user.etudiants %}
+                                        <tr>
+                                            <th>Genre </th>
+                                            <td>{{etudiants.sexe }}  </td>
+                                        </tr>
+                                            <tr>
+                                            <th>Etat civile  </th>
+                                            <td>{{etudiants.etatcivile }}  </td>
+                                        </tr>
+                                        <tr>
+                                            <th>Identifiant  </th>
+                                            <td>{{app.user.code}} </td>
+                                        </tr>
+                                        <tr>
+                                            <th>Nom de famille </th>
+                                            <td>{{ app.user.nom}}   </td>
+                                        </tr>
+                                        <tr>
+                                            <th>Prenom </th>
+                                            <td>{{app.user.prenom}}   </td>
+                                        </tr>
+                                        <tr>
+                                            <th>Adresse e-mail </th>
+                                            <td>{{app.user.email}} </td>
+                                        </tr>
+                                        <tr>
+                                            <th>Telephone personnel </th>
+                                            <td>{{ etudiants.telephone}}  </td>
+                                        </tr>
+                                        
+                                        {% endfor %}
+                                        
+                                    </tbody>
+                                </table> 
+                                <table class="table table-striped table-bordered" style=" width: 100%">
+                                <tbody>
+                                    {% for etudiants  in app.user.etudiants %}
+                                    <tr>
+                                        <th>Lieu de naissance  </th>
+                                        <td> {{etudiants.lieuNaissance}} </td>
+                                    </tr>
+                                    <tr>
+                                        <th>Date de naissance  </th>
+                                        <td>{{etudiants.dateNaissance | date('y/m/d') }}   </td>
+                                    </tr>
+                                    <tr>
+                                        <th>Adresse domicile   </th>
+                                        <td> {{etudiants.adresse}}   </td>
+                                    </tr>
+                                    <tr>
+                                        <th>Personne à contacter en cas d'urgence  </th>
+                                        <td> {{etudiants.telUrgence}}    </td>
+                                    </tr>
+                                    <tr>
+                                        <th>Statut actuel  </th>
+                                        <td> {{etudiants.status}}   </td>
+                                    </tr>
+                                    <tr>
+                                        <th> Ile de naissance  </th>
+                                        <td> {{etudiants.ile}}     </td>
+                                    </tr>
+                                {% endfor %}
+                                </tbody>
+                            </table> 
+                            </div>
+                        </div>
+                    </div>
+                   <div class="col-lg-4 col-xl-3">
+                        <div class="card" style="width: 50rem;">
+                            <h5 class="card-header bg-primary mb-3">Information baccalaureat</h5>
+                            <div class="card-body">
+                                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                            </div>
+                        </div>
+                        <div class="card" style="width: 50rem;">
+                            <h5 class="card-header bg-primary mb-3">Information bourse </h5>
+                            <div class="card-body">
+                                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                            </div>
+                        </div>
+                        
+                    </div>
+                </div>
+            </div>
+            {% for candidat in app.user.candidatures %}
+                {% if candidat.status == 0  %}
+                {{ candidat.id }}
+                <div style="padding-left:20%">
+                <a href="{{ path('candidature_valider' , {'id_candidature': candidat.id }) }}" class="btn btn-xl btn-success">Valider dossier  </a>
+                <a href="#" class="btn  btn-danger">Annuler dossier  </a>
+                </div>
+                {% endif %}
+            {% endfor %}
+        </div>
+    </section>
+</div>
+{% endblock %}

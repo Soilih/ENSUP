@@ -1,0 +1,50 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}InformationBac{% endblock %}
+
+{% block body %}
+    <h1>InformationBac</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ information_bac.id }}</td>
+            </tr>
+            <tr>
+                <th>Ecole</th>
+                <td>{{ information_bac.ecole }}</td>
+            </tr>
+            <tr>
+                <th>Moyenne</th>
+                <td>{{ information_bac.moyenne }}</td>
+            </tr>
+            <tr>
+                <th>Mention</th>
+                <td>{{ information_bac.mention }}</td>
+            </tr>
+            <tr>
+                <th>Attestation</th>
+                <td>{{ information_bac.attestation }}</td>
+            </tr>
+            <tr>
+                <th>Releve</th>
+                <td>{{ information_bac.releve }}</td>
+            </tr>
+            <tr>
+                <th>Session</th>
+                <td>{{ information_bac.session }}</td>
+            </tr>
+            <tr>
+                <th>Cursus</th>
+                <td>{{ information_bac.cursus }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('information_bac_index') }}">back to list</a>
+
+    <a href="{{ path('information_bac_edit', {'id': information_bac.id}) }}">edit</a>
+
+    {{ include('information_bac/_delete_form.html.twig') }}
+{% endblock %}

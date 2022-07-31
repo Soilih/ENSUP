@@ -1,0 +1,71 @@
+
+{% extends 'base.html.twig' %}
+{% block body %}
+
+<div class="wrapper">
+  <div class="content-wrapper">
+     <div class="row" style="padding-left:2%;padding-top:2%">
+          <div class="col-md-8">
+            <div class="card card-success">
+              <div class="card-header">
+                <h3 class="card-title">
+             
+                  Description : 
+                </h3>
+              </div>
+              <!-- /.card-header -->
+              <div class="card-body">
+               <table class="table ">
+                 <tbody>
+                        <tr>
+                            <th>Diplome</th>
+                            <td>{{ diplome.typediplome.libelle }}</td>
+                        </tr>
+                        
+                        <tr>
+                            <th>Libelle</th>
+                            <td>{{ diplome.libelle }}</td>
+                        </tr>
+                        <tr>
+                            <th>Fichier</th>
+                            <td>{{ diplome.fichier }}</td>
+                        </tr>
+                        <tr>
+                            <th>Universite</th>
+                            <td>{{ diplome.universite }}</td>
+                        </tr>
+                        <tr>
+                            <th>Pays</th>
+                            <td>{{ diplome.pays }}</td>
+                        </tr>
+                        <tr>
+                            <th>Session</th>
+                            <td>{{ diplome.session }}</td>
+                        </tr>
+                        <tr>
+                            <th>Description</th>
+                            <td>{{ diplome.description }}</td>
+                        </tr>
+                        <tr>
+                            <th>Mention</th>
+                            <td>{{ diplome.mention }}</td>
+                        </tr>
+                        <tr>
+                            <th>Moyenne</th>
+                            <td>{{ diplome.moyenne }}</td>
+                        </tr>
+                    </tbody>
+                </table>
+                 <br>
+                 <br>
+                
+              </div>
+              <!-- /.card-body -->
+            </div>
+          </div>  
+        </div>
+    </div>
+</div>
+
+{% endblock %}
+

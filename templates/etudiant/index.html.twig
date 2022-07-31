@@ -1,0 +1,160 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+  <div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <div class="content-header">
+      <div class="container-fluid">
+        <div class="row mb-2">
+          <div class="col-sm-6">
+            <h1 class="m-0">Dashboard</h1>
+          </div><!-- /.col -->
+          <div class="col-sm-6">
+            <ol class="breadcrumb float-sm-right">
+              <li class="breadcrumb-item"><a href="#">Home</a></li>
+              <li class="breadcrumb-item active">Dashboard v1</li>
+            </ol>
+          </div><!-- /.col -->
+        </div><!-- /.row -->
+      </div><!-- /.container-fluid -->
+    </div>
+    <section class="content">
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col-md-12">
+            <div class="card card-primary card-outline">
+              <div class="card-header">
+                <h3 class="card-title">
+                  <i class="fas fa-edit"></i>
+                  Modal Examples
+                </h3>
+              </div>
+              <div class="card-body">
+                  <div class="col-md-6">
+                    <table id="todo" class="table table-bordered">
+                    
+                      <tbody style="padding-top:3%">
+                      {% for etudiant in app.user.etudiants  %}
+                      <tr>
+                        <td>
+                        Email: {{ app.user.email  }} 
+                      </td>
+                      <td>
+                        Nom: {{ app.user.nom  }} 
+                      </td>
+                      <td>
+                        Prenom: {{ app.user.prenom }} 
+                      </td>
+                      </tr>
+                        {% endfor %}
+                       
+                        <tr>
+                          <td>
+                          
+                        </td>
+                        </tr>
+                        {% for etudiant in app.user.etudiants  %}
+                        <tr>
+                          <td>
+                          Lieu de Naissance  : {{ etudiant.lieuNaissance  }} 
+                        </td>
+                        </tr>
+                        <tr>
+                          <td>
+                        Date de naissance: {{ etudiant.dateNaissance ? etudiant.dateNaissance|date('Y-m-d') : '' }}
+                        </td>
+                        </tr>
+                        <tr>
+                            <td>
+                            Adresse : {{ etudiant.adresse  }}
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                            Ile: {{ etudiant.ile  }}
+                            </td>
+                        </tr>
+                      
+                        <tr>
+                            <td>
+                        Sexe : {{ etudiant.sexe   }}
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                            Actions : 
+                            <button type="button" class="btn btn-theme04 delete">
+                          <a href="{{ path('etudiant_show', {'id': etudiant.id}) }}"> <i class="glyphicon glyphicon-trash"></i></a>
+                            <span>Delete</span>
+                        </button>
+
+                          <a href="{{ path('etudiant_edit', {'id': etudiant.id}) }}">
+                          <button type="button" class="btn btn-theme start">
+                            <i class="glyphicon glyphicon-pencil"></i>
+                            <span>Editer</span>
+                        </button> 
+                            </td>
+                        </tr>
+                        
+                      </tbody>
+                      
+                      {% endfor %}
+                    
+                    </table>
+                  </div>
+                <div   class="col-md-6">
+                 <table id="todo" class="table table-hover table-bordered">
+                 {% for etudiant in app.user.etudiants %}
+                  <tbody>
+                    <tr>
+                      <td>
+                        Nationalité : {{ etudiant.nationalite  }} 
+                    </td>
+                    </tr>
+                    <tr>
+                      <td>
+                       Type de piece d'identité : {{ etudiant.typeIdentite   }} 
+                    </td>
+                    </tr>
+                   
+                    <tr>
+                      <td>
+                     N° de piece d'identité : {{ app.user.nin }}
+                    </td>
+                    </tr>
+                    
+                    </tr>
+                    <tr>
+                        <td>
+                        Actions : 
+                        <button type="button" class="btn btn-theme04 delete">
+                       <a href="{{ path('etudiant_show', {'id': etudiant.id}) }}"> <i class="glyphicon glyphicon-trash"></i></a>
+                        <span>Delete</span>
+                     </button>
+
+                      <a href="{{ path('etudiant_edit', {'id': etudiant.id}) }}">
+                      <button type="button" class="btn btn-theme start">
+                        <i class="glyphicon glyphicon-pencil"></i>
+                        <span>Editer</span>
+                     </button>
+                     </a>
+                    </td>
+                    </tr>
+                  </tbody>
+                
+                  {% endfor %}
+                </table>
+                </div>
+                </div>
+                <!-- /.card -->
+              </div>
+            
+          </div>
+       
+        <!-- /row -->
+      </section>
+      <!-- /wrapper -->
+</section>
+    <!-- /.content -->
+  </div>
+{% endblock %}

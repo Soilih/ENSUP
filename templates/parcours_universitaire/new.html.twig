@@ -1,0 +1,79 @@
+{% extends 'base.html.twig' %}
+{% block body %}
+<div class="wrapper">
+  <div class="content-wrapper">
+     <div class="row" style="padding-left:2%;padding-top:2%">
+          <div class="col-md-12">
+            <div class="card card-success">
+              <div class="card-header">
+                <strong style="font-size:20px;padding-left:2%"> Cursus interne  
+                </strong>
+                
+                
+                  <a  data-toggle="modal" data-target="#responsable" href="#" class="btn btn-primary" style="float:right">Ajouter cursus interne </a>
+              </div>
+              <!-- /.card-header -->
+              <div class="card-body">
+                    <div class="card-body table-responsive p-0">
+                    <table class="table table-hover text-nowrap">
+                    <thead>
+                        <tr>
+                        
+                            <th>Anneé Inscription</th>
+                            <th>Filiére d'etude </th>
+                            <th>Mention obtenu </th>
+                            <th>Moyenne génerale</th>
+                            <th>Université d'etude </th>
+                            <th>Pays </th>
+                            <th>actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    {% for parcours_universitaire in app.user.parcours_universitaires %}
+                      
+                        <tr>
+                           <td>{{ parcours_universitaire.AnneInscription ? parcours_universitaire.AnneInscription|date('d-m-Y' , false) : '' }}</td>
+                            <td>{{ parcours_universitaire.filiere }}</td>
+                            <td>{{ parcours_universitaire.mention }}</td>
+                            <td>{{ parcours_universitaire.moyenne }}</td>
+                            <td>{{ parcours_universitaire.titreUniveriste }}</td>
+                            <td>{{ parcours_universitaire.pays }}</td>
+                            <td>
+                                <a class="btn btn-primary btn-sm" href="{{ path('parcours_universitaire_show', {'id': parcours_universitaire.id}) }}"><i  class="fas fa-eye"></i></a>
+                                <a class="btn btn-primary btn-sm" href="{{ path('parcours_universitaire_edit', {'id': parcours_universitaire.id}) }}"><i  class="fas fa-pencil-alt"></i></a>
+                                <div style="display: inline-block;padding-left:2% ; color:red">{{ include('parcours_universitaire/_delete_form.html.twig') }} </div> 
+                            </td>
+                            
+                        </tr>
+                       
+                    {% endfor %}
+                    </tbody>
+                </table>
+                </div>
+              </div>
+              <!-- /.card-body -->
+            </div>
+          </div>  
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="responsable" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Cursus interne   </h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+           {{ include('parcours_universitaire/_form.html.twig') }}
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-danger" data-dismiss="modal">Quitter</button>
+         
+        </div>
+      </div>
+    </div>
+</div>
+{% endblock %}

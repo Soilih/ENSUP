@@ -1,0 +1,148 @@
+
+{% extends 'base.html.twig' %}
+
+{% block body %}
+<div class="wrapper">
+<div class="content-wrapper">
+  <div class="row" style="padding-left:2%;padding-top:2%">
+      {% if (app.user.etudiants | length) < 1  %}
+        <div class="col-md-5">
+          <div class="card card-success">
+            <div class="card-header">
+            <strong> Information personnelles  </strong>
+            </div>  
+              <div class="card-body">
+                  {{ include('etudiant/_form.html.twig') }}
+              </div>
+          </div>
+        </div>
+      {% endif %}
+    <div class="col-md-6">
+        <div class="card text-left">
+        <div class="card-body">
+          <div class="card-header" style="font-szie:24px">
+          <h3 class="card-title">
+            Informations personnelles    
+          </h3>
+        </div>
+        <div class="table-responsive">
+            <table class="table table-striped" style=" width: 100%">
+                <tbody>
+                {% for etudiant in app.user.etudiants %}
+                  <tr>
+                      <th>Sexe</th>
+                      <td>{{ etudiant.sexe }}</td>
+                  </tr>
+                  <tr>
+                      <th>Etat civile </th>
+                      <td>{{ etudiant.etatcivile }}</td>
+                  </tr>
+                  <tr>
+                      <th>Photo </th>
+                      <td><img src="{{asset('uploads/'~ etudiant.photo) }}"> </td>
+                  </tr>
+                  <tr>
+                      <th>Nom</th>
+                      <td>{{ app.user.nom }}</td>
+                  </tr>
+                  <tr>
+                      <th>Prenom</th>
+                      <td>{{ app.user.prenom }}</td>
+                  </tr>
+                  <tr>
+                      <th>Adresse E-mail</th>
+                      <td>{{ app.user.email }}</td>
+                  </tr>
+                  <tr>
+                      <th>Telephone</th>
+                      <td>{{ etudiant.telephone }}</td>
+                  </tr>
+                  <tr>
+                      <th>Personne à contacter en cas d'urgence </th>
+                      <td>{{ etudiant.telUrgence }}</td>
+                  </tr>
+
+                  <tr>
+                      <th>Date de naissance</th>
+                      <td>{{ etudiant.dateNaissance ? etudiant.dateNaissance|date('Y-m-d') : '' }}</td>
+                  </tr>
+                  <tr>
+                      <th>Adresse domicile </th>
+                      <td>{{ etudiant.adresse }}</td>
+                  </tr>
+                  <tr>
+                      <th>Lieu de naissance</th>
+                      <td>{{ etudiant.lieuNaissance }}</td>
+                  </tr>
+                  <tr>
+                      <th>Nin</th>
+                      <td>{{ app.user.nin }}</td>
+                  </tr>
+                 <tr>
+                      <th>Nationalité</th>
+                      <td>{{ etudiant.nationalite }}</td>
+                  </tr>
+                  <tr>
+                      <th>Statut actuel </th>
+                      <td>{{ etudiant.status }}</td>
+                  </tr>
+                  <tr>
+                      <th>Ile de naissance </th>
+                      <td>{{ etudiant.ile }}</td>
+                  </tr>
+                  <tr>
+                      <th>Date de Validité </th>
+                       <td>{{ etudiant.dateExpiration ? etudiant.dateExpiration|date('Y-m-d') : '' }}</td>
+                  </tr>
+                  <tr>
+                      <th>Type de piece d'identite</th>
+                      <td>{{ etudiant.typeIdentite }}</td>
+                  </tr>
+                  <tr>
+                      <th>Pays de delivrance</th>
+                      <td>{{ etudiant.pays }}</td>
+                  </tr>
+                  
+                  <tr>
+                      <th>Date de delivrance </th>
+                       <td>{{ etudiant.dateDelivrance ? etudiant.dateDelivrance|date('Y-m-d') : '' }}</td>
+                  </tr>
+                  <tr>
+                      <th>Numero de carte d'identité  </th>
+                       <td>{{ etudiant.NumCarteidentite }}</td>
+                  </tr>
+                  <tr>
+                      <th> curriculum vitae  </th>
+                       <td><a href="{{ asset('uploads/'~ etudiant.cv) }}">consulter </a> </td>
+                  </tr>
+                  <tr>
+                      <th> Piece d'identité   </th>
+                       <td> <a href="{{ asset('uploads/'~ etudiant.Pieceidentite) }}">consulter </a></td>
+                  </tr>
+                  <tr>
+                    <th>Actions  </th>
+                    <td>
+                        <a class="btn btn-success" href="{{ path('etudiant_edit', {'id': etudiant.id}) }}"> editer</a>
+                        <div style="display:inline-block">   {{ include('etudiant/_delete_form.html.twig') }} </div>
+                      
+                    </td>
+                  </tr>
+                    {% endfor %}
+              </tbody>
+            </table>
+        </div>
+        
+      </div>
+      </div>
+      </div>
+
+
+
+    </div>
+  </div>
+</div>
+      
+          
+
+
+{% endblock %}

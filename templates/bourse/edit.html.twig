@@ -1,0 +1,25 @@
+
+{% extends 'base.html.twig' %}
+{% block body %}
+<div class="wrapper">
+  <div class="content-wrapper">
+     <div class="row" style="padding-left:2%;padding-top:2%">
+          <div class="col-md-6">
+            <div class="card card-success">
+              <div class="card-header">
+                <h3 class="card-title">
+                 
+                 Ajouter une bourse d'etude 
+                </h3>
+              </div>
+              <!-- /.card-header -->
+              <div class="card-body">
+                     {{ include('bourse/_form.html.twig', {'button_label': 'Modifier'}) }}
+              </div>
+              <!-- /.card-body -->
+            </div>
+          </div>  
+        </div>
+    </div>
+</div>
+{% endblock %}

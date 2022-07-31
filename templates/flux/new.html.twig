@@ -1,0 +1,94 @@
+{% extends 'base.html.twig' %}
+{% block body %}
+<div class="wrapper">
+  <div class="content-wrapper">
+     <div class="row" style="padding-left:2%;padding-top:2%">
+     {% if (app.user.fluxes | length) < 1  %}
+         <div class="col-md-5">
+            <div class="card card-success">
+              <div class="card-header">
+                <h3 class="card-title">
+                
+                   Ajouter un flux entrant
+                </h3>
+              </div>
+              <!-- /.card-header -->
+              <div class="card-body">
+                  {{ include('flux/_form.html.twig') }}
+              </div>
+              <!-- /.card-body -->
+            </div>
+          </div> 
+     {% endif %}
+       
+        <div class="col-lg-7">
+          <div class="card text-left">
+            <div class="card-header">
+              <h4 class="card-title">Flux entrant </h4>
+            </div>
+           <div class="card-body">
+               <div class="table-responsive">
+                <table class="table table-bordered table-striped" style=" width: 100%">
+                    <tbody>
+                        {% for flux in app.user.fluxes %}
+                            <tr>
+                            <th>date de Depart  </th>
+                            <td> {{ flux.depart ? flux.depart|date('Y-m-d') : '' }}   </td>
+                        </tr>
+                        <tr>
+                            <th>Date d'arrivée </th>
+                            <td>{{ flux.dateArrive ? flux.depart|date('Y-m-d') : '' }}   </td>
+                        </tr>
+                        <tr>
+                            <th>Niveau d'etude  actuel  </th>
+                            <td>{{ flux.niveauActuel.libelle }}   </td>
+                        </tr>
+                        <tr>
+                            <th>Cycle   </th>
+                            <td>{{ flux.cycle }}    </td>
+                        </tr>
+                        
+                        <tr>
+                            <th>Souhaitez-vous poursuivre les etudes ?  </th>
+                            <td>{{ flux.etudePoursuite }}    </td>
+                        </tr>
+                        <tr>
+                            <th> Pays effectuant les etudes </th>
+                            <td> {{ flux.pays }}  </td>
+                        </tr>
+                        <tr>
+                            <th> Deroulement des etudes </th>
+                            <td> {{ flux.detail  }}  </td>
+                        </tr>
+                        <tr>
+                            <th> Difficultés rencontreés durant les etudes  </th>
+                            <td>{{ flux.probleme   }}  </td>
+                        </tr>
+                        <tr>
+                            <th> Projet pour mon pays   </th>
+                            <td> {{ flux.projet   }}    </td>
+                        </tr>
+                        <tr>
+                            <th> Quelques suggestions   </th>
+                            <td> {{ flux.suggestion    }}    </td>
+                        </tr>
+                        <tr>
+                              <th>Actions  </th>
+                              <td>
+                                 <a class="btn btn-success" href="{{ path('flux_edit', {'id': flux.id}) }}"> editer</a>
+                                  <div style="display:inline-block">   {{ include('flux/_delete_form.html.twig') }} </div>
+                                
+                              </td>
+                          </tr>
+                        {% endfor %}
+                        
+                    </tbody>
+                </table>
+              </div>
+            </div>
+            </div>
+          </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

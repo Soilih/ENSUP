@@ -1,0 +1,103 @@
+
+{% extends 'base.html.twig' %}
+
+{% block body %}
+<div class="wrapper">
+  <div class="content-wrapper">
+     <div class="row" style="padding-left:2%;padding-top:2%">
+      
+       {% if (app.user.informationBacs | length) < 1  %}
+          <div class="col-md-6">
+            <div class="card card-success">
+              <div class="card-header" style="font-szie:24px">
+                <h3 class="card-title">
+                  
+                  Baccalauréat   
+                </h3>
+              </div>
+              <!-- /.card-header -->
+              <div class="card-body">
+                    {{ include('information_bac/_form.html.twig') }}
+              </div>
+              <!-- /.card-body -->
+            </div>
+          </div>
+          {% endif %}
+          <div class="col-md-6">
+          <div class="card text-left">
+           <div class="card-body">
+               <div class="card-header" style="font-szie:24px">
+                <h3 class="card-title">
+                  Informations Baccalauréat   
+                </h3>
+              </div>
+              
+               <div class="table-responsive">
+                  <table class="table table-striped" style=" width: 100%">
+                      <tbody>
+                         {% for  information_bac in app.user.informationBacs  %}
+                          <tr>
+                              <th>Numero de table   </th>
+                              <td> {{app.user.numerocarte}}  </td>
+                          </tr>
+                          
+                          <tr>
+                              <th>Serie bac  </th>
+                              <td>{{ information_bac.serie.libelle }}  </td>
+                          </tr>
+                          <tr>
+                              <th>Mention obtenu  </th>
+                              <td>{{information_bac.mention}}  </td>
+                          </tr>
+                          <tr>
+                              <th>Moyenne obtenue </th>
+                              <td>{{ information_bac.moyenne  }} </td>
+                          </tr>
+                          <tr>
+                              <th>Session  </th>
+                              <td>{{information_bac.session}}  </td>
+                          </tr>
+                          <tr>
+                              <th>Etablissement frequenté  </th>
+                              <td>{{information_bac.ecole}}  </td>
+                          </tr>
+                          <tr>
+                              <th>Attestation de reussite  </th>
+                              <td> <a href="{{ asset('uploads/'~ information_bac.attestation) }}">consulter </a></td>  
+                          </tr>
+                          <tr>
+                              <th>Relevé de notes  </th>
+                            <td> <a href="{{ asset('uploads/'~ information_bac.releve) }}">consulter </a></td>  
+                          </tr>
+                          <tr>
+                              <th>Description Cursus   </th>
+                              <td>
+                                {{ information_bac.cursus  }}
+                               </td>
+                          </tr>
+                          <tr>
+                              <th>Actions  </th>
+                              <td>
+                                 <a class="btn btn-success" href="{{ path('information_bac_edit', {'id': information_bac.id}) }}"> editer</a>
+                                  <div style="display:inline-block">   {{ include('information_bac/_delete_form.html.twig') }} </div>
+                                
+                              </td>
+                          </tr>
+                         {% endfor %}
+                          
+                          
+                      </tbody>
+                  </table>
+              </div>
+              
+            </div>
+          </div>
+         </div>  
+          
+
+
+        </div>
+    </div>
+</div>
+{% endblock %}
+

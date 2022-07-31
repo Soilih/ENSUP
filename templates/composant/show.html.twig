@@ -1,0 +1,45 @@
+{% extends 'base.html.twig' %}
+{% block body %}
+<section id="main-content">
+    <section class="wrapper">
+        <h3><i class="fa fa-angle-right"></i> GESTION DES COMPOSANTS  </h3>
+        <!-- BASIC FORM VALIDATION -->
+        <div class="row mt">
+          
+          <div class="col-lg-8">
+            <div class="content-panel">
+              <h4><i class="fa fa-angle-right"></i> Description : </h4>
+              <hr>
+              
+                <table class="table table-bordered">
+                    <tbody>
+                        <tr>
+                            <th>Id</th>
+                            <td>{{ composant.id }}</td>
+                        </tr>
+                        <tr>
+                            <th>Libelle</th>
+                            <td>{{ composant.libelle }}</td>
+                        </tr>
+                        <tr>
+                            <th>Detail</th>
+                            <td>{{ composant.detail }}</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <a  class="btn btn-info"  style="font-size:18px" href="{{ path('composant_index') }}"> Consulter nos composants </a>
+
+              
+            </div>
+            <!-- /form-panel -->
+          </div>
+
+          <!-- /col-lg-12 -->
+        </div>
+        
+        <!-- /row -->
+      </section>
+      <!-- /wrapper -->
+</section>
+{% endblock %}

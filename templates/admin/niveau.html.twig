@@ -1,0 +1,61 @@
+
+
+{% extends 'base.html.twig' %}
+{% block body %}
+<div class="wrapper">
+  <div class="content-wrapper">
+     <div class="row" style="padding-left:2%;padding-top:2%">
+          
+          <div class="col-md-12">
+            <div class="card card-success">
+             <div class="card-header">
+                <h3 class="card-title">
+                  Liste des eleves baccalauréat 
+                </h3>
+            </div>
+              <!-- /.card-header -->
+              <div class="card-body">
+                <table id="data" class="table table-bordered table-hover">
+               
+                    <thead>
+                        <tr>
+                            <th>Nom </th>
+                            <th>Prenom  </th>
+                            <th>Date de naissance  </th>
+                            <th>Nin </th>
+                            <th>Identifiant  </th>
+                            <th>Serie </th>
+                            <th> Numero de table   </th>
+                            <th>Etablissement </th>
+                            <th>Session  </th>
+                            <th>Type de flux    </th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    {% for etudiant in etudiants %}
+                    <tr>
+                        <td>{{ etudiant.nom }}</td>
+                        <td>{{ etudiant.prenom }}</td>
+                        <td>{{ etudiant.dt|date('Y-m-d') }}</td>
+                        <td>{{ etudiant.nin }}</td>
+                        <td>{{ etudiant.code }}</td>
+                        <td>{{ etudiant.serie_libelle }}</td>
+                        <td>{{ etudiant.num }}</td>
+                        <td>{{ etudiant.ecole }}</td>
+                        <td>{{ etudiant.session }}</td>
+                         <td>{{ etudiant.flux }}</td>
+                        <td> <a href="{{ path('listetudiantDetailEtudiant' , {id: etudiant.id} ) }}" ><i style="color:bleu ; font-size:24px" class="fa fa-eye"></i></a>  </td>      
+                    </tr>
+                    {% endfor %}
+                    
+                </tbody>
+                </table>
+              </div>
+              <!-- /.card-body -->
+            </div>
+          </div>  
+        </div>
+    </div>
+</div>
+{% endblock %}

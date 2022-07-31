@@ -1,0 +1,51 @@
+{% extends 'base.html.twig' %}
+{% block body %}
+<div class="wrapper">
+  <div class="content-wrapper">
+     <div class="row" style="padding-left:2%;padding-top:2%">
+          <div class="col-md-12">
+            <div class="card card-success">
+              <div class="card-header">
+                <h3 class="card-title" style="font-size:22px">
+                 <strong> Gestion competences linguistiques </strong>
+               </h3>
+                <a  href="{{ path("langue_new") }}" class="btn btn-primary" style="float:right">Ajouter une langue </a>
+              </div>
+              <!-- /.card-header -->
+              <div class="card-body table-responsive p-1">
+                <table class="table table-bordered">
+                    <thead>
+                        <tr>
+                            
+                            <th>Libelle de langue </th>
+                            <th>Niveau de competence </th>
+                            <th>Diplome obtenu  </th>
+                            <th> Description de votre niveau de langue</th>
+                           
+                        </tr>
+                    </thead>
+                    <tbody>
+                    {% for langue in app.user.langues %}
+                        <tr>
+                            
+                            <td>{{ langue.libelle }}</td>
+                            <td>{{ langue.niveau }}</td>
+                            <td>{{ langue.diplome }}</td>
+                            <td>{{ langue.detail }}</td>
+                           
+                        </tr>
+                    {% else %}
+                        <tr>
+                            <td colspan="4"> Aucune competence en langue n'est disponible </td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+              </div>
+              <!-- /.card-body -->
+            </div>
+          </div>  
+        </div>
+    </div>
+</div>
+{% endblock %}

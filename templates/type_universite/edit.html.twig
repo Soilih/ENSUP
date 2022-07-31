@@ -1,0 +1,24 @@
+{% extends 'base.html.twig' %}
+{% block body %}
+<div class="wrapper">
+  <div class="content-wrapper">
+     <div class="row" style="padding-left:2%;padding-top:2%">
+          <div class="col-md-6">
+            <div class="card card-default">
+              <div class="card-header">
+                <h3 class="card-title">
+                  <i class="fas fa-exclamation-triangle"></i>
+                EDITER UN TYPE D'UNIVERSITÉ
+                </h3>
+              </div>
+              <!-- /.card-header -->
+              <div class="card-body">
+              {{ include('type_universite/_form.html.twig', {'button_label': 'modifier'}) }}
+              </div>
+              <!-- /.card-body -->
+            </div>
+          </div>  
+        </div>
+    </div>
+</div>
+{% endblock %}

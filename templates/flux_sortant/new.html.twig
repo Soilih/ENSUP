@@ -1,0 +1,102 @@
+{% extends 'base.html.twig' %}
+{% block body %}
+<div class="wrapper">
+  <div class="content-wrapper">
+     <div class="row" style="padding-left:2%;padding-top:2%">
+      {% if (app.user.fluxSortants | length) < 1  %}
+        <div class="col-md-5">
+            <div class="card card-success">
+              <div class="card-header">
+                <h3 class="card-title">
+                  Ajouter un flux sortant 
+                </h3>
+              </div>
+              <!-- /.card-header -->
+              <div class="card-body">
+                 {{ include('flux_sortant/_form.html.twig') }}
+              </div>
+              <!-- /.card-body -->
+            </div>
+        </div>  
+      {% endif %}
+      <div class="col-lg-7">
+          <div class="card text-left">
+            <div class="card-header">
+              <h4 class="card-title">Flux sortant  </h4>
+            </div>
+           <div class="card-body">
+               <div class="table-responsive">
+                <table class="table table-bordered table-striped " style=" width:100%">
+                    <tbody>
+                      {% for flux_sortant in app.user.fluxSortants %}
+                        <tr>
+                            <th>Date de Depart</th>
+                            <td>{{ flux_sortant.dateDepart ? flux_sortant.dateDepart|date('Y-m-d') : '' }}</td>
+                        </tr>
+                        <tr>
+                            <th>Universite inscrite </th>
+                            <td>{{ flux_sortant.universite }}</td>
+                        </tr>
+                        <tr>
+                            <th>Niveau poursuivis  </th>
+                            <td>{{ flux_sortant.niveau.libelle }}</td>
+                        </tr>
+                        <tr>
+                            <th>Type d'etablissement superieur </th>
+                            <td>{{ flux_sortant.typeuniversite.libelle }}</td>
+                        </tr>
+                        <tr>
+                            <th>adresse de l'universite  </th>
+                            <td>{{ flux_sortant.ville }}</td>
+                        </tr>
+                        <tr>
+                            <th>Categorie d'etablissement  </th>
+                            <td>{{ flux_sortant.typeuniversit  }}</td>
+                        </tr>
+                         <tr>
+                            <th>Pays </th>
+                            <td>{{ flux_sortant.pays  }}</td>
+                        </tr>
+                        <tr>
+                            <th>Filiere </th>
+                            <td>{{ flux_sortant.filiere }}</td>
+                        </tr>
+                         <tr>
+                            <th>Composant de filiere </th>
+                            <td>{{ flux_sortant.composant.libelle  }}</td>
+                        </tr>
+                        <tr>
+                            <th>Cycle de poursuite </th>
+                            <td>{{ flux_sortant.cycle }}</td>
+                        </tr>
+                        <tr>
+                            <th>Prise en charge durant vos etudes </th>
+                            <td>{{ flux_sortant.moyen }}</td>
+                        </tr>
+                        
+                        <tr>
+                            <th>Motivation </th>
+                            <td>{{ flux_sortant.motivation }}</td>
+                        </tr>
+                        <tr>
+                          <th>Actions  </th>
+                          <td>
+                              <a class="btn btn-success" href="{{ path('flux_sortant_edit', {'id': flux_sortant.id}) }}"> editer</a>
+                              <div style="display:inline-block">   {{ include('flux_sortant/_delete_form.html.twig') }} </div>
+                          </td>
+                        </tr>
+                      {% endfor %}
+                    </tbody>
+                </table>
+              </div>
+            </div>
+            </div>
+          </div>
+        </div>
+         
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+

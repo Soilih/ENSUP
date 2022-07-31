@@ -1,0 +1,48 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}InformationBac index{% endblock %}
+
+{% block body %}
+    <h1>InformationBac index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Ecole</th>
+                <th>Moyenne</th>
+                <th>Mention</th>
+                <th>Attestation</th>
+                <th>Releve</th>
+                <th>Session</th>
+                <th>Cursus</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for information_bac in information_bacs %}
+            <tr>
+                <td>{{ information_bac.id }}</td>
+                <td>{{ information_bac.ecole }}</td>
+                <td>{{ information_bac.moyenne }}</td>
+                <td>{{ information_bac.mention }}</td>
+                <td>{{ information_bac.attestation }}</td>
+                <td>{{ information_bac.releve }}</td>
+                <td>{{ information_bac.session }}</td>
+                <td>{{ information_bac.cursus }}</td>
+                <td>
+                    <a href="{{ path('information_bac_show', {'id': information_bac.id}) }}">show</a>
+                    <a href="{{ path('information_bac_edit', {'id': information_bac.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="9">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('information_bac_new') }}">Create new</a>
+{% endblock %}
+

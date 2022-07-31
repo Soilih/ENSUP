@@ -1,0 +1,91 @@
+{% extends 'base.html.twig' %}
+{% block body %}
+
+<div class="wrapper">
+  <div class="content-wrapper">
+     <div class="row" style="padding-left:2%;padding-top:2%">
+          <div class="col-md-8">
+            <div class="card card-success">
+              <div class="card-header">
+                <h3 class="card-title">
+             
+                  Description : 
+                </h3>
+              </div>
+              <!-- /.card-header -->
+              <div class="card-body">
+                <table class="table">
+                    <tbody>
+                        
+                        <tr>
+                            <th>Prise en charge durant vos etudes </th>
+                            <td>{{ flux_sortant.moyen }}</td>
+                        </tr>
+                        <tr>
+                            <th>Date de Depart</th>
+                            <td>{{ flux_sortant.dateDepart ? flux_sortant.dateDepart|date('Y-m-d') : '' }}</td>
+                        </tr>
+                        <tr>
+                            <th>Universite inscrit </th>
+                            <td>{{ flux_sortant.universite }}</td>
+                        </tr>
+                         <tr>
+                            <th>Type d'etablissement superieur </th>
+                            <td>{{ flux_sortant.typeuniversite.libelle }}</td>
+                        </tr>
+                         <tr>
+                            <th>Niveau de poursuit  </th>
+                            <td>{{ flux_sortant.niveau.libelle }}</td>
+                        </tr>
+                        <tr>
+                            <th>Filiere </th>
+                            <td>{{ flux_sortant.filiere }}</td>
+                        </tr>
+                         <tr>
+                            <th>Composant de filiere </th>
+                            <td>{{ flux_sortant.composant.libelle  }}</td>
+                        </tr>
+                        <tr>
+                            <th>Cycle de poursuite </th>
+                            <td>{{ flux_sortant.cycle }}</td>
+                        </tr>
+                        <tr>
+                            <th>adresse de l'universite  </th>
+                            <td>{{ flux_sortant.ville }}</td>
+                        </tr>
+                        <tr>
+                            <th>Motivation </th>
+                            <td>{{ flux_sortant.motivation }}</td>
+                        </tr>
+                       
+                        <tr>
+                            <th>Pays </th>
+                            <td>{{ flux_sortant.pays  }}</td>
+                        </tr>
+                        <tr>
+                            <th>Adresse de l'universite  </th>
+                            <td>{{ flux_sortant.ville  }}</td>
+                        </tr>
+                        <tr>
+                            <th>type de flux  </th>
+                            <td>{{ flux_sortant.type  }}</td>
+                        </tr>
+                        <tr>
+                            <th>type d'enseignement </th>
+                            <td>{{ flux_sortant.typeuniversit  }}</td>
+                        </tr>
+                    </tbody>
+                 </table>
+                 <br>
+                 <br>
+                 <a  href="{{ path('flux_sortant_index') }}" class="btn btn-primary btn-lg "> Liste de flux  sortant </a>   
+              </div>
+              <!-- /.card-body -->
+            </div>
+          </div>  
+        </div>
+    </div>
+</div>
+
+{% endblock %}
+

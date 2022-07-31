@@ -1,0 +1,66 @@
+
+
+{% extends 'base.html.twig' %}
+{% block body %}
+<div class="wrapper">
+  <div class="content-wrapper">
+     <div class="row" style="padding-left:2%;padding-top:2%">
+          
+          <div class="col-md-12">
+            <div class="card card-success">
+              <div class="card-header">
+                <h3 class="card-title">
+                 Flux resident 
+                   </h3>
+                   
+                </div>
+              <!-- /.card-header -->
+              <div class="card-body">
+                <table id="data" class="table table-bordered table-hover">
+               
+                    <thead>
+                        <tr>
+                            <th>Nom de famille </th>
+                            <th>Prenom  </th>
+                            <th>Date de depart  </th>
+                            <th> Niveau poursuivi   </th>
+                            <th>Université </th>
+                            <th>Filiere d'etude </th>
+                            <th>Cycle </th>
+                            <th>Type d'etablissament  </th>
+                            <th>Categorie etablissament </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    {% for et in nos_etudiant %}
+                        <tr>
+                            <td>{{ et.nom }}</td>
+                             <td>{{ et.prenom }}</td>
+                             <td>{{ et.dateDepart ? et.dateDepart |date('d/m/Y' , false) : '' }}</td>
+                              <td>{{ et.libelle  }}</td> 
+                              <td>{{ et.universite }}</td> 
+                             <td>{{ et.filiere }}</td> 
+                             <td>{{ et.cycle }}</td> 
+                              <td>{{ et.lib_type }}</td> 
+                             <td>{{ et.typ }}</td> 
+                            
+                            
+                            
+                        </tr>
+                    {% else %}
+                        <tr>
+                            <td colspan="8">no records found</td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                
+
+                </table>
+              </div>
+              <!-- /.card-body -->
+            </div>
+          </div>  
+        </div>
+    </div>
+</div>
+{% endblock %}

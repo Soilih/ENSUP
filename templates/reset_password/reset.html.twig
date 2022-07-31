@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+   {% include "link/link_css.html.twig" %}
+</head>
+<body class="animsition">
+    <div class="page-wrapper">
+        <div class="page-content--bge5">
+            <div class="container">
+                <div class="login-wrap">
+                    <div class="login-content">
+                        <div class="login-logo">
+                           
+                           <h3>Changer mot de passe </h3>
+                        </div>
+                        <div class="login-form">
+                             {{ form_start(resetForm) }}
+                                 {{ form_row(resetForm.plainPassword) }}
+                                <div class="btn-forgot">
+                                    <button class="btn btn-primary btn-block waves-effect waves-light text-center"> Changer mot de passe 
+                                    </button>
+                                </div>
+                                {{ form_end(resetForm) }}
+                            <br>
+                            <a class="btn btn-block btn-success"  href="{{ path('app_login') }}"> Se connecter  </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+  {% include "link/link_js.html.twig" %}
+</body>
+</html>

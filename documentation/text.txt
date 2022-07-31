@@ -1,0 +1,26 @@
+suivant : 
+--------
+http://techlaboratory.net/jquery-smartwizard
+
+cours sur ajax symfony 
+https://www.tutorialspoint.com/symfony/symfony_ajax_control.htm
+
+suivie de projet 
+https://soilih.atlassian.net/jira/dashboards
+
+chart js avec symfony 
+https://www.youtube.com/watch?v=kf-eY3iZ7Fg&t=2095s
+
+generer un pdf 
+https://github.com/dompdf/dompdf
+tuto : https://github.com/dompdf/dompdf
+
+generer un excel : 
+https://github.com/rusty1s/table2excel
+tuto: https://www.youtube.com/watch?v=vWbMRlUvre8
+https://www.youtube.com/watch?v=N0kYa5-IkeI
+
+moyen dherbergement symfony 
+https://www.youtube.com/watch?v=5grXvolI8Ls
+
+site pour la gestion datatable

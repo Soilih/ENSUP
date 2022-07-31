@@ -1,0 +1,59 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Composant index{% endblock %}
+
+{% block body %}
+<section id="main-content">
+    <section class="wrapper">
+        <h3><i class="fa fa-angle-right"></i> GESTION DE COMPOSANTS  </h3>
+        <!-- BASIC FORM VALIDATION -->
+        <div class="row mt">
+          
+          <div class="col-lg-12">
+            <div class="content-panel">
+              <h4><i class="fa fa-angle-right"></i> Liste des composants </h4>
+              <hr>
+              <table class="table table-condensed">
+                <thead>
+                    <tr>
+                        <th>Id</th>
+                        <th>Libelle </th>
+                        <th>Description </th>
+                        <th>actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                {% for composant in composants %}
+                    <tr>
+                        <td>{{ composant.id }}</td>
+                        <td>{{ composant.libelle }}</td>
+                        <td>{{ composant.detail }}</td>
+                        <td>
+                            <a href="{{ path('composant_show', {'id': composant.id}) }}"><i style="color:bleu" class="fa fa-eye"></i></a>
+                            <a href="{{ path('composant_edit', {'id': composant.id}) }}"><i style="color:bleu" class="fa fa-pencil"></i></a>
+                        <div style="display: inline-block;padding-left:2% ; color:red">{{ include('composant/_delete_form.html.twig') }} </div> 
+                        </td>
+                    </tr>
+                {% else %}
+                    <tr>
+                        <td colspan="4">no records found</td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+           </div>
+            <!-- /form-panel -->
+          </div>
+
+          <!-- /col-lg-12 -->
+        </div>
+        
+        <!-- /row -->
+      </section>
+      <!-- /wrapper -->
+</section>
+
+
+    
+    <a href="{{ path('composant_new') }}">Create new</a>
+{% endblock %}

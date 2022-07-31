@@ -1,0 +1,65 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+<div class="wrapper">
+  <div class="content-wrapper">
+     <div class="row" style="padding-left:2%;padding-top:2%">
+          <div class="col-md-10">
+            <div class="card card-success">
+              <div class="card-header">
+                <h3 class="card-title">
+                 
+                  Description du responsable 
+                </h3>
+              </div>
+              <!-- /.card-header -->
+              <div class="card-body">
+              <table class="table table-striped ">
+                    <tbody style="font-size:18px">
+                        
+                        <tr>
+                            <th>Nom de Famille : </th>
+                           <strong> <td>{{ responsable.nom }}</td>  </strong>
+                        </tr>
+                        <tr>
+                            <th>Prénom :  </th>
+                            <td>{{ responsable.prenom }}</td>
+                        </tr>
+                        <tr>
+                            <th>Telephone: </th>
+                            <td>{{ responsable.tel }}</td>
+                        </tr>
+                        <tr>
+                            <th>Adresse Email: </th>
+                            <td>{{ responsable.email }}</td>
+                        </tr>
+                         <tr>
+                            <th>Lieu de Naissance:  </th>
+                            <td>{{ responsable.lieunaissance }}</td>
+                        </tr>
+                        <tr>
+                            <th>Adresse domicile:  </th>
+                            <td>{{ responsable.adresse }}</td>
+                        </tr>
+                        <tr>
+                            <th>votre Proffession: </th>
+                            <td>{{ responsable.proffession }}</td>
+                        </tr>
+                        <tr>
+                            <th>votre pays : </th>
+                            <td>{{ responsable.pays }}</td>
+                        </tr>
+                         <tr>
+                            <th>Description: </th>
+                            <td>{{ responsable.detail }}</td>
+                        </tr>
+                    </tbody>
+              </table>
+              </div>
+              <!-- /.card-body -->
+            </div>
+          </div>  
+        </div>
+    </div>
+</div>
+{% endblock %}

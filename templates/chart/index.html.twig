@@ -1,0 +1,279 @@
+
+{% extends 'base.html.twig' %}
+{% block body %}
+<div class="wrapper">
+    <div class="content-wrapper">
+      <!-- Content Header (Page header) -->
+        <div class="content-header">
+            <section class="content">
+                <div class="col-lg-12">
+                    <div class="card">
+                        <div class="card-header">
+                            <h4>Statistique </h4>
+                            
+                        </div>
+                        <div class="card-body">
+                            <div class="default-tab">
+                                <nav>
+                                    <div class="nav nav-tabs" id="nav-tab" role="tablist">
+                                        <a class="nav-item nav-link active" id="custom-nav-home-tab" data-toggle="tab" href="#custom-nav-home" role="tab" aria-controls="custom-nav-home"
+                                            aria-selected="true">Rapport</a>
+                                        <a class="nav-item nav-link" id="custom-nav-profile-tab" data-toggle="tab" href="#custom-nav-profile" role="tab" aria-controls="custom-nav-profile"
+                                            aria-selected="false">Flux entrant </a>
+                                        <a class="nav-item nav-link" id="custom-nav-contact-tab" data-toggle="tab" href="#custom-nav-contact" role="tab" aria-controls="custom-nav-contact"
+                                            aria-selected="false">Flux sortant 
+                                        </a>
+                                         <a class="nav-item nav-link" id="custom-nav-resident-tab" data-toggle="tab" href="#custom-nav-resident" role="tab" aria-controls="custom-nav-resident"
+                                            aria-selected="false">Flux resident 
+                                        </a>
+                                    </div>
+								</nav>
+                                <div class="tab-content pl-3 pt-2" id="nav-tabContent">
+                                    <div class="tab-pane fade show active" id="custom-nav-home" role="tabpanel" aria-labelledby="custom-nav-home">
+                                        <div class="main-content">
+                                            <div class="container-fluid">
+                                                <div class="row">
+                                                    <div class="col-lg-6">
+                                                        <div class="au-card m-b-30">
+                                                            <div class="au-card-inner">
+                                                                <h3 class="title-2 m-b-40">Gestion de flux etudiant  </h3>
+                                                                <canvas id="flux" width="350" height="200" >  </canvas>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-lg-6">
+                                                        <div class="au-card m-b-30">
+                                                            <div class="au-card-inner">
+                                                                <h3 class="title-2 m-b-40">Répartition bourse  </h3>
+                                                                <canvas id="genre" width="350" height="200"></canvas>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-lg-6">
+                                                        <div class="au-card m-b-30">
+                                                            <div class="au-card-inner">
+                                                                <h3 class="title-2 m-b-40">Repartition par cursus </h3>
+                                                                <canvas id="cursus" width="350" height="200"></canvas>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-lg-6">
+                                                        <div class="au-card m-b-30">
+                                                            <div class="au-card-inner">
+                                                                <h3 class="title-2 m-b-40">Experience proffessionnelle  </h3>
+                                                                <canvas id="stage" width="350" height="200"></canvas>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-lg-6">
+                                                        <div class="au-card m-b-30">
+                                                            <div class="au-card-inner">
+                                                                <h3 class="title-2 m-b-40">Gestion etudiant-salarié </h3>
+                                                                <canvas id="status" width="350" height="200"></canvas>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                     <div class="col-lg-6">
+                                                        <div class="au-card m-b-30">
+                                                            <div class="au-card-inner">
+                                                                <h3 class="title-2 m-b-40">Gestion diplome  </h3>
+                                                                <canvas id="diplome" width="350" height="200"></canvas>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    {# FLUX ENTRANT #}
+                                    <div class="tab-pane fade show" id="custom-nav-profile" role="tabpanel" aria-labelledby="custom-nav-profile">
+                                        <div class="main-content">
+                                            <div class="container-fluid">
+                                                <div class="row">
+                                                <div class="col-lg-6">
+                                                        <div class="au-card m-b-30">
+                                                            <div class="au-card-inner">
+                                                                <h3 class="title-2 m-b-40">Nombre d'etudiant/an</h3>
+                                                                <canvas id="categories" width="400" height="310"></canvas>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-lg-6">
+                                                        <div class="au-card m-b-30">
+                                                            <div class="au-card-inner">
+                                                                <h3 class="title-2 m-b-40">Type de diplome</h3>
+                                                                <canvas id="cam" width="400" height="310"></canvas>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-lg-6">
+                                                        <div class="au-card m-b-30">
+                                                            <div class="au-card-inner">
+                                                                <h3 class="title-2 m-b-40">Repartition par pays </h3>
+                                                                <canvas id="cam" width="400" height="310"></canvas>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-lg-6">
+                                                        <div class="au-card m-b-30">
+                                                            <div class="au-card-inner">
+                                                                <h3 class="title-2 m-b-40">Gestion de Filiere </h3>
+                                                                <canvas id="cam" width="400" height="310"></canvas>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-lg-6">
+                                                        <div class="au-card m-b-30">
+                                                            <div class="au-card-inner">
+                                                                <h3 class="title-2 m-b-40">Gestion de cycle d'etude </h3>
+                                                                <canvas id="cam" width="400" height="310"></canvas>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-lg-6">
+                                                        <div class="au-card m-b-30">
+                                                            <div class="au-card-inner">
+                                                                <h3 class="title-2 m-b-40">Repartition par genre </h3>
+                                                                <canvas id="cam" width="400" height="310"></canvas>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                 </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="tab-pane fade show" id="custom-nav-contact" role="tabpanel" aria-labelledby="custom-nav-contact">
+                                        <div class="main-content">
+                                            <div class="container-fluid">
+                                                <div class="row">
+                                                 <div class="col-lg-6">
+                                                        <div class="au-card m-b-30">
+                                                            <div class="au-card-inner">
+                                                                <h3 class="title-2 m-b-40">Bar chart</h3>
+                                                                <canvas id="categories" width="400" height="310"></canvas>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-lg-6">
+                                                        <div class="au-card m-b-30">
+                                                            <div class="au-card-inner">
+                                                                <h3 class="title-2 m-b-40">Bar chart</h3>
+                                                                <canvas id="cam" width="400" height="310"></canvas>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-lg-6">
+                                                        <div class="au-card m-b-30">
+                                                            <div class="au-card-inner">
+                                                                <h3 class="title-2 m-b-40">Bar chart</h3>
+                                                                <canvas id="cam" width="400" height="310"></canvas>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-lg-6">
+                                                        <div class="au-card m-b-30">
+                                                            <div class="au-card-inner">
+                                                                <h3 class="title-2 m-b-40">Bar chart</h3>
+                                                                <canvas id="cam" width="400" height="310"></canvas>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-lg-6">
+                                                        <div class="au-card m-b-30">
+                                                            <div class="au-card-inner">
+                                                                <h3 class="title-2 m-b-40">Bar chart</h3>
+                                                                <canvas id="cam" width="400" height="310"></canvas>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-lg-6">
+                                                        <div class="au-card m-b-30">
+                                                            <div class="au-card-inner">
+                                                                <h3 class="title-2 m-b-40">Bar chart</h3>
+                                                                <canvas id="cam" width="400" height="310"></canvas>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="tab-pane fade show" id="custom-nav-resident" role="tabpanel" aria-labelledby="custom-nav-resident">
+                                        <div class="main-content">
+                                            <div class="container-fluid">
+                                                <div class="row">
+                                                  <div class="col-lg-6">
+                                                        <div class="au-card m-b-30">
+                                                            <div class="au-card-inner">
+                                                                <h3 class="title-2 m-b-40">Flux</h3>
+                                                                <canvas id="categories" width="400" height="310"></canvas>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-lg-6">
+                                                        <div class="au-card m-b-30">
+                                                            <div class="au-card-inner">
+                                                                <h3 class="title-2 m-b-40">Type d'etablissament </h3>
+                                                                <canvas id="etablissement" width="400" height="310"></canvas>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-lg-6">
+                                                        <div class="au-card m-b-30">
+                                                            <div class="au-card-inner">
+                                                                <h3 class="title-2 m-b-40">Bar chart</h3>
+                                                                <canvas id="cam" width="400" height="310"></canvas>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-lg-6">
+                                                        <div class="au-card m-b-30">
+                                                            <div class="au-card-inner">
+                                                                <h3 class="title-2 m-b-40">Bar chart</h3>
+                                                                <canvas id="cam" width="400" height="310"></canvas>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-lg-6">
+                                                        <div class="au-card m-b-30">
+                                                            <div class="au-card-inner">
+                                                                <h3 class="title-2 m-b-40">Bar chart</h3>
+                                                                <canvas id="cam" width="400" height="310"></canvas>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-lg-6">
+                                                        <div class="au-card m-b-30">
+                                                            <div class="au-card-inner">
+                                                                <h3 class="title-2 m-b-40">Bar chart</h3>
+                                                                <canvas id="cam" width="400" height="310"></canvas>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </div>
+</div>								
+{% endblock %}
+
+
+
+
+
+
+
+
+
+
+

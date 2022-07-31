@@ -1,0 +1,117 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Etudiant{% endblock %}
+
+{% block body %}
+<section id="main-content">
+    <section class="wrapper">
+        
+        <!-- BASIC FORM VALIDATION -->
+        <div class="row mt">
+          
+          <div class="col-lg-8">
+            <div class="content-panel">
+              <h4><i class="fa fa-angle-right"></i> Description : </h4>
+              <hr>
+               <table class="table">
+                    <tbody>
+                        <tr>
+                            <th>Id</th>
+                            <td>{{ etudiant.id }}</td>
+                        </tr>
+                        <tr>
+                            <th>Nom</th>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <th>Prenom</th>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <th>Email</th>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <th>Telephone</th>
+                           
+                        </tr>
+                        <tr>
+                            <th>DateNaissance</th>
+                            <td>{{ etudiant.dateNaissance ? etudiant.dateNaissance|date('Y-m-d') : '' }}</td>
+                        </tr>
+                        <tr>
+                            <th>Adresse</th>
+                            <td>{{ etudiant.adresse }}</td>
+                        </tr>
+                        <tr>
+                            <th>LieuNaissance</th>
+                            <td>{{ etudiant.lieuNaissance }}</td>
+                        </tr>
+                        <tr>
+                            <th>Nin</th>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <th>Photo</th>
+                            <td><img src="{{ asset('etudiant.photo') }}"></td>
+                        </tr>
+                        <tr>
+                            <th>Nationalite</th>
+                            <td>{{ etudiant.nationalite }}</td>
+                        </tr>
+                        <tr>
+                            <th>Status</th>
+                            <td>{{ etudiant.status }}</td>
+                        </tr>
+                        <tr>
+                            <th>Ile</th>
+                            <td>{{ etudiant.ile }}</td>
+                        </tr>
+                        <tr>
+                            <th>DateValide</th>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <th>TypeIdentite</th>
+                            <td>{{ etudiant.typeIdentite }}</td>
+                        </tr>
+                        <tr>
+                            <th>PaysDelivrance</th>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <th>Sexe</th>
+                            <td>{{ etudiant.sexe }}</td>
+                        </tr>
+                        <tr>
+                            <th>Datefin</th>
+                            <td></td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div style="display:inline-block ; padding-left:3%;margin-left:2%">
+                 <a style="display:inline-block" href="{{ path('etudiant_edit', {'id': etudiant.id}) }}" class="btn btn-primary">Editer les infomations </a>
+                 <a style="display:inline-block"> {{ include('etudiant/_delete_form.html.twig') }} </a>
+                </div>
+      
+    
+ 
+
+   
+
+            </div>
+            <!-- /form-panel -->
+          </div>
+
+          <!-- /col-lg-12 -->
+        </div>
+        
+        <!-- /row -->
+      </section>
+      <!-- /wrapper -->
+</section>
+    
+
+
+    
+{% endblock %}

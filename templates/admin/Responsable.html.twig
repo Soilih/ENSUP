@@ -1,0 +1,61 @@
+
+
+{% extends 'base.html.twig' %}
+{% block body %}
+<div class="wrapper">
+  <div class="content-wrapper">
+     <div class="row" style="padding-left:2%;padding-top:2%">
+          <div class="col-md-12">
+            <div class="card card-success">
+              <div class="card-header">
+                <h3 class="card-title">
+                  LISTE DES RESPONSABLES 
+                   </h3>
+                    
+                </div>
+              <!-- /.card-header -->
+              <div class="card-body">
+                <table  id="datatable" class="table table-bordered table-hover">
+               
+                    <thead>
+                        <tr>
+                            <th>Nom responsable </th>
+                            <th>Prenom responsable  </th>
+                            <th>Adresse domicile </th>
+                            <th>Telephone</th>
+                            <th>Nom etudiant </th>
+                            <th>Prenom etudiant </th>
+                          </tr>
+                    </thead>
+                    <tbody>
+                    {% for et in nos_etudiant %}
+                        <tr>
+                        
+                             <td>{{ et.n}}</td>
+                             <td>{{ et.pr }}</td>
+                             <td>{{ et.ad}}</td>
+                             <td>{{ et.t}}</td>
+                             <td>{{ et.nommm}}</td>
+                             <td>{{ et.p}}</td>
+                       
+                             
+                            
+                            
+                        </tr>
+                    {% else %}
+                        <tr>
+                            <td colspan="8">Aucun responsable </td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                
+
+                </table>
+              </div>
+              <!-- /.card-body -->
+            </div>
+          </div>  
+        </div>
+    </div>
+</div>
+{% endblock %}

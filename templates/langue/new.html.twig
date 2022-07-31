@@ -1,0 +1,68 @@
+{% extends 'base.html.twig' %}
+{% block body %}
+<div class="wrapper">
+  <div class="content-wrapper">
+     <div class="row" style="padding-left:2%;padding-top:2%">
+          <div class="col-md-4">
+            <div class="card card-success">
+              <div class="card-header">
+                <strong>
+                Enregistrer langue
+                </strong>
+              </div>
+              <!-- /.card-header -->
+              <div class="card-body">
+                 {{ include('langue/_form.html.twig') }}
+              </div>
+              <!-- /.card-body -->
+            </div>
+          </div>  
+          {# gestion  #}
+          <div class="col-md-8">
+            <div class="card card-success">
+              <div class="card-header">
+                  
+                <strong>  Mes competences linguistiques </strong>  
+              </div>
+              <!-- /.card-header -->
+              <div class="card-body">
+               <table    class="table table-condensed table-bordered">
+                    <thead>
+                        <tr>
+                           
+                            <th>Libelle</th>
+                            <th>Niveau de langue </th>
+                            <th>Description  </th>
+                            <th>actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    {% for langue in app.user.langues %}
+                        <tr>
+                           
+                            <td>{{ langue.libelle }}</td>
+                            <td>{{ langue.niveau }}</td>
+                            <td>{{ langue.detail }}</td>
+                           
+                       
+                            <td>
+                              <a class="btn btn-primary btn-sm"  href="{{ path('langue_edit', {'id': langue.id}) }}"><i class="fas fa-pencil-alt"></i></a>
+                            <div style="display: inline-block ; color:red">{{ include('langue/_delete_form.html.twig') }} </div> 
+                            </td>
+                        </tr>
+                    {% else %}
+                        <tr>
+                            <td colspan="4">Ajouter une langue </td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+              </div>
+              <!-- /.card-body -->
+            </div>
+          </div>  
+            
+        </div>
+    </div>
+</div>
+{% endblock %}
