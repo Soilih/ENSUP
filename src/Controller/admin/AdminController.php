@@ -22,6 +22,7 @@ use App\Repository\LangueRepository;
 use App\Form\EtudiantType;
 use App\Form\CandidatureType;
 use App\Repository\CandidatureRepository;
+use App\Repository\DocumentRepository;
 use App\Repository\ParcoursUniversitaireRepository;
 use App\Repository\ResponsableRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -37,6 +38,16 @@ class AdminController extends AbstractController
 {
     public function __construct(EtudiantRepository $repo){
         $this->repo = $repo ;
+    }
+
+     /**
+     * cette controller permet de creer le profile utilisateur
+     * @Route("/" , name="index")
+     */
+
+    public function index(): Response
+    {
+        return $this->render("admin/index.html.twig");
     }
     
      /**
@@ -164,7 +175,7 @@ class AdminController extends AbstractController
         if ($this->isGranted('ROLE_ADMIN')) {
             return $this->redirectToRoute('listetudiant');
         }else{
-            return $this->redirectToRoute('home_accueil');
+            return $this->redirectToRoute('candidature');
         }
        throw new \Exception(AccessDeniedException::class);
     }
@@ -181,7 +192,9 @@ class AdminController extends AbstractController
         FluxRepository $fluxRepository,
         FluxSortantRepository $fluxSortantRepository , 
         InformationBacRepository $informationBac , 
-        DiplomeRepository $diplomeRepository 
+        DiplomeRepository $diplomeRepository , 
+        DocumentRepository $documentRepository , 
+        CandidatureRepository $candidatureRepository
      ):Response {
         return $this->render('admin/home_user.html.twig', [
                 'etudiants'    =>   $etudiantRepository->findAll(),
@@ -194,19 +207,10 @@ class AdminController extends AbstractController
                 "fluxSortants"=> $fluxSortantRepository->findAll() , 
                 "informationBacs" => $informationBac->findAll(),
                 "diplomes"=> $diplomeRepository->findAll() , 
+                "documents"=>$documentRepository->findAll() , 
+                "candidatures"=>$candidatureRepository->findAll() 
         ]);
     }
-
-    /**
-     * @Route("/admin/update" , name="update_candidature")
-    */
-    public function update_candidature(Request $request , CandidatureRepository $candidatureRepository ){
-       
-        $candidatureRepository->decision_admin("1" , "je suis content" , "23" , "23");
-       
-        return $this->render("admin/DetailEtudiantId.html.twig");
-    }
-   
 
     /**
      *@Route("/universitaire" , name="niveau_universitaire")
@@ -226,8 +230,9 @@ class AdminController extends AbstractController
        return $this->render("admin/niveau.html.twig" , [
             "etudiants"=> $etudiant
         ]);
-      }
-
+    }
+    
+    
 
 
 

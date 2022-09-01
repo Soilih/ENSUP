@@ -55,7 +55,12 @@ class Bourse
      */
     private $Nature;
 
-    public function getId(): ?int
+    /**
+     * @ORM\Column(type="date", nullable=true)
+     */
+    private $datecreate;
+
+  public function getId(): ?int
     {
         return $this->id;
     }
@@ -119,6 +124,22 @@ class Bourse
 
         return $this;
     }
+
+    public function getDatecreate(): ?\DateTimeInterface
+    {
+        return $this->datecreate;
+    }
+
+    public function setDatecreate(?\DateTimeInterface $datecreate): self
+    {
+        $this->datecreate = $datecreate;
+
+        return $this;
+    }
+
+    
+  
+   
 
 
 }

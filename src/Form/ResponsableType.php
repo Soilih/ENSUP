@@ -29,21 +29,15 @@ class ResponsableType extends AbstractType
             ])
             ->add('email' , EmailType::class ,[
                 'label' => 'Adresse E-mail valide ',
+                "attr" => ['required'=>true]
              ])
             ->add('proffession' , TextType::class ,[
                 'label' => 'Activté proffessionnelle'])
             ->add('adresse' ,  TextType::class , 
-            ['label' => 'Lieu de residence '])
-            ->add('lieunaissance' ,  TextType::class ,[
-                'label' => 'Lieu de naissance ',
-            ])
-            ->add('pays' ,  TextType::class ,[
-                'label' => 'Pays de naissance  ',
-            ])
-            ->add('detail' ,  TextareaType::class ,[
-                'label' => 'Commentaire  ',
-                
-            ])
+             ['label' => 'Lieu de residence '])
+            
+            
+          
            
            
             

@@ -1,4 +1,33 @@
 {{ form_start(form) }}
-    {{ form_widget(form) }}
-    <button class="btn btn-success">{{ button_label|default('Enregistrer') }}</button>
+    <div class="form-row">
+      <div class="form-group col-md-6">
+      {{ form_row(form.session) }}
+    </div>
+     <div class="form-group col-md-6">
+      {{ form_row(form.serie) }}
+    </div>
+    <div class="form-group col-md-6">
+      {{ form_row(form.centre) }}
+    </div>
+    <div class="form-group col-md-6">
+       {{ form_row(form.ecole) }}
+    </div>
+    <div class="form-group col-md-6">
+      {{ form_row(form.moyenne) }}
+    </div>
+
+    <div class="form-group col-md-6">
+      {{ form_row(form.mention) }}
+    </div>
+    <div class="form-group col-md-6">
+      {{ form_row(form.attestation) }}
+    </div>
+    <div class="form-group col-md-6">
+      {{ form_row(form.releve) }}
+    </div>
+  
+    
+  </div>
+
+    <button id="ajouter_information_bac" class="btn btn-success">{{ button_label|default('Enregistrer') }}</button>
 {{ form_end(form) }}

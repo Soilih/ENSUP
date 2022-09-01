@@ -1,4 +1,4 @@
 <form method="post" action="{{ path('flux_delete', {'id': flux.id}) }}" onsubmit="return confirm('Are you sure you want to delete this item?');">
     <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ flux.id) }}">
-       <button class="btn btn-danger btn-sm">suprimer</button>
+       <button class="btn btn-danger btn-sm"><i class="zmdi zmdi-delete"></i> suprimer</button>
 </form>

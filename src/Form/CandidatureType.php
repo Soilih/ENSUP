@@ -4,6 +4,7 @@ namespace App\Form;
 
 use App\Entity\Candidature;
 use App\Entity\Niveau;
+use App\Entity\TypeDiplome;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -26,7 +27,13 @@ class CandidatureType extends AbstractType
             ])
             ->add('niveau' , EntityType::class , [
                 'class'=>Niveau::class , 
-                 'label'=>"niveau poursuivis",
+                 'label'=>"niveau d'etude actuel ",
+                'choice_label'=>'libelle', 
+                'attr'=>['class'=>'form-control']
+            ])
+            ->add('typediplome' , EntityType::class , [
+                'class'=>TypeDiplome::class , 
+                 'label'=>"Diplome obtenu",
                 'choice_label'=>'libelle', 
                 'attr'=>['class'=>'form-control']
             ])
@@ -34,7 +41,7 @@ class CandidatureType extends AbstractType
                 'label'=>"Beneficiez-vous de bourse ",
                 'choices'=>[
                 'oui'=>'oui' , 
-                'non'=>'oui' , 
+                'non'=>'non' , 
                 
             ] , 
             'attr'=>['class'=>'form-control']

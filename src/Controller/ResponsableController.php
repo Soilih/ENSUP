@@ -31,7 +31,7 @@ class ResponsableController extends AbstractController
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($responsable);
             $entityManager->flush();
-
+            $this->addFlash("success" , "informations responsable  sont bien enregistrées avec success ");
             return $this->redirectToRoute('responsable_new', [], Response::HTTP_SEE_OTHER);
         }
 
@@ -63,7 +63,7 @@ class ResponsableController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $this->getDoctrine()->getManager()->flush();
 
-            return $this->redirectToRoute('home_accueil', [], Response::HTTP_SEE_OTHER);
+            return $this->redirectToRoute('responsable_new', [], Response::HTTP_SEE_OTHER);
         }
 
         return $this->renderForm('responsable/edit.html.twig', [

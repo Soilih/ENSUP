@@ -31,7 +31,7 @@ class BourseController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $entityManager->persist($bourse);
             $entityManager->flush();
-
+            $this->addFlash("success" , "informations de bourses sont bien enregistrées avec success ");
             return $this->redirectToRoute('bourse_new', [], Response::HTTP_SEE_OTHER);
         }
 

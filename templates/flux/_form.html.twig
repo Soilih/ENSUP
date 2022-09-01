@@ -1,5 +1,43 @@
 {{ form_start(form) }}
-    {{ form_widget(form) }}
-    <br>
-    <button class="btn btn-success">{{ button_label|default('Enregistrer') }}</button>
+    <div class="form-row">
+    <div class="form-group col-md-6">
+       {{ form_row(form.depart) }}
+    </div>
+    <div class="form-group col-md-6">
+      {{ form_row(form.dateArrive) }}
+    </div>
+
+    <div class="form-group col-md-6">
+      {{ form_row(form.niveauActuel) }}
+    </div>
+    <div class="form-group col-md-6">
+      {{ form_row(form.cycle) }}
+    </div>
+    <div class="form-group col-md-6">
+      {{ form_row(form.pays) }}
+    </div>
+    <div class="form-group col-md-6">
+      {{ form_row(form.diplome) }}
+    </div>
+     <div class="form-group col-md-6">
+      {{ form_row(form.specialite) }}
+    </div>
+    <div class="form-group col-md-6">
+      {{ form_row(form.typediplome) }}
+    </div>
+    <div class="form-group col-md-6">
+      {{ form_row(form.suggestion) }}
+    </div>
+    <div class="form-group col-md-6">
+      {{ form_row(form.probleme) }}
+    </div>
+    <div class="form-group col-md-12">
+      {{ form_row(form.projet) }}
+    </div>
+    
+    
+  </div>
+  <br>
+<button class="btn btn-lg btn-success" id="buton-ajouter-etudiant">{{ button_label|default('Enregister') }}</button>
 {{ form_end(form) }}
+

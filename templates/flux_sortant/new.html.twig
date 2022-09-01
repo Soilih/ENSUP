@@ -1,102 +1,139 @@
-{% extends 'base.html.twig' %}
-{% block body %}
-<div class="wrapper">
-  <div class="content-wrapper">
-     <div class="row" style="padding-left:2%;padding-top:2%">
-      {% if (app.user.fluxSortants | length) < 1  %}
-        <div class="col-md-5">
-            <div class="card card-success">
-              <div class="card-header">
-                <h3 class="card-title">
-                  Ajouter un flux sortant 
-                </h3>
-              </div>
-              <!-- /.card-header -->
-              <div class="card-body">
-                 {{ include('flux_sortant/_form.html.twig') }}
-              </div>
-              <!-- /.card-body -->
+
+
+<head>
+    <!-- Required meta tags-->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="au theme template">
+    <meta name="author" content="Hau Nguyen">
+    <meta name="keywords" content="au theme template">
+
+    <!-- Title Page-->
+    <title>Dashboard</title>
+    {% include "link/link_css.html.twig" %}  
+</head>
+{% include "link/header.html.twig" %}
+    <div class="page-container">
+        <div class="main-content">
+            <div class="section__content section__content--p30">
+                <div class="container-fluid">
+                    <div class="row">
+                    {% if (app.user.fluxSortants|length) < 1   %}
+                        <div class="col-lg-10">
+                          {% for msg in app.flashes('success') %}
+                            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                                </button>
+                                <strong>  {{msg }} </strong> 
+                            </div>
+                            <script>
+                              $(".alert").alert();
+                            </script>
+                                
+                            </div>
+                          {% endfor %}
+                            <div class="card">
+                              <h3 class="card-header"> Flux sortant  </h3>  
+                              <div class="card-body">
+                                  {{ include('flux_sortant/_form.html.twig') }}
+                                <br>
+                                 
+                                  
+                              </div>
+                            </div>
+                        </div>
+                        {% else %}
+                        <div class="col-lg-8">
+                          <div class="card border-primary">
+                           <div class="card-body">
+                              <h4 class="card-header">Données flux sortant </h4>
+                               {% for flux_sortant  in app.user.fluxSortants %}
+                                <table class="table table-bordered table-striped">
+                                      <tbody>
+                                          <tr>
+                                              <th>Date de Depart</th>
+                                              <td>{{ flux_sortant.dateDepart ? flux_sortant.dateDepart|date('Y-m-d') : '' }}</td>
+                                          </tr>
+                                          <tr>
+                                              <th>Niveau d'etude poursuivis </th>
+                                              <td>{{ flux_sortant.niveau.libelle }}</td>
+                                          </tr>
+                                          <tr>
+                                              <th>Discipline </th>
+                                              <td>{{ flux_sortant.filiere }}</td>
+                                          </tr>
+                                          <tr>
+                                              <th>Composant de domaine </th>
+                                              <td>{{ flux_sortant.composant.libelle  }}</td>
+                                          </tr>
+                                          <tr>
+                                              <th>Cycle d'etude</th>
+                                              <td>{{ flux_sortant.cycle }}</td>
+                                          </tr>
+                                          <tr>
+                                              <th>Nom etablissement </th>
+                                              <td>{{ flux_sortant.universite }}</td>
+                                          </tr>
+                                          <tr>
+                                              <th>Type d'établissement </th>
+                                              <td>{{ flux_sortant.typeuniversite.libelle }} {{ flux_sortant.typeuniversit }} </td>
+                                          </tr>
+                                          <tr>
+                                              <th>adresse de l'universite  </th>
+                                              <td>{{ flux_sortant.ville }}</td>
+                                          </tr>
+                                          <tr>
+                                              <th>Pays </th>
+                                              <td>{{ flux_sortant.pays  }}</td>
+                                          </tr>
+                                          <tr>
+                                              <th>type de flux  </th>
+                                              <td>{{ flux_sortant.type  }}</td>
+                                          </tr>
+                                          <tr>
+                                              <th>Projet professionnel </th>
+                                              <td>{{ flux_sortant.motivation }}</td>
+                                          </tr>
+                                          <tr>
+                                              <th>Resources financiere  </th>
+                                              <td>{{ flux_sortant.moyen }}</td>
+                                          </tr>
+                                      </tbody>
+                                  </table>
+                                  <br>
+                                  <a class="btn btn-primary"  href="{{ path('home_accueil')}}"> <i class="fa fa-location-arrow" aria-hidden="true"></i>
+                                  Finaliser votre inscription 
+                                </a> 
+                                 {% for candidatures in app.user.candidatures %}
+                                  {% if candidatures.cursus == "autre"  %}
+                                    <a class="btn btn-warning"  href="{{ path('information_bac_new')}}"> <i class="fa fa-location-arrow" aria-hidden="true"></i>
+                                      Revenir à l'etape precedente 
+                                    </a>
+                                    {% elseif candidatures.cursus=="externe"  %}
+                                        <a class="btn btn-warning"  href="{{ path('parcours_universitaire_new_externe')}}"> <i class="fa fa-location-arrow" aria-hidden="true"></i>
+                                        Revenir à l'etape precedente 
+                                        </a>
+                                    {% elseif candidatures.cursus=="interne" %}
+                                        <a class="btn btn-warning"  href="{{ path('parcours_universitaire_new')}}"> <i class="fa fa-location-arrow" aria-hidden="true"></i>
+                                        Revenir à l'etape precedente 
+                                        </a>
+                                        {% else %}
+                                           <a class="btn btn-warning"  href="{{ path('parcours_universitaire_new')}}"> <i class="fa fa-location-arrow" aria-hidden="true"></i>
+                                        Revenir à l'etape precedente 
+                                        </a> 
+                                    {% endif %}
+                                  {% endfor %}
+                               {% endfor %}
+                            </div>
+                          </div>
+                        </div>
+                        {% endif %}
+                    </div>
+                </div>
             </div>
-        </div>  
-      {% endif %}
-      <div class="col-lg-7">
-          <div class="card text-left">
-            <div class="card-header">
-              <h4 class="card-title">Flux sortant  </h4>
-            </div>
-           <div class="card-body">
-               <div class="table-responsive">
-                <table class="table table-bordered table-striped " style=" width:100%">
-                    <tbody>
-                      {% for flux_sortant in app.user.fluxSortants %}
-                        <tr>
-                            <th>Date de Depart</th>
-                            <td>{{ flux_sortant.dateDepart ? flux_sortant.dateDepart|date('Y-m-d') : '' }}</td>
-                        </tr>
-                        <tr>
-                            <th>Universite inscrite </th>
-                            <td>{{ flux_sortant.universite }}</td>
-                        </tr>
-                        <tr>
-                            <th>Niveau poursuivis  </th>
-                            <td>{{ flux_sortant.niveau.libelle }}</td>
-                        </tr>
-                        <tr>
-                            <th>Type d'etablissement superieur </th>
-                            <td>{{ flux_sortant.typeuniversite.libelle }}</td>
-                        </tr>
-                        <tr>
-                            <th>adresse de l'universite  </th>
-                            <td>{{ flux_sortant.ville }}</td>
-                        </tr>
-                        <tr>
-                            <th>Categorie d'etablissement  </th>
-                            <td>{{ flux_sortant.typeuniversit  }}</td>
-                        </tr>
-                         <tr>
-                            <th>Pays </th>
-                            <td>{{ flux_sortant.pays  }}</td>
-                        </tr>
-                        <tr>
-                            <th>Filiere </th>
-                            <td>{{ flux_sortant.filiere }}</td>
-                        </tr>
-                         <tr>
-                            <th>Composant de filiere </th>
-                            <td>{{ flux_sortant.composant.libelle  }}</td>
-                        </tr>
-                        <tr>
-                            <th>Cycle de poursuite </th>
-                            <td>{{ flux_sortant.cycle }}</td>
-                        </tr>
-                        <tr>
-                            <th>Prise en charge durant vos etudes </th>
-                            <td>{{ flux_sortant.moyen }}</td>
-                        </tr>
-                        
-                        <tr>
-                            <th>Motivation </th>
-                            <td>{{ flux_sortant.motivation }}</td>
-                        </tr>
-                        <tr>
-                          <th>Actions  </th>
-                          <td>
-                              <a class="btn btn-success" href="{{ path('flux_sortant_edit', {'id': flux_sortant.id}) }}"> editer</a>
-                              <div style="display:inline-block">   {{ include('flux_sortant/_delete_form.html.twig') }} </div>
-                          </td>
-                        </tr>
-                      {% endfor %}
-                    </tbody>
-                </table>
-              </div>
-            </div>
-            </div>
-          </div>
-        </div>
-         
         </div>
     </div>
-</div>
-{% endblock %}
-
-
+     
+{% include 'link/footer.html.twig' %}
+ {% include "link/link_js.html.twig" %}  

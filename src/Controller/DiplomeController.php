@@ -38,6 +38,7 @@ class DiplomeController extends AbstractController
             }
             $entityManager->persist($diplome);
             $entityManager->flush();
+            $this->addFlash("success" , "informations  sont bien enregistrées avec success ");
             return $this->redirectToRoute('diplome_new', [], Response::HTTP_SEE_OTHER);
         }
 

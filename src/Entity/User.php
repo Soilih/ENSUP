@@ -153,6 +153,11 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      */
     private $informationBacs;
 
+    /**
+     * @ORM\OneToMany(targetEntity=Document::class, mappedBy="user")
+     */
+    private $documents;
+
     
 public function __construct()
     {
@@ -172,6 +177,7 @@ public function __construct()
         $this->informationBacs = new ArrayCollection();
        
         $this->users = new ArrayCollection();
+        $this->documents = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -730,6 +736,36 @@ public function __construct()
         if (!$this->users->contains($user)) {
             $this->users[] = $user;
           
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Document>
+     */
+    public function getDocuments(): Collection
+    {
+        return $this->documents;
+    }
+
+    public function addDocument(Document $document): self
+    {
+        if (!$this->documents->contains($document)) {
+            $this->documents[] = $document;
+            $document->setUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeDocument(Document $document): self
+    {
+        if ($this->documents->removeElement($document)) {
+            // set the owning side to null (unless already changed)
+            if ($document->getUser() === $this) {
+                $document->setUser(null);
+            }
         }
 
         return $this;

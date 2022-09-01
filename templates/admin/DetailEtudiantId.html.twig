@@ -144,10 +144,10 @@
                                  </div>
                                  <div class="col-4 col-sm-12">
                                  <div class="card border-primary">
+                                     
                                     <div class="card-body">
-                                       <h4 class="card-title">Responsable d'etude   </h4>
-                                       
-                                       <table class="table table-striped">
+                                     <h4 class="card-header">Responsable d'etude   </h4>
+                                      <table class="table table-bordered table-striped">
                                          <thead>
                                           <tr>
                                              <th>Nom  </th>
@@ -156,9 +156,7 @@
                                              <th>Email</th>
                                              <th>Proffession </th>
                                               <th>Adresse domicile  </th>
-                                             <th>Lieu de naissance </th>
-                                             <th>Pays de naissance  </th>
-                                             <th>Description</th>
+                                             
                                           </tr>
                                        </thead>
                                        <tbody>
@@ -170,9 +168,7 @@
                                           <td>{{rep.email }}</td>
                                           <td>{{rep.prof }}</td>
                                           <td>{{rep.ad }}</td>
-                                          <td>{{rep.lieu }}</td>
-                                          <td>{{rep.pays }}</td>
-                                          <td>{{rep.dt }}</td>
+                                          
                                        </tr>
                                        {% endfor %}
                                        
@@ -185,7 +181,7 @@
                                  <div class="col-6 col-sm-6">
                                     <div class="card border-primary">
                                     <div class="card-body">
-                                       <h4 class="card-title">Informations suplementaires et identité   </h4>
+                                       <h4 class="card-header">Informations suplementaires et identité   </h4>
                                        
                                        <table class="table table-striped">
                                           <tbody>
@@ -195,11 +191,7 @@
                                                 <th> Personne à contacter en cas d'urgence   </th>
                                                 <td>  {{nos_etudiantt.urgence}}    </td>
                                              </tr>
-                                             <tr>
-                                                <th> Curriculum Vitae </th>
-                                                 <td><a href="{{ asset('uploads/'~ nos_etudiantt.cv) }}">consulter </a> </td>
-                                              
-                                             </tr>
+                                             
                                              <tr>
                                                  <th>Numero de carte d'identité  </th>
                                                 <td> {{nos_etudiantt.num_ca}}    </td>
@@ -240,7 +232,7 @@
                               <div class="col-6 col-sm-6">
                                     <div class="card border-primary">
                                     <div class="card-body">
-                                       <h4 class="card-title">Baccalauréat  </h4>
+                                       <h4 class="card-header">Baccalauréat  </h4>
                                        
                                        <table class="table table-striped">
                                           <tbody>
@@ -264,6 +256,11 @@
                                              <tr>
                                                 <th> Numero de table    </th>
                                                 <td>  {{nos_etudiantt.nutable}}    </td>
+                                             </tr>
+                                             <tr>
+                                             <tr>
+                                                <th> Nom du centre    </th>
+                                                <td>  {{nos_etudiantt.centre}}    </td>
                                              </tr>
                                              <tr>
                                                 <th> Année de session     </th>
@@ -299,20 +296,19 @@
                                     <div class="col-12 col-sm-12">
                                        <div class="card border-primary">
                                           <div class="card-body">
-                                             <h4 class="card-title">Cursus interne    </h4>
-                                             <table class="table table-striped">
+                                             <h4 class="card-header">Cursus interne    </h4>
+                                             <table class="table  table-bordered   table-striped ">
                                                 <thead>
                                                    <tr>
-                                                      <th>Anneé d'obtention  </th>
-                                                      <th>Etablissement  </th>
+                                                      <th>Anneé   </th>
+                                                      <th>Nom Etablissement  </th>
                                                       <th>Niveau d'etude</th>
-                                                      <th>Filiére  </th>
+                                                      <th>Discipline </th>
                                                       <th> Mention </th>
                                                       <th> Moyenne </th>
-                                                      <th>Type d'enseignement   </th>
+                                                      <th>Type d'etablissement    </th>
                                                       <th>Pays </th>
                                                       <th>Justificatif </th>
-                                                      <th> Description  </th> 
                                                    </tr>
                                                    </thead>
                                                    <tbody>
@@ -327,11 +323,7 @@
                                                          <td> {{ cursus.libelle }}</td>
                                                          <td> {{ cursus.pays }}</td>
                                                          <td><a href="{{ asset('uploads/'~ cursus.fichier) }}">consulter </a> </td>
-                                                         <td> {{ cursus.detail }}</td>
-                                                         
-                                                      
-                                                         
-                                                      </tr>
+                                                       </tr>
                                                    {% endfor %}
                                                    
                                              </tbody>
@@ -346,20 +338,19 @@
                                     <div class="col-12 col-sm-12">
                                        <div class="card border-primary">
                                           <div class="card-body">
-                                             <h4 class="card-title">Cursus externe     </h4>
-                                             <table class="table table-striped">
+                                             <h4 class="card-header">Cursus externe     </h4>
+                                             <table  class="table   table-bordered   table-striped">
                                              <thead>
                                                    <tr>
-                                                      <th>Anneé d'obtention  </th>
-                                                      <th>Etablissement  </th>
+                                                      <th>Anneé   </th>
+                                                      <th>Nom Etablissement  </th>
                                                       <th>Niveau d'etude</th>
-                                                      <th>Filiére  </th>
+                                                      <th>Discipline </th>
                                                       <th> Mention </th>
                                                       <th> Moyenne </th>
-                                                      <th>Type d'enseignement   </th>
+                                                      <th>Type d'etablissement    </th>
                                                       <th>Pays </th>
                                                       <th>Justificatif </th>
-                                                      <th> Description  </th> 
                                                    </tr>
                                                    </thead>
                                                    <tbody>
@@ -374,7 +365,7 @@
                                                          <td> {{ cursus.libelle }}</td>
                                                          <td> {{ cursus.pays }}</td>
                                                          <td><a href="{{ asset('uploads/'~ cursus.fichier) }}">consulter </a> </td>
-                                                         <td> {{ cursus.detail }}</td>
+                                                        
                                                       </tr>
                                                    {% endfor %}
                                                    </tbody>
@@ -389,20 +380,19 @@
                                     <div class="col-12 col-sm-12">
                                        <div class="card border-primary">
                                           <div class="card-body">
-                                             <h4 class="card-title">Cursus interne    </h4>
-                                             <table class="table table-striped">
+                                             <h4 class="card-header">Cursus interne    </h4>
+                                             <table class="table  table-bordered table-striped">
                                                 <thead>
                                                    <tr>
-                                                      <th>Anneé d'obtention  </th>
-                                                      <th>Etablissement  </th>
+                                                      <th>Anneé   </th>
+                                                      <th>Nom Etablissement  </th>
                                                       <th>Niveau d'etude</th>
-                                                      <th>Filiére  </th>
+                                                      <th>Discipline </th>
                                                       <th> Mention </th>
                                                       <th> Moyenne </th>
-                                                      <th>Type d'enseignement   </th>
+                                                      <th>Type d'etablissement    </th>
                                                       <th>Pays </th>
                                                       <th>Justificatif </th>
-                                                      <th> Description  </th> 
                                                    </tr>
                                                    </thead>
                                                    <tbody>
@@ -417,7 +407,7 @@
                                                          <td> {{ cursus.libelle }}</td>
                                                          <td> {{ cursus.pays }}</td>
                                                          <td><a href="{{ asset('uploads/'~ cursus.fichier) }}">consulter </a> </td>
-                                                         <td> {{ cursus.detail }}</td>
+                                                        
                                                       </tr>
                                                    {% endfor %}
                                              </tbody>
@@ -428,20 +418,19 @@
                                     <div class="col-12 col-sm-12">
                                        <div class="card border-primary">
                                           <div class="card-body">
-                                             <h4 class="card-title">Cursus externe     </h4>
-                                             <table class="table table-striped">
+                                             <h4 class="card-header">Cursus externe     </h4>
+                                             <table class="table table-bordered table-striped">
                                              <thead>
                                                    <tr>
-                                                      <th>Anneé d'obtention  </th>
-                                                      <th>Etablissement  </th>
+                                                      <th>Anneé   </th>
+                                                      <th>Nom Etablissement  </th>
                                                       <th>Niveau d'etude</th>
-                                                      <th>Filiére  </th>
+                                                      <th>Discipline </th>
                                                       <th> Mention </th>
                                                       <th> Moyenne </th>
-                                                      <th>Type d'enseignement   </th>
+                                                      <th>Type d'etablissement    </th>
                                                       <th>Pays </th>
                                                       <th>Justificatif </th>
-                                                      <th> Description  </th> 
                                                    </tr>
                                                    </thead>
                                                    <tbody>
@@ -456,7 +445,7 @@
                                                          <td> {{ cursus.libelle }}</td>
                                                          <td> {{ cursus.pays }}</td>
                                                          <td><a href="{{ asset('uploads/'~ cursus.fichier) }}">consulter </a> </td>
-                                                         <td> {{ cursus.detail }}</td>
+                                                         
                                                       </tr>
                                                    {% endfor %}
                                                    </tbody>
@@ -473,15 +462,18 @@
                                     <div class="card-body">
                                        <h4 class="card-title">Formations et diplomes   </h4>
                                        
-                                       <table class="table table-striped">
+                                       <table class="table  table-bordered table-striped">
                                          <thead>
                                           <tr>
+                                              <th>Année de session</th>
                                              <th>Intitulé diplome </th>
-                                             <th>Filiere  </th>
+                                             <th>Discipline   </th>
                                              <th>Diplome  </th>
-                                             <th>Université </th>
+                                             <th>Moyenne   </th>
+                                             <th>Type d'etablissement   </th>
+                                             <th>Nom etablissement    </th>
                                             <th>Pays</th>
-                                             <th>Session</th>
+                                            
                                              <th>Justificatif </th>
                                              
                                           </tr>
@@ -489,12 +481,15 @@
                                        <tbody>
                                        {% for diplome in diplomes  %}
                                         <tr>
+                                          <td>{{ diplome.session   }}</td>
                                           <td>{{diplome.lib }}</td>
                                           <td>{{diplome.compo }}</td>
                                           <td>{{diplome.type_diplome }}</td>
+                                          <td>{{diplome.moy }}</td>
+                                          <td>{{diplome.lib_uni }}</td>
                                           <td>{{ diplome.universite  }}</td>
                                           <td>{{ diplome.pays  }}</td>
-                                          <td>{{ diplome.session   }}</td>
+                                          
                                            <td><a href="{{ asset('uploads/'~ diplome.fichier) }}">consulter </a> </td>
                                         </tr>
                                        {% endfor %}
@@ -509,85 +504,21 @@
                                  
                               {% endfor %}
                               
-                              <div class="col-7 col-sm-7">
-                                 <div class="card border-primary">
-                                    <div class="card-body">
-                                       <h4 class="card-title">Langues  </h4>
-                                       <table class="table table-striped">
-                                           <thead>
-                                             <tr>
-                                               <th>Titre  </th>
-                                                <th>Niveau </th>
-                                                <th> Description</th>
-                                             </tr>
-                                       </thead>
-                                       <tbody>
-                                       {% for lg in langue %}
-                                          <tr>
-                                             <td> {{lg.lib }}  </td>
-                                             <td> {{lg.niv }}  </td>
-                                             <td> {{lg.dt }}  </td>
-                                          </tr>
-                                       {% endfor %}
-                                       </tbody>
-                                       </table>
-                                      
-                                    </div>
-                                 </div>
-                              </div>
-                              {% for nos_etudiantt in nos_etudiantt %}
-                                 {% if nos_etudiantt.bourse == "oui"  %}
-                                    <div class="col-4 col-sm-5">
-                                       <div class="card border-primary">
-                                          <div class="card-body">
-                                             <h4 class="card-title">Informations bourse  </h4>
-                                             
-                                             <table class="table table-striped">
-                                                <tbody>
-                                                {% for bourse in bourses %}
-                                                   <tr>
-                                                      <th>Nature  </th>
-                                                      <td>  {{bourse.nat}}    </td>
-                                                   </tr>
-                                                   <tr>
-                                                      <th> Montant par mois    </th>
-                                                      <td>  {{bourse.mont}} kmf   </td>
-                                                   </tr>
-                                                   <tr>
-                                                      <th> Pays d'obtention   </th>
-                                                      <td>  {{bourse.pays_b}}    </td>
-                                                   </tr>
-                                                   <tr>
-                                                      <th> Description    </th>
-                                                      <td>  {{bourse.bour_de }}    </td>
-                                                   </tr>
-                                                   
-                                                {% endfor %}
-                                                   
-                                                </tbody>
-                                             </table>
-                                          
-                                          </div>
-                                       </div>
-                                    </div>
-                                 {% endif %}
-                              {% endfor %}
-                              {% for nos_etudiantt in nos_etudiantt %}
+                               {% for nos_etudiantt in nos_etudiantt %}
                                  {% if nos_etudiantt.stage =="oui" %}
-                                   <div class="col-10 col-sm-12">
+                                   <div class="col-8 col-sm-8">
                                  <div class="card border-primary">
                                     <div class="card-body">
-                                       <h4 class="card-title">EXPÉRIENCES PROFESSIONNELLES / STAGE </h4>
-                                       <table class="table table-striped">
+                                       <h4 class="card-header">EXPÉRIENCES PROFESSIONNELLES / STAGE </h4>
+                                       <table class="table table-bordered table-striped">
                                          <thead>
                                                 <tr>
-                                                   
-                                                   <th>Date debut </th>
-                                                   <th>Date Fin  </th>
+                                                  <th>Date debut </th>
+                                                   <th>Date  Fin  </th>
                                                    <th>Poste ocupé</th>
-                                                   <th>Nom de l'entreprise </th>
-                                                   <th>adresse   </th>
-                                                   <th>detail </th>
+                                                   <th>Nom societé </th>
+                                                   <th>Pays</th>
+                                                   <th>Description </th>
                                                 </tr>
                                           </thead>
                                           <tbody>
@@ -609,57 +540,104 @@
                               </div>
                                  {% endif %}
                               {% endfor %}
+                              {% for nos_etudiantt in nos_etudiantt %}
+                                 {% if nos_etudiantt.bourse == "oui"  %}
+                                    <div class="col-4 col-sm-4">
+                                       <div class="card border-primary">
+                                          <div class="card-body">
+                                             <h4 class="card-header">Informations bourse  </h4>
+                                             
+                                             <table class="table table-striped">
+                                                <tbody>
+                                                {% for bourse in bourses %}
+                                                <tr>
+                                                      <th>Date d'obtention  </th>
+                                                      <td>  {{bourse.dt}}    </td>
+                                                   </tr>
+                                                   <tr>
+                                                      <th>Nature  </th>
+                                                      <td> bourse {{bourse.nat}}    </td>
+                                                   </tr>
+                                                   <tr>
+                                                      <th> Montant/mois    </th>
+                                                      <td>  {{bourse.mont}} kmf   </td>
+                                                   </tr>
+                                                   <tr>
+                                                      <th> Pays </th>
+                                                      <td>  {{bourse.pays_b}}    </td>
+                                                   </tr>
+                                                   <tr>
+                                                      <th> Description    </th>
+                                                      <td>  {{bourse.bour_de }}    </td>
+                                                   </tr>
+                                                   
+                                                {% endfor %}
+                                                   
+                                                </tbody>
+                                             </table>
+                                          
+                                          </div>
+                                       </div>
+                                    </div>
+                                 {% endif %}
+                              {% endfor %}
+                             
                               
                                {% for nos_etudiantt in nos_etudiantt %}
                                  {% if nos_etudiantt.flux == "sortant"  %}
-                                    <div class="col-12 col-sm-12">
+                                   <div class="col-12 col-sm-12">
                                        <div class="card border-primary">
                                           <div class="card-body">
-                                             <h4 class="card-title">Flux sortant  </h4>
-                                             <table class="table table-striped">
+                                             <h4 class="card-header">Flux sortant  </h4>
+                                             <table class="table table-bordered table-striped">
                                              <thead>
                                                    <tr class="table-success text-nowrap">
                                                       <th>Année depart </th>
                                                       <th>Etablissement   </th>
                                                       <th>Type d'établissement </th>
                                                       <th>adresse universite  </th>
-                                                      <th> Pays </th>
-                                                      <th>Cycle  </th>
+                                                      <th>Pays  </th>
+                                                    
                                                    </tr>
                                                 </thead>
                                                 <tbody>
                                                 {% for flux_sortant in flux_sortant %}
+                                                 {% if flux_sortant.types=="sortant" %}
+                                                 
                                                    <tr>
                                                       <td>{{flux_sortant.depart|date('Y-m-d') }}</td>
-                                                      <td> {{ flux_sortant.univ }}</td>
-                                                      <td> {{ flux_sortant.type_univ }}</td>
-                                                      <td> {{ flux_sortant.ville }}</td>
-                                                      <td> {{ flux_sortant.pays }}</td>
-                                                      <td> {{ flux_sortant.cycle }}</td>
-                                                   </tr>  
+                                                      <td>  {{ flux_sortant.univ }}  </td>
+                                                      <td> {{ flux_sortant.type_univ }}  {{ flux_sortant.type_uni }}   </td>
+                                                      <td> {{ flux_sortant.ville }}  </td>
+                                                      <td> {{ flux_sortant.pays }}  </td>
+                                                     
+                                                   </tr> 
+                                                {% endif %}
                                                 {% endfor %}
                                                    </tbody>
                                                    <thead>
                                                       <tr class="table-success text-nowrap">
-                                                         <th>Filiere d'etude   </th>
+                                                         <th>Discipline   </th>
                                                          <th>Composant de domaine  </th>
                                                          <th>Niveau d'etude poursuivis </th>
+                                                           <th>Cycle d'etude   </th>
                                                          <th> moyen de subsistance </th>
-                                                         <th> Categorie d'etablissement  </th> 
-                                                         <th> Projet proffessionnel  </th> 
+                                                        
                                                       </tr>
                                                    </thead>
                                                    <tbody>
                                                    {% for flux_sortant in flux_sortant %}
+                                                    {% if flux_sortant.types=="sortant" %}
                                                       <tr>
                                                          <td>{{flux_sortant.filiere  }}</td>
                                                          <td> {{ flux_sortant.lib_compo}} </td>
                                                          <td>{{ flux_sortant.lib_niveau}}</td>
-                                                         <td>{{ flux_sortant.moyen}}</td>
-                                                      <td>{{ flux_sortant.type_uni}}</td>
-                                                      <td>{{ flux_sortant.motivation }}</td>
-                                                      </tr>
+                                                          <td> {{ flux_sortant.cycle }}</td>
+                                                         <td> {{ flux_sortant.moyen}}  </td>
+                                                       </tr>
+                                                       {% endif %}
                                                       {% endfor %}
+                                                      
                                                    </tbody>
                                              </table>
                                           </div>
@@ -669,52 +647,60 @@
                               {% endfor %}
                               {% for nos_etudiantt in nos_etudiantt %}
                                  {% if nos_etudiantt.flux == "resident"  %}
+                                 
                                     <div class="col-12 col-sm-12">
                                        <div class="card border-primary">
                                           <div class="card-body">
-                                             <h4 class="card-title">Flux resident   </h4>
-                                             <table class="table table-striped">
+                                             <h4 class="card-header">Flux resident   </h4>
+                                             <table class="table table-bordered table-striped">
                                              <thead>
                                                    <tr class="table-success text-nowrap">
                                                       <th>Année depart </th>
                                                       <th>Etablissement   </th>
                                                       <th>Type d'établissement </th>
                                                       <th>adresse universite  </th>
-                                                      <th> Pays </th>
-                                                      <th>Cycle  </th>
+                                                      <th>Pays  </th>
+                                                    
                                                    </tr>
                                                 </thead>
                                                 <tbody>
                                                 {% for flux_sortant in flux_sortant %}
+                                                 {% if flux_sortant.types=="resident" %}
+                                                 
                                                    <tr>
                                                       <td>{{flux_sortant.depart|date('Y-m-d') }}</td>
-                                                      <td> {{ flux_sortant.univ }}</td>
-                                                      <td> {{ flux_sortant.type_uni }}</td>
-                                                      <td> {{ flux_sortant.ville }}</td>
-                                                      <td> {{ flux_sortant.pays }}</td>
-                                                      <td> {{ flux_sortant.cycle }}</td>
-                                                   </tr>  
+                                                      <td>  {{ flux_sortant.univ }}  </td>
+                                                      <td> {{ flux_sortant.type_univ }}  {{ flux_sortant.type_uni }}   </td>
+                                                      <td> {{ flux_sortant.ville }}  </td>
+                                                      <td> {{ flux_sortant.pays }}  </td>
+                                                     
+                                                   </tr> 
+                                                {% endif %}
                                                 {% endfor %}
                                                    </tbody>
                                                    <thead>
                                                       <tr class="table-success text-nowrap">
-                                                         <th>Filiere d'etude   </th>
+                                                         <th>Discipline   </th>
                                                          <th>Composant de domaine  </th>
                                                          <th>Niveau d'etude poursuivis </th>
+                                                           <th>Cycle d'etude   </th>
                                                          <th> moyen de subsistance </th>
-                                                         <th> Categorie d'etablissement  </th> 
+                                                        
                                                       </tr>
                                                    </thead>
                                                    <tbody>
                                                    {% for flux_sortant in flux_sortant %}
+                                                    {% if flux_sortant.types=="resident" %}
                                                       <tr>
                                                          <td>{{flux_sortant.filiere  }}</td>
                                                          <td> {{ flux_sortant.lib_compo}} </td>
                                                          <td>{{ flux_sortant.lib_niveau}}</td>
-                                                         <td>{{ flux_sortant.moyen}}</td>
-                                                      <td>{{ flux_sortant.type_uni}}</td>
-                                                      </tr>
+                                                          <td> {{ flux_sortant.cycle }}</td>
+                                                         <td> {{ flux_sortant.moyen}}  </td>
+                                                       </tr>
+                                                       {% endif %}
                                                       {% endfor %}
+                                                      
                                                    </tbody>
                                              </table>
                                           </div>
@@ -736,7 +722,7 @@
                                                             <th>date de depart  </th>
                                                             <th>Niveau d'etude actuel    </th>
                                                             <th>Pays effectué les etudes </th>
-                                                            <th> Cycle   </th>
+                                                            <th> Cycle d'etude    </th>
                                                          </tr>
                                                       </thead>
                                                       <tbody>
@@ -746,29 +732,26 @@
                                                          <td>{{ fl.depart|date('Y-m-d') }}</td>
                                                          <td>{{ fl.lib_niveau}}</td>
                                                          <td>{{ fl.pays}}</td>
-                                                         <td>{{ fl.cycle}}</td>
+                                                         <td>{{ fl.typedi}}</td>
                                                       </tr>
                                                       {% endfor %}
                                                       
                                                    </tbody>
                                                 <thead>
                                                       <tr class="table-success">
-                                                         <th>Avez-vous des projet pour ton pays?
-                                                         </th>
-                                                         <th>Comment derouler tes etudes?
-                                                         </th>
-                                                         <th>Souhaitez-vous poursuivre les etudes?
-                                                         </th>
-                                                         <th>Problemes rencontreés  </th>
-                                                         <th>Suggestion et remarque   </th>
+                                                         <th>  Dernier diplome obtenu </th>
+                                                         <th>  Domaine specialité </th>
+                                                         <th>votre projet proffessionnel ? </th>
+                                                         <th>Problemes rencontreés durant les etudes  </th>
+                                                         <th>Quelques Suggestions et remarques   </th>
                                                       </tr>
                                                 </thead>
                                                    <tbody>
                                                    {% for fl in flux %}
                                                       <tr>
+                                                          <td>{{fl.diplome }}</td>
+                                                          <td>{{fl.sp }}</td>
                                                          <td>{{fl.projet }}</td>
-                                                         <td>{{ fl.detail }}</td>
-                                                         <td>{{fl.etude }}</td>
                                                          <td>{{fl.probleme }}</td>
                                                          <td>{{fl.sug }}</td>
                                                       
@@ -790,30 +773,28 @@
                                  <div class="card border-primary">
                                     <div class="card-body">
                                        <h4 class="card-title">Espace reservé à l'administrateur </h4>
-                                       {% for  etudiant  in nos_etudiantt %}
-                                       {% if etudiant.idcandidat>0 %}
-                                       <form method="POST" action="{{ path('decision') }}">
-                                          <div class="form-group">
-                                            <label for="">Decision candidature </label>
-                                             <label for=""></label>
-                                              <select class="form-control" name="decision">
-                                                <option value="1">Valider</option>
-                                                <option value="2">Annuler</option>
-                                                <option value="3">Incomplet </option>
-                                              </select>
-                                          </div>
-                                          <div class="form-group">
-                                            <label for="">Description ou motif </label>
-                                            <textarea class="form-control" name="detail"  rows="3"></textarea>
-                                          </div>
-                                          <input type="hidden" name="idcandidature" value="{{etudiant.idcandidat}}">
-                                          <input type="hidden" action="action" name="ajouter_decision">
-                                          <button type="submit" class="btn btn-lg btn-success">Envoyer</button>
-                                       </form>
-                                      {% endif %}
+                                       {% for nos_etudiantt in nos_etudiantt %} 
                                           
-                                       {% endfor %}
-                                       
+                                          <form action="">
+                                             <div class="form-group">
+                                               <label for="">Avis de dossier </label>
+                                               <select  class="form-control" name="avis" id="avis">
+                                                 <option value="2"> validé </option>
+                                                 <option  value="3">incomplet </option>
+                                                 <option value="4">refusé </option>
+                                               </select>
+                                             </div>
+                                             <div class="form-group">
+                                               <label for="">Motif du dossier  </label>
+                                               <textarea class="form-control" name="motif" id="motif" rows="3"></textarea>
+                                             </div>
+                                             <div class="form-group">
+                                               
+                                                <input type="hidden" class="form-control"  data-id ={{ nos_etudiantt.id }}    id="idcandidature" placeholder="">
+                                             </div>
+                                             <button id="decision" type="submit" class="btn btn-success">   Envoyer <i class="zmdi zmdi-mail-send"></i> </button>
+                                             </form> 
+                                      {% endfor %}
                                     </div>
                                  </div>
                               </div>

@@ -77,6 +77,11 @@ class Candidature
      */
     private $type;
 
+    /**
+     * @ORM\ManyToOne(targetEntity=TypeDiplome::class, inversedBy="candidatures")
+     */
+    private $typediplome;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -226,6 +231,18 @@ class Candidature
     public function setType(string $type): self
     {
         $this->type = $type;
+
+        return $this;
+    }
+
+    public function getTypediplome(): ?TypeDiplome
+    {
+        return $this->typediplome;
+    }
+
+    public function setTypediplome(?TypeDiplome $typediplome): self
+    {
+        $this->typediplome = $typediplome;
 
         return $this;
     }

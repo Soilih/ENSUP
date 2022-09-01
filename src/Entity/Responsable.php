@@ -33,7 +33,7 @@ class Responsable
     private $tel;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=255 , nullable=true)
      */
     private $email;
 
@@ -53,20 +53,8 @@ class Responsable
      */
     private $user;
 
-    /**
-     * @ORM\Column(type="string", length=255, nullable=true)
-     */
-    private $lieunaissance;
+   
 
-    /**
-     * @ORM\Column(type="string", length=255)
-     */
-    private $pays;
-
-    /**
-     * @ORM\Column(type="text", nullable=true)
-     */
-    private $detail;
 
  
 
@@ -160,40 +148,5 @@ class Responsable
         return $this;
     }
 
-    public function getLieunaissance(): ?string
-    {
-        return $this->lieunaissance;
-    }
-
-    public function setLieunaissance(?string $lieunaissance): self
-    {
-        $this->lieunaissance = $lieunaissance;
-
-        return $this;
-    }
-
-    public function getPays(): ?string
-    {
-        return $this->pays;
-    }
-
-    public function setPays(string $pays): self
-    {
-        $this->pays = $pays;
-
-        return $this;
-    }
-
-    public function getDetail(): ?string
-    {
-        return $this->detail;
-    }
-
-    public function setDetail(?string $detail): self
-    {
-        $this->detail = $detail;
-
-        return $this;
-    }
 
 }

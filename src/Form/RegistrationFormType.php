@@ -35,36 +35,18 @@ class RegistrationFormType extends AbstractType
                 "label"=>"Prenom"
             ])
             ->add('nin' , TextType::class , [
-                "label"=>"Numero de piece d'identite  "
+                "label"=>"Numero de piece d'identite (nin , numero passport )" , 
+                'attr' => ['maxlength' => 8] ,
             ])
             ->add('numerocarte' , TextType::class , [
-                "label"=>"Numero de Carte" , 
-                'constraints' => [
-                    new NotBlank([
-                        'message' => "Saisir l'anné de session ",
-                    ]),
-                    new Length([
-                        'min' => 1,
-                        'minMessage' => "Le numero de carte n'est pas valide ",
-                        // max length allowed by Symfony for security reasons
-                        'max' => 7,
-                    ]),
-                ],
+                "label"=>"Numero de table baccalaureat" , 
+                'attr' => ['pattern' => '/^[0-9]{8}$/', 'maxlength' => 4] , 
             ])
             ->add('session' , NumberType::class , [
                 "label"=>"Année de session " , 
-                "attr"=>["class"=>"form-control"] , 
-                'constraints' => [
-                    new NotBlank([
-                        'message' => "Saisir l'anné de session ",
-                    ]),
-                    new Length([
-                        'min' => 4,
-                        'minMessage' => "l'année de session est invalide",
-                        // max length allowed by Symfony for security reasons
-                        'max' => 4,
-                    ]),
-                ],
+                'attr' => ['pattern' => '/^[0-9]{8}$/', 'maxlength' => 4] , 
+                
+                
                 
             ])
 

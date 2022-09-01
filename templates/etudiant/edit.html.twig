@@ -1,26 +1,40 @@
-{% extends 'base.html.twig' %}
+<head>
+    <!-- Required meta tags-->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="au theme template">
+    <meta name="author" content="Hau Nguyen">
+    <meta name="keywords" content="au theme template">
 
-{% block body %}
-<div class="wrapper">
-  <div class="content-wrapper">
-     <div class="row" style="padding-left:2%;padding-top:2%">
-          <div class="col-md-6">
-            <div class="card card-default">
-              <div class="card-header">
-                <h3 class="card-title">
-                
-                  Modifier les informations personnelles 
-                </h3>
-              </div>
-              <!-- /.card-header -->
-              <div class="card-body">
-             {{ include('etudiant/_form.html.twig', {'button_label': 'Modifier '}) }}
-              </div>
-              <!-- /.card-body -->
+    <!-- Title Page-->
+    <title>Dashboard</title>
+    {% include "link/link_css.html.twig" %}  
+</head>
+{% include "link/header.html.twig" %}
+    <div class="page-container">
+        <div class="main-content">
+            <div class="section__content section__content--p30">
+                <div class="container-fluid">
+                    <div class="row">
+                       
+                          <div class="col-md-10">
+                            <div class="card card-success">
+                              <div class="card-header">
+                              <strong> Information personnelles  </strong>
+                              </div>  
+                                <div class="card-body">
+                                     {{ include('etudiant/_form.html.twig', {'button_label': 'Modifier '}) }}
+                                    <br>
+                                </div>
+                            </div>
+                          </div>
+                        </div>
+                    </div>
             </div>
-          </div>  
-        </div>
+       </div>
     </div>
-</div>
+  {% include 'link/footer.html.twig' %}
+ {% include "link/link_js.html.twig" %}  
 
-{% endblock %}
+      
+          

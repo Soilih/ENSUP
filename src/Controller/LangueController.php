@@ -40,7 +40,7 @@ class LangueController extends AbstractController
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($langue);
             $entityManager->flush();
-
+            $this->addFlash("success" , "informations sont bien enregistrées avec success ");
             return $this->redirectToRoute('langue_new', [], Response::HTTP_SEE_OTHER);
         }
 

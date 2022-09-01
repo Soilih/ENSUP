@@ -39,7 +39,7 @@ class ExperienceController extends AbstractController
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($experience);
             $entityManager->flush();
-
+            $this->addFlash("success" , "les informations sont  enregistrées avec success ");
             return $this->redirectToRoute('experience_new', [], Response::HTTP_SEE_OTHER);
         }
 

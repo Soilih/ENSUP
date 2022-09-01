@@ -39,6 +39,7 @@ class ParcoursUniversitaireController extends AbstractController
                 $entityManager->persist($parcoursUniversitaire);
                 $entityManager->flush();
             }
+            $this->addFlash("success" , "informations  sont bien enregistrées avec success ");
            return $this->redirectToRoute('parcours_universitaire_new', [], Response::HTTP_SEE_OTHER);
         }
 

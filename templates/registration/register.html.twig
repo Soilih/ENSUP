@@ -5,33 +5,30 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
    {% include "link/link_css.html.twig" %}
 </head>
-
-<body class="animsition" id="body">
-    <div class="page-wrapper">
-        <div class="page-content--bge5">
-            <div class="container">
-                <div class="login-wrap">
-                 
-                    <div class="login-content">
-                        <div class="login-logo">
-                          <h2> <strong> S'inscrire  </strong>  </h2> 
-                        </div>
-                        <div class="login-form">
-                            {% for flashError in app.flashes('verify_email_error') %}
-                            <div class="alert alert-danger" role="alert">{{ flashError }}</div>
-                            {% endfor %}
-                            
-                            
-                              {{ form_start(registrationForm) }}
-                              {{ form_end(registrationForm) }}
-                        </div>
-                         <a href="{{ path("app_login") }}" class="btn btn-block btn-success"> Se connecter  </a>
-                    </div>
+{% include "link/header.html.twig" %}
+<div class="page-content--bge5">
+    <div class="container">
+        <div class="login-wrap">
+          
+            <div class="login-content">
+                <div class="login-logo">
+                  <h2> <strong> S'inscrire  </strong>  </h2> 
                 </div>
+                <div class="login-form">
+                    {% for flashError in app.flashes('verify_email_error') %}
+                    <div class="alert alert-danger" role="alert">{{ flashError }}</div>
+                    {% endfor %}
+                    
+                    
+                      {{ form_start(registrationForm) }}
+                      {{ form_end(registrationForm) }}
+                </div>
+                  <a href="{{ path("app_login") }}" class="btn btn-block btn-success"> Se connecter  </a>
             </div>
         </div>
-
     </div>
+</div>
+{{ include('link/footer.html.twig') }}
   {% include "link/link_js.html.twig" %}
 </body>
 </html>

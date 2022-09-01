@@ -4,106 +4,679 @@
         <div class="section__content section__content--p100">
             <div class="container-fluid">
                 <div class="row">
-                    <div class="col-lg-8 col-xl-8">
+                    <div class="col-lg-6 col-xl-6" id="informat-personnel">
                         <div class="card border-primary">
-                             <h5 class="card-header bg-primary mb-3">Informations personnelles </h5>
+                            <h5 class="card-header text-white bg-primary mb-3">Informations personnelles </h5>
+                            <div class="col-lg-12 col-xl-12">
+                                <div class="card-body">
+                                    <div class="card mb-4">
+                                        <div class="row no-gutters">
+                                            <div class="col-md-4">
+                                                <img src="images/identite.jpg" alt="...">
+                                            </div>
+                                            <div class="col-md-8">
+                                                <div class="card-body">
+                                                    {% for etudiants  in app.user.etudiants %}
+                                                        <h5 class="card-title"> 
+                                                        {% if etudiants.sexe=="Homme" %}
+                                                        Mr {{ app.user.nom }} {{ app.user.prenom }} </h5>
+                                                        {% else %}
+                                                            Mme {{ app.user.nom }} {{ app.user.prenom }} </h5>
+                                                        {% endif %}
+                                                            <p class="card-text">Né le : {{etudiants.dateNaissance | date('Y-m-d') }}  </p>
+                                                            <p class="card-text"> <small> Situation maritale : <strong> {{etudiants.etatcivile }} </strong> </small>  </p>
+                                                            <p class="card-text"> <small> Identifiant  : <strong> {{app.user.code }} </strong> </small>  </p>
+                                                    
+                                                    {% endfor %}
+                                                </div>
+                                            </div>
+                                            
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-12 col-xl-12">
+                                <div class="card-body">
+                                    <div class="card mb-4">
+                                        <div class="row no-gutters">
+                                            <div class="col-md-4">
+                                                <img src="images/coordo.jpg" alt="...">
+                                            </div>
+                                            <div class="col-md-8">
+                                                <div class="card-body">
+                                                    {% for etudiants  in app.user.etudiants %}
+                                                            <p class="card-text"> <small> E-mail : <strong> {{app.user.email}} </strong>  </small> </p>
+                                                            <p class="card-text"> <small> Lieu Naissance  : <strong> {{etudiants.lieuNaissance }} </strong> </small>  </p>
+                                                            <p class="card-text"> <small> Adresse de residence  : <strong> {{ etudiants.adresse }} </strong> </small>  </p>
+                                                             <p class="card-text"> <small> Personne à contacter en cas d'urgence : <br> <strong> {{ etudiants.telUrgence }} </strong> </small>  </p>
+                                                    
+                                                    {% endfor %}
+                                                </div>
+                                            </div>
+                                            
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-12 col-xl-12">
+                                <div class="card-body">
+                                    <div class="card mb-4">
+                                        <div class="row no-gutters">
+                                            <div class="col-md-4">
+                                                <img src="images/civile.jpg" alt="..." style="min-width: 100%; height:200px">
+                                            </div>
+                                            <div class="col-md-8">
+                                                <div class="card-body">
+                                                    {% for etudiants  in app.user.etudiants %}
+                                                            <p class="card-text"> <small> Numero identité : <strong> {{app.user.nin}}  </strong> </small> </p>
+                                                            <p class="card-text"> <small>Date de validité : <strong> {{ etudiants.dateDelivrance ? etudiants.dateDelivrance|date('Y-m-d') : '' }}</strong> </small>  </p>
+                                                            <p class="card-text"> <small>Date d'expiration : <strong> {{ etudiants.dateExpiration ? etudiants.dateExpiration|date('Y-m-d') : '' }} </strong> </small> </p>
+                                                            <p class="card-text"> <small> Nationalité  : <strong> {{etudiants.nationalite }} </strong> </small>  </p>
+                                                            <p class="card-text"> <small> Pays de naissance  : <strong> {{etudiants.pays }} </strong> </small>  </p>
+                                                            <p class="card-text"> <small> Numero de carte   : <strong> {{ etudiants.NumCarteidentite  }} </strong> </small>  </p>
+                                                            <p class="card-text"> <small> Type piece d'identité :  <strong> {{ etudiants.typeIdentite }} </strong> </small>  </p>
+                                                    
+                                                    {% endfor %}
+                                                </div>
+                                            </div>
+                                            
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-12 col-xl-12">
+                                <div class="card-body">
+                                    <div class="card mb-4">
+                                        <div class="row no-gutters">
+                                            <div class="col-md-4">
+                                                <img src="images/respon.jpg" alt="..." style="min-width: 100%; height:200px">
+                                            </div>
+                                            <div class="col-md-8">
+                                                <div class="card-body" style="height:200px">
+                                                    {% for item in app.user.responsables %}
+                                                            <p class="card-text"> <small>Nom & Prenom : <strong> {{item.nom }} {{item.prenom }} </strong> </small> </p>
+                                                            <p class="card-text"> <small>Telephone mobile : <strong> {{item.tel }} </strong> </small> </p>
+                                                            <p class="card-text"> <small>Adresse E-mail : <strong> {{item.email }} </strong> </small> </p>
+                                                            <p class="card-text"> <small>Proffession : <strong> {{item.proffession }} </strong> </small> </p>
+                                                            <p class="card-text"> <small>Adresse residence  : <strong> {{item.adresse }} </strong> </small> </p>
+                                                     {% endfor %}
+                                                </div>
+                                            </div>
+                                            
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-6 col-xl-6">
+                        <div class="card" >
+                            <h5 class="card-header text-white bg-primary mb-3">Information baccalaureat</h5>
                             <div class="card-body">
-                                <table class="table table-striped table-bordered" style=" width: 100%">
-                                    <tbody>
-                                        {% for etudiants  in app.user.etudiants %}
-                                        <tr>
-                                            <th>Genre </th>
-                                            <td>{{etudiants.sexe }}  </td>
-                                        </tr>
-                                            <tr>
-                                            <th>Etat civile  </th>
-                                            <td>{{etudiants.etatcivile }}  </td>
-                                        </tr>
-                                        <tr>
-                                            <th>Identifiant  </th>
-                                            <td>{{app.user.code}} </td>
-                                        </tr>
-                                        <tr>
-                                            <th>Nom de famille </th>
-                                            <td>{{ app.user.nom}}   </td>
-                                        </tr>
-                                        <tr>
-                                            <th>Prenom </th>
-                                            <td>{{app.user.prenom}}   </td>
-                                        </tr>
-                                        <tr>
-                                            <th>Adresse e-mail </th>
-                                            <td>{{app.user.email}} </td>
-                                        </tr>
-                                        <tr>
-                                            <th>Telephone personnel </th>
-                                            <td>{{ etudiants.telephone}}  </td>
-                                        </tr>
-                                        
+                                <div class="au-inbox-wrap js-inbox-wrap">
+                                    <div class="au-message js-list-load">
+                                        <div class="au-message-list">
+                                           {% for item in app.user.informationBacs %}
+                                            <div class="au-message__item">
+                                            
+                                                <div class="au-message__item-inner">
+                                                    <div class="au-message__item-text">
+                                                        <div class="avatar-wrap">
+                                                            <i class="zmdi zmdi-tag-more zmdi-hc-2x"></i>
+                                                        </div>
+                                                        <div class="text">
+                                                            <h5 class="name">{{app.user.numerocarte}} </h5>
+                                                            <p>Numero de table </p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="au-message__item">
+                                                <div class="au-message__item-inner">
+                                                    <div class="au-message__item-text">
+                                                        <div class="avatar-wrap">
+                                                            <i class="zmdi zmdi-layers zmdi-hc-2x"></i>
+                                                        </div>
+                                                        <div class="text">
+                                                            <h5 class="name"> serie {{item.serie.libelle}}  </h5>
+                                                            <p>serie baccalaureat  </p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="au-message__item">
+                                                <div class="au-message__item-inner">
+                                                    <div class="au-message__item-text">
+                                                        <div class="avatar-wrap">
+                                                            <i class="zmdi zmdi-assignment zmdi-hc-2x"></i>
+                                                        </div>
+                                                        <div class="text">
+                                                            <h5 class="name"> {{item.mention }}  </h5>
+                                                            <p>Mention obtenu au bac  </p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="au-message__item">
+                                                <div class="au-message__item-inner">
+                                                    <div class="au-message__item-text">
+                                                        <div class="avatar-wrap">
+                                                           <i class="zmdi  zmdi-hc-2x zmdi-gps-dot"></i>
+                                                        </div>
+                                                        <div class="text">
+                                                            <h5 class="name"> {{item.centre }}  </h5>
+                                                            <p>Centre  </p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="au-message__item">
+                                                <div class="au-message__item-inner">
+                                                    <div class="au-message__item-text">
+                                                        <div class="avatar-wrap">
+                                                            <i class="zmdi zmdi-codepen zmdi-hc-2x"></i>
+                                                        </div>
+                                                        <div class="text">
+                                                            <h5 class="name"> {{item.moyenne}} </h5>
+                                                            <p>Moyenne générale   </p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="au-message__item">
+                                                <div class="au-message__item-inner">
+                                                    <div class="au-message__item-text">
+                                                        <div class="avatar-wrap">
+                                                            <i class="zmdi zmdi-calendar-alt zmdi-hc-2x"></i>
+                                                        </div>
+                                                        <div class="text">
+                                                            <h5 class="name"> {{app.user.session}} </h5>
+                                                            <p>Année de session    </p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="au-message__item">
+                                                <div class="au-message__item-inner">
+                                                    <div class="au-message__item-text">
+                                                        <div class="avatar-wrap">
+                                                            <i class="zmdi zmdi-accounts-outline zmdi-hc-2x"></i>
+                                                        </div>
+                                                        <div class="text">
+                                                            <h5 class="name"> {{item.session}}  </h5>
+                                                            <p>Apreciation du jury session 1 , session 2 (direct , 2 ieme groupe  )  </p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="au-message__item">
+                                                <div class="au-message__item-inner">
+                                                    <div class="au-message__item-text">
+                                                        <div class="avatar-wrap">
+                                                            <i class="zmdi zmdi-balance zmdi-hc-2x"></i>
+                                                        </div>
+                                                        <div class="text">
+                                                            <h5 class="name"> {{item.ecole}}  </h5>
+                                                            <p>Etablissement scolaire frequenté   </p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="au-message__item">
+                                                <div class="au-message__item-inner">
+                                                    <div class="au-message__item-text">
+                                                        <div class="avatar-wrap">
+                                                            <i class="zmdi zmdi-file zmdi-hc-2x"></i>
+                                                        </div>
+                                                        <div class="text">
+                                                            <h5 class="name"> <a href="{{ asset('uploads/'~ item.attestation) }}">consulter </a> </h5>
+                                                            <p>Attestation de reussite  ou diplome bac   </p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="au-message__item">
+                                                <div class="au-message__item-inner">
+                                                    <div class="au-message__item-text">
+                                                        <div class="avatar-wrap">
+                                                            <i class="zmdi zmdi-folder-person zmdi-hc-2x"></i>
+                                                        </div>
+                                                        <div class="text">
+                                                            <h5 class="name"> <a href="{{ asset('uploads/'~ item.releve) }}">consulter </a>  </h5>
+                                                            <p>Relevé de notes    </p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            
+                                           {% endfor %}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        {% for candidatures in app.user.candidatures %}
+                            {% if candidatures.stage =="oui" %}
+                                <div class="col-lg-12">
+                                    <div class="au-card au-card--no-shadow au-card--no-pad m-b-40 au-card--border">
+                                         <h5 class="card-header text-white bg-primary mb-3">Experience professionnelle </h5>
+                                        <div class="au-task js-list-load au-task--border">
+                                            
+                                            <div class="au-task-list js-scrollbar3">
+                                                <div class="au-task__item au-task__item--danger">
+                                                    <div class="au-task__item-inner">
+                                                    
+                                                            {% for item in app.user.experiences  %}
+                                                                <a href="#" class="list-group-item list-group-item-action">
+                                                                    <div class="d-flex w-100 justify-content-between">
+                                                                    <h4 class="card-title"> {{ item.poste}} <h4>
+                                                                    <h5 class="mb-3"> {{ item.entreprise }} - {{ item.pays}} <h5>
+                                                                    </div>
+                                                                    <div class="d-flex w-100 justify-content-between">
+                                                                    <h6 class="mb-3">Du {{ item.dateExperience|date('Y-m-d') }} à {{ item.datefin|date('d/m/Y') }} </h6>
+                                                                    </div>
+                                                                    {{ item.detail}}
+                                                                </a>
+                                                            {% endfor %}
+                                                        
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            {% endif %}
+                        {% endfor %}
+                         {% for candidatures in app.user.candidatures %}
+                            {% if candidatures.bourse =="oui" %}
+                            <div class="card" id="section_bourse">
+                                <h5 class="card-header text-white bg-primary mb-3">Bourse d'etude  </h5>
+                                <div class="card-body">
+                                    <div class="list-group">
+                                        {% for bourse in app.user.bourses %}
+                                        <a href="#" class="list-group-item list-group-item-action">
+                                            <div class="d-flex w-100 justify-content-between">
+                                            <h5 class="mb-1">Bourse : {{ bourse.nature }} <h5>
+                                            <p> Pays d'obtention : {{ bourse.pays }}</p>
+                                            <small><strong> {{bourse.datecreate|date('Y-m-d')}} </strong> </small> 
+                                            </div>
+                                            <p class="mb-1">{{bourse.detail }}</p>
+                                            <small>  <strong> Montant mensuel :  <span class="badge btn-md badge-primary">{{ bourse.montant }}€</span></strong> </small> 
+                                        </a>
                                         {% endfor %}
+                                    </div>
+                                </div>
+                            </div>
+                            {% endif %}
+                        {% endfor %}
+                    </div>
+                    <div class="col-lg-12 col-xl-12">
+                        {% for candidatures in app.user.candidatures %}
+                            {% if (candidatures.cursus=="interne" ) %}
+                                <div class="card">
+                                    <h5 class="card-header text-white bg-primary mb-3">Cursus interne </h5>
+                                    <div class="card-body">
+                                        <table class="table table-hover table-bordered text-nowrap">
+                                            <thead>
+                                                <tr>
+                                                    <th>Anneé</th>
+                                                    <th>Discipline </th>
+                                                    <th>niveau d'etude  </th>
+                                                    <th>Etablissement </th>
+                                                    <th>mention   </th>
+                                                    <th>moyenne    </th>
+                                                   <th>Justificatif  </th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                            {% for parcours_universitaire in app.user.parcours_universitaires %}
+                                            
+                                                <tr>
+                                                <td>{{ parcours_universitaire.AnneInscription ? parcours_universitaire.AnneInscription|date('d-m-Y' , false) : '' }}</td>
+                                                    <td>{{ parcours_universitaire.filiere }}</td>
+                                                    <td>{{ parcours_universitaire.niveau.libelle }}</td>
+                                                    <td>{{ parcours_universitaire.titreUniveriste }} {{ parcours_universitaire.typeuniversite.libelle }} {{ parcours_universitaire.pays }}</td>
+                                                    <td>{{ parcours_universitaire.mention }}</td>
+                                                    <td>{{ parcours_universitaire.moyenne }}</td>
+                                                    <td><a href="{{ asset('uploads/'~ parcours_universitaire.fichier ) }}"><i class="zmdi zmdi-download zmdi-hc-2x"></i>  </a> </td>
+                                                </tr>
+                                            
+                                            {% endfor %}
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            {% endif %}
+                        {% endfor %}
+                    </div>
+                    <div class="col-lg-12 col-xl-12">
+                        {% for candidatures in app.user.candidatures %}
+                            {% if (candidatures.cursus=="externe" ) %}
+                                <div class="card">
+                                    <h5 class="card-header text-white bg-primary mb-3">Cursus externe </h5>
+                                    <div class="card-body">
+                                        <table class="table table-hover table-bordered text-nowrap">
+                                            <thead>
+                                                <tr>
+                                                    <th>Anneé</th>
+                                                    <th>Discipline </th>
+                                                    <th>niveau d'etude  </th>
+                                                    <th>Etablissement </th>
+                                                    <th>type etablissement  </th>
+                                                    <th>mention   </th>
+                                                    <th>moyenne    </th>
+                                                    <th>pays  </th>
+                                                     <th>Justificatif  </th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                            {% for parcours_universitaire in app.user.parcours_universitaires %}
+                                            
+                                                <tr>
+                                                <td>{{ parcours_universitaire.AnneInscription ? parcours_universitaire.AnneInscription|date('d-m-Y' , false) : '' }}</td>
+                                                    <td>{{ parcours_universitaire.filiere }}</td>
+                                                    <td>{{ parcours_universitaire.niveau.libelle }}</td>
+                                                    <td>{{ parcours_universitaire.titreUniveriste }}</td>
+                                                    <td>{{ parcours_universitaire.typeuniversite.libelle }}</td>
+                                                    <td>{{ parcours_universitaire.mention }}</td>
+                                                    <td>{{ parcours_universitaire.moyenne }}</td>
+                                                    <td>{{ parcours_universitaire.pays }}</td>
+                                                     <td><a href="{{ asset('uploads/'~ parcours_universitaire.fichier ) }}"><i class="zmdi zmdi-download zmdi-hc-2x"></i> </a> </td>
+                                                </tr>
+                                            
+                                            {% endfor %}
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                                {% elseif candidatures.cursus=="deux"  %}
+                                <div class="card">
+                                    <h5 class="card-header text-white bg-primary mb-3">Cursus externe </h5>
+                                    <div class="card-body">
+                                        <table class="table table-hover table-bordered text-nowrap">
+                                            <thead>
+                                                <tr>
+                                                    <th>Anneé</th>
+                                                    <th>Discipline </th>
+                                                    <th>niveau d'etude  </th>
+                                                    <th>Etablissement </th>
+                                                    <th>type etablissement  </th>
+                                                    <th>mention   </th>
+                                                    <th>moyenne    </th>
+                                                    <th>pays  </th>
+                                                    <td>Justificatif</td>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                            {% for parcours_universitaire in app.user.parcours_universitaires %}
+                                            
+                                                <tr>
+                                                <td>{{ parcours_universitaire.AnneInscription ? parcours_universitaire.AnneInscription|date('d-m-Y' , false) : '' }}</td>
+                                                    <td>{{ parcours_universitaire.filiere }}</td>
+                                                    <td>{{ parcours_universitaire.niveau.libelle }}</td>
+                                                    
+                                                    <td>{{ parcours_universitaire.titreUniveriste }}</td>
+                                                    <td>{{ parcours_universitaire.typeuniversite.libelle }}</td>
+                                                    <td>{{ parcours_universitaire.mention }}</td>
+                                                    <td>{{ parcours_universitaire.moyenne }}</td>
+                                                    <td>{{ parcours_universitaire.pays }}</td>
+                                                    <td><a href="{{ asset('uploads/'~ parcours_universitaire.fichier ) }}"><i class="zmdi zmdi-download zmdi-hc-2x"></i> </a> </td>
+                                                </tr>
+                                            
+                                            {% endfor %}
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                                <div class="card">
+                                    <h5 class="card-header text-white bg-primary mb-3">Cursus interne </h5>
+                                    <div class="card-body">
+                                        <table class="table table-hover table-bordered text-nowrap">
+                                            <thead>
+                                                <tr>
+                                                    <th>Anneé</th>
+                                                    <th>Discipline </th>
+                                                    <th>niveau d'etude  </th>
+                                                    <th>Etablissement </th>
+                                                    <th>type etablissement  </th>
+                                                    <th>mention   </th>
+                                                    <th>moyenne    </th>
+                                                    <th>pays  </th>
+                                                    <td>Justificatif</td>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                            {% for parcours_universitaire in app.user.parcours_universitaires %}
+                                            
+                                                <tr>
+                                                <td>{{ parcours_universitaire.AnneInscription ? parcours_universitaire.AnneInscription|date('d-m-Y' , false) : '' }}</td>
+                                                    <td>{{ parcours_universitaire.filiere }}</td>
+                                                    <td>{{ parcours_universitaire.niveau.libelle }}</td>
+                                                    <td>{{ parcours_universitaire.titreUniveriste }}</td>
+                                                    <td>{{ parcours_universitaire.typeuniversite.libelle }}</td>
+                                                    <td>{{ parcours_universitaire.mention }}</td>
+                                                    <td>{{ parcours_universitaire.moyenne }}</td>
+                                                    <td>{{ parcours_universitaire.pays }}</td>
+                                                     <td><a href="{{ asset('uploads/'~ parcours_universitaire.fichier ) }}"><i class="zmdi zmdi-download zmdi-hc-2x"></i> </a> </td>
+
+                                                </tr>
+                                            
+                                            {% endfor %}
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+
+                            {% endif %}
+                        {% endfor %}
+                    </div>
+                    <div class="col-lg-12 col-xl-12">
+                     {% for candidatures in app.user.candidatures %}
+                        {% if candidatures.typediplome.id  !="3" %}
+                            <div class="col-lg-12 col-xl-12">
+                                    <div class="card" >
+                                        <h5 class="card-header text-white bg-primary mb-3">Formations et diplomes  </h5>
+                                        <div class="card-body" id="section_diplome">
+                                        <table   class="table table-striped table-bordered">
+                                            <thead>
+                                                <tr>
+                                                <th>Diplome </th>
+                                                <th>Année d'otention  </th>
+                                                <th>Discipline </th>
+                                                <th>Intitulé diplome </th>
+                                                <th>Cycle d'études</th>
+                                                
+                                                <th>Etablissement  </th>
+                                                <th>Mention </th>
+                                                
+                                            </tr>
+                                            </thead>
+                                            <tbody>
+                                                {% for diplome in app.user.diplomes %}
+                                                    <tr> 
+                                                        <td><a href="{{ asset('uploads/'~ diplome.fichier ) }}"><i class="zmdi zmdi-download zmdi-hc-2x"></i> </a> </td>
+                                                        <td>{{ diplome.session }}</td>
+                                                        <td>{{ diplome.composant.libelle }}</td>
+                                                        <td>{{ diplome.libelle }}</td>
+                                                        <td> {{ diplome.typediplome.libelle }} </td>
+                                                        
+                                                        <td> {{ diplome.typeuniversite.libelle }}- {{ diplome.universite }} {{ diplome.pays }}</td>
+                                                        <td> <span> {{ diplome.mention }}  </span> </td>
+                                                    </tr>
+                                                {% else %}
+                                                    <tr>
+                                                        <td colspan="10">Saisi </td>
+                                                    </tr>
+                                                {% endfor %}
+                                                </tbody>
+                                            </table>   
+                                        </div>
+                                    </div>
+                            </div>
+                        {% endif %}
+                     {% endfor %}
+                    </div>
+                    {% for candidatures in app.user.candidatures %}    
+                        {% if candidatures.flux =="entrant" %}
+                            <div class="col-lg-12 col-xl-12">
+                                <div class="card mb-5">
+                                <h5 class="card-header text-white bg-primary mb-3">Flux entrant </h5>
+                                <div class="row gutters" style="margin-left:2%">
+                                    <div class="col-md-4">
+                                        {% for flux in app.user.fluxes  %}
+                                        <ul class="list-group">
+                                             <li class="list-group-item d-flex justify-content-between align-items-center">
+                                             Date depart
+                                                <span class="badge badge-primary badge-pill">{{ flux.depart ? flux.depart|date('Y-m-d') : '' }}</span>
+                                            </li>
+                                            <li class="list-group-item d-flex justify-content-between align-items-center">
+                                              Date d'arrivé
+                                                <span class="badge badge-primary badge-pill">{{ flux.dateArrive ? flux.depart|date('Y-m-d') : '' }}</span>
+                                            </li>
+                                            <li class="list-group-item d-flex justify-content-between align-items-center">
+                                               Diplome obtenu 
+                                                <span class="badge badge-primary badge-pill">{{flux.diplome}}</span>
+                                            </li>
+                                            <li class="list-group-item d-flex justify-content-between align-items-center">
+                                                specialité
+                                                <span class="badge badge-primary badge-pill">{{flux.specialite }}</span>
+                                            </li>
+                                             <li class="list-group-item d-flex justify-content-between align-items-center">
+                                               Niveau d'etude actuel
+                                                <span class="badge badge-primary badge-pill">{{ flux.niveauActuel.libelle }} </span>
+                                            </li>
+                                             <li class="list-group-item d-flex justify-content-between align-items-center">
+                                              Pays d'etude
+                                                <span class="badge badge-primary badge-pill">{{flux.pays}}</span>
+                                            </li>
+                                             <li class="list-group-item d-flex justify-content-between align-items-center">
+                                              cycle d'etude
+                                                <span class="badge badge-primary badge-pill">{{flux.typediplome.libelle}}</span>
+                                            </li>
+                                            </ul>
+                             
                                         
-                                    </tbody>
-                                </table> 
-                                <table class="table table-striped table-bordered" style=" width: 100%">
-                                <tbody>
-                                    {% for etudiants  in app.user.etudiants %}
-                                    <tr>
-                                        <th>Lieu de naissance  </th>
-                                        <td> {{etudiants.lieuNaissance}} </td>
-                                    </tr>
-                                    <tr>
-                                        <th>Date de naissance  </th>
-                                        <td>{{etudiants.dateNaissance | date('y/m/d') }}   </td>
-                                    </tr>
-                                    <tr>
-                                        <th>Adresse domicile   </th>
-                                        <td> {{etudiants.adresse}}   </td>
-                                    </tr>
-                                    <tr>
-                                        <th>Personne à contacter en cas d'urgence  </th>
-                                        <td> {{etudiants.telUrgence}}    </td>
-                                    </tr>
-                                    <tr>
-                                        <th>Statut actuel  </th>
-                                        <td> {{etudiants.status}}   </td>
-                                    </tr>
-                                    <tr>
-                                        <th> Ile de naissance  </th>
-                                        <td> {{etudiants.ile}}     </td>
-                                    </tr>
-                                {% endfor %}
-                                </tbody>
-                            </table> 
+                                      {% endfor %}
+                                    </div>
+                                    <div class="col-md-8">
+                                     {% for flux in app.user.fluxes  %}
+                                        <div class="card border-primary">
+                                            <div class="card-body">
+                                                <h5 class="card-title">Projet proffessionnel </h5>
+                                                <p class="card-text">{{  flux.projet}}</p>
+                                            </div>
+                                        </div>
+                                        <div class="card border-primary">
+                                            <div class="card-body">
+                                                <h5 class="card-title">Difficultés rencontrés durant les etudes   </h5>
+                                                <p class="card-text">{{ flux.probleme}}</p>
+                                            </div>
+                                        </div>
+                                        <div class="card border-primary">
+                                            <div class="card-body">
+                                                <h5 class="card-title">Remarques , suggestions  </h5>
+                                                <p class="card-text">{{ flux.suggestion }}</p>
+                                            </div>
+                                        </div>
+                                         {% endfor %}
+                                    </div>
+                                </div>
                             </div>
+                        {% endif %}
+                    {% endfor %}
+
+                    {% for candidatures in app.user.candidatures %}
+                      {% if candidatures.flux=="sortant" %}
+                        <div class="col-lg-12 col-xl-12">
+                            <div class="card mb-6">
+                                 <h5 class="card-header text-white bg-primary mb-3">Flux resident </h5>
+                                <div class="row no-gutters">
+                                    <div class="col-md-4" style="padding-left:2%">
+                                     {% for flux_sortant in app.user.fluxSortants %}
+                                        <h4 class="mb-2">Date depart : <small> {{ flux_sortant.dateDepart ? flux_sortant.dateDepart|date('Y-m-d') : '' }} </small> </h5>
+                                        <h4 class="mb-2">Nom etablissement  : <small>  {{ flux_sortant.universite }} </small> </h4>
+                                        <h4 class="mb-2">Niveau d'etude visé : <small> {{ flux_sortant.niveau.libelle }} </small> </h4>
+                                        <h4 class="mb-2">Type d'etablissement: <small> {{ flux_sortant.typeuniversite.libelle }} {{ flux_sortant.typeuniversit}} </small> </h4>
+                                        <h4 class="mb-2">Discipline : <small>{{ flux_sortant.filiere }} </small> </h4>
+                                        <h4 class="mb-2">composant : <small> {{ flux_sortant.composant.libelle  }} </small> </h4>
+                                        <h4 class="mb-2">cycle d'etude  : <small>{{ flux_sortant.cycle}}  </small> </h4>
+                                        <h4 class="mb-2">Pays : <small>{{ flux_sortant.pays }}  </small> </h4>
+                                        <h4 class="mb-2">adresse de l'etablissement : <small> {{ flux_sortant.ville }} </small> </h4>
+                                     
+                                     {% endfor %}
+                                    </div>
+                                    <div class="col-md-8">
+                                     {% for flux_sortant in app.user.fluxSortants %}
+                                        <div class="card border-primary">
+                                            <div class="card-body">
+                                                <h5 class="card-title">Projet proffessionnel </h5>
+                                                <p class="card-text">{{ flux_sortant.motivation   }}</p>
+                                            </div>
+                                        </div>
+                                        <div class="card border-primary">
+                                            <div class="card-body">
+                                                <h5 class="card-title">Resource financiere  </h5>
+                                                <p class="card-text">{{ flux_sortant.moyen   }}</p>
+                                            </div>
+                                        </div>
+                                    {% endfor %}
+                                    </div>
+                                </div>
+                                </div>
                         </div>
                     </div>
-                   <div class="col-lg-4 col-xl-3">
-                        <div class="card" style="width: 50rem;">
-                            <h5 class="card-header bg-primary mb-3">Information baccalaureat</h5>
-                            <div class="card-body">
-                                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                            </div>
+                    {% endif %}
+                    {% endfor %}
+                     {% for candidatures in app.user.candidatures %}
+                      {% if candidatures.flux=="resident" %}
+                        <div class="col-lg-12 col-xl-12">
+                            <div class="card mb-6">
+                                 <h5 class="card-header text-white bg-primary mb-3">Flux resident </h5>
+                                <div class="row no-gutters">
+                                    <div class="col-md-4" style="padding-left:2%">
+                                     {% for flux_sortant in app.user.fluxSortants %}
+                                        <h4 class="mb-2">Date depart : <small> {{ flux_sortant.dateDepart ? flux_sortant.dateDepart|date('Y-m-d') : '' }} </small> </h5>
+                                        <h4 class="mb-2">Nom etablissement  : <small>  {{ flux_sortant.universite }} </small> </h4>
+                                        <h4 class="mb-2">Niveau d'etude visé : <small> {{ flux_sortant.niveau.libelle }} </small> </h4>
+                                        <h4 class="mb-2">Type d'etablissement: <small> {{ flux_sortant.typeuniversite.libelle }} {{ flux_sortant.typeuniversit}} </small> </h4>
+                                        <h4 class="mb-2">Discipline : <small>{{ flux_sortant.filiere }} </small> </h4>
+                                        <h4 class="mb-2">composant : <small> {{ flux_sortant.composant.libelle  }} </small> </h4>
+                                        <h4 class="mb-2">cycle d'etude  : <small>{{ flux_sortant.cycle}}  </small> </h4>
+                                        <h4 class="mb-2">Pays : <small>{{ flux_sortant.pays }}  </small> </h4>
+                                        <h4 class="mb-2">adresse de l'etablissement : <small> {{ flux_sortant.ville }} </small> </h4>
+                                     
+                                     {% endfor %}
+                                    </div>
+                                    <div class="col-md-8">
+                                     {% for flux_sortant in app.user.fluxSortants %}
+                                        <div class="card border-primary">
+                                            <div class="card-body">
+                                                <h5 class="card-title">Projet proffessionnel </h5>
+                                                <p class="card-text">{{ flux_sortant.motivation   }}</p>
+                                            </div>
+                                        </div>
+                                        <div class="card border-primary">
+                                            <div class="card-body">
+                                                <h5 class="card-title">Resource financiere  </h5>
+                                                <p class="card-text">{{ flux_sortant.moyen   }}</p>
+                                            </div>
+                                        </div>
+                                    {% endfor %}
+                                    </div>
+                                </div>
+                                </div>
                         </div>
-                        <div class="card" style="width: 50rem;">
-                            <h5 class="card-header bg-primary mb-3">Information bourse </h5>
-                            <div class="card-body">
-                                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                            </div>
-                        </div>
-                        
-                    </div>
+                        {% endif %}
+                    {% endfor %}
                 </div>
             </div>
-            {% for candidat in app.user.candidatures %}
-                {% if candidat.status == 0  %}
-                {{ candidat.id }}
-                <div style="padding-left:20%">
-                <a href="{{ path('candidature_valider' , {'id_candidature': candidat.id }) }}" class="btn btn-xl btn-success">Valider dossier  </a>
-                <a href="#" class="btn  btn-danger">Annuler dossier  </a>
-                </div>
-                {% endif %}
-            {% endfor %}
         </div>
-    </section>
-</div>
+        {% for candidat in app.user.candidatures %}
+            {% if candidat.status == 0  %}
+            <div style="padding-left:20%" id="btn-valider">
+            <a href="#"  data-id="{{candidat.id}}"  id="valider_candidature" style="color:white"  class="btn btn-lg btn-success "> <i class="zmdi zmdi-assignment-check"></i>  valider votre candidature  </a>
+            </div>
+            {% endif %}
+        {% endfor %}
+</section>
 {% endblock %}

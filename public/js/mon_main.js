@@ -62,5 +62,9 @@ $(document).ready(function() {
         } ]
        
       });
+     
+        // SmartWizard initialize
+       
+  
   } );
 

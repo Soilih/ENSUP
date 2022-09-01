@@ -1,29 +1,51 @@
-{% extends 'base.html.twig' %}
+<head>
+    <!-- Required meta tags-->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="au theme template">
+    <meta name="author" content="Hau Nguyen">
+    <meta name="keywords" content="au theme template">
 
-{% block body %}
-<div class="wrapper">
-  <div class="content-wrapper">
-      <div class="row" style="padding-left:2%;padding-top:2%">
-          <div class="col-md-6">
-            <div class="card card-success">
-                <div class="card-header" style="font-szie:24px">
-                    <h3 class="card-title">
-                     Editer informations baccalaureat   
-                    </h3>
-                </div>
-                <div class="card-body">
-                {{ include('information_bac/_form.html.twig', {'button_label': 'Modifier'}) }}
+    <!-- Title Page-->
+    <title>Dashboard</title>
+    {% include "link/link_css.html.twig" %}  
+</head>
+{% include "link/header.html.twig" %}
+    <div class="page-container">
+        <div class="main-content">
+                <div class="section__content section__content--p30">
+                  <div class="container-fluid">
+                    <div class="row">
+                   
+                      <div class="col-lg-10">
+                        {% for msg in app.flashes('success') %}
+                          <div class="alert alert-success alert-dismissible fade show" role="alert">
+                              <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                              <span aria-hidden="true">&times;</span>
+                              </button>
+                              <strong>  {{msg }} </strong> 
+                          </div>
+                          <script>
+                            $(".alert").alert();
+                          </script>
+                              
+                          </div>
+                        {% endfor %}
+                        <div class="card text-left">
+                            <h5 class="card-header">Saisie baccalaureat </h5>
+                          <div class="card-body">
+                                 {{ include('information_bac/_form.html.twig', {'button_label': 'Modifier'}) }}
+                          </div>
+                        </div>
+                         
 
+                      </div>
+                     
                 </div>
-              </div>
             </div>
-          </div>
-      </div>
-  </div>
-</div>
+        </div>
+    </div>
+     
+{% include 'link/footer.html.twig' %}
+ {% include "link/link_js.html.twig" %}  
 
-  
-  
-
-
-{% endblock %}

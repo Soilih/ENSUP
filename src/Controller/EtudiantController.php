@@ -13,7 +13,6 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
-
 use Symfony\Component\HttpFoundation\File\Exception\FileException;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\String\Slugger\SluggerInterface;
@@ -58,23 +57,24 @@ class EtudiantController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $brochureFile1 = $form->get('photo')->getData();
             $brochureFile2 = $form->get('Pieceidentite')->getData();
-            $brochureFile3 = $form->get('cv')->getData();
+           
             
             // this condition is needed because the 'brochure' field is not required
             // so the PDF file must be processed only when a file is uploaded
            
-            if ($brochureFile1 || $brochureFile2 || $brochureFile3) {
+            if ($brochureFile1 || $brochureFile2) {
                 $brochureFileName1 = $fileUploader->upload($brochureFile1);
                 $brochureFileName2 = $fileUploader->upload($brochureFile2);
-                $brochureFileName3 = $fileUploader->upload($brochureFile3);
+               
 
                 $etudiant->setPieceidentite($brochureFileName2);
                 $etudiant->setPhoto($brochureFileName1);
-                $etudiant->setcv($brochureFileName3);
+               
             }
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($etudiant);
             $entityManager->flush();
+            $this->addFlash("success" , "informations personnelles  sont bien enregistrées avec success ");
 
             return $this->redirectToRoute('etudiant_new', [], Response::HTTP_SEE_OTHER);
         }
@@ -109,23 +109,23 @@ class EtudiantController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $brochureFile1 = $form->get('photo')->getData();
             $brochureFile2 = $form->get('Pieceidentite')->getData();
-            $brochureFile3 = $form->get('cv')->getData();
+          
             
             // this condition is needed because the 'brochure' field is not required
             // so the PDF file must be processed only when a file is uploaded
            
-            if ($brochureFile1 || $brochureFile2 || $brochureFile3 ) {
+            if ($brochureFile1 || $brochureFile2 ) {
                 $brochureFileName1 = $fileUploader->upload($brochureFile1);
                 $brochureFileName2 = $fileUploader->upload($brochureFile2);
-                $brochureFileName3 = $fileUploader->upload($brochureFile3);
+               
 
                 $etudiant->setPieceidentite($brochureFileName2);
                 $etudiant->setPhoto($brochureFileName1);
-                $etudiant->setcv($brochureFileName3);
+               
             }
             $this->getDoctrine()->getManager()->flush();
 
-            return $this->redirectToRoute('home_accueil', [], Response::HTTP_SEE_OTHER);
+            return $this->redirectToRoute('etudiant_new', [], Response::HTTP_SEE_OTHER);
         }
 
         return $this->renderForm('etudiant/edit.html.twig', [
@@ -156,10 +156,6 @@ class EtudiantController extends AbstractController
     {
           return $this->render('recap.html.twig',[
               'etudiant'=>$etudiant->findAll()
-            
-        ]);
-        
-        
-    
-    }
+         ]);
+     }
 }

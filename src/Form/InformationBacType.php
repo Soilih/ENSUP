@@ -25,6 +25,10 @@ class InformationBacType extends AbstractType
             'label'=>'serie au bac' , 
             'attr'=>['class'=>'form-control']
            ])
+           ->add('centre' ,  TextType::class , [
+             'label'=>'Nom du centre' , 
+            'attr'=>['class'=>'form-control']
+           ])
         ->add('mention' ,  ChoiceType::class  ,[
             'label'=>"Mention obtenue",
             'choices'=>[
@@ -38,13 +42,16 @@ class InformationBacType extends AbstractType
         'attr'=>['class'=>'form-control']
         ])
         ->add('moyenne' , NumberType::class , [
-            "label"=>"Moyenne obtenue au baccalaureat"
+            "label"=>"Moyenne obtenue au baccalaureat" , 
+            'attr' => [ 'maxlength' => 2 ] ,
+            'row_attr' => ['class' => 'text-editor', 'id' => 'moyenne'],
         ])
+
         ->add('session' ,  ChoiceType::class  ,[
-            'label'=>"Type de session",
+            'label'=>"Decision du jury",
             'choices'=>[
-            'session 1'=>'session 1' , 
-            'session 2'=>'session 2' , 
+            'session 1 (direct)'=>'session 1 ' , 
+            'session 2 (oral) '=>'session 2 ' , 
             
         ] , 
         'attr'=>['class'=>'form-control']
@@ -66,9 +73,7 @@ class InformationBacType extends AbstractType
             ])
             
             
-        ->add('cursus' , TextareaType::class , [
-                "label"=>"Expliquez brievement votre cursus scolaire"
-            ])
+        
         ;
     }
 

@@ -8,142 +8,103 @@
    {% include "link/link_css.html.twig" %}  
  </head>
 <body class="animsition">
-    <div class="page-wrapper">
-        <!-- MENU SIDEBAR-->
+  <div class="page-wrapper">
         <aside class="menu-sidebar2">
-            <div class="logo">
-                <a href="#">
-                     <img src="{{ asset("images/logo.png") }}" style="min-heigth:70px ;   min-width:100%" />
-                </a>
-            </div>
             <div class="menu-sidebar2__content js-scrollbar1">
-                <div class="account2">
-                    <div class="image img-cir img-120">
-                        <img src="{{ asset("images/avatar-01.jpg") }}" alt="John Doe" />
+              {% for item in app.user.etudiants %}
+                    <div class="account2">
+                        <div class="image img-cir img-120">
+                            <img src="{{asset('uploads/'~ item.photo) }}" alt="John Doe" />
+                        </div>
+                        <h4 class="name">{{app.user.nom }} {{app.user.prenom }}</h4>
+                         <a href="{{ path('app_logout') }}"> <strong> Deconnexion </strong> </a>
                     </div>
-                    <h4 class="name">{{app.user.nom }} {{app.user.prenom }} </h4>
-                    <a href="{{ path('app_logout') }}"> <strong> Deconnexion </strong> </a>
-                </div>
+                    {% endfor %}
+                    {% if is_granted("ROLE_ADMIN") %}
+                    <div class="account2">
+                        <div class="image img-cir img-120">
+                            <img src="{{asset('images/default.jpg') }}" alt="photo profile" />
+                        </div>
+                        <h4 class="name">{{app.user.nom }} {{app.user.prenom }}</h4>
+                         <a href="{{ path('app_logout') }}"> <strong> Deconnexion </strong> </a>
+                    </div>
+                    {% endif %}
                 <nav class="navbar-sidebar2">
                     <ul class="list-unstyled navbar__list">
-                        <li>
+                      {% if is_granted("ROLE_ADMIN") %}
+                      <li>
                             <a href="{{ path("secure_area") }}">
                             <i class="fas fa-home"></i>Accueil</a>
                         </li>
+                      {% endif %}
+                        
+                       
                        
                         {% if not is_granted("ROLE_ADMIN")  %}
-                         {% if ((app.user.candidatures |length ) >= 1 ) %}
+                          <li>
+                            <a href="{{ path("home_accueil") }}">
+                            <i class="fas fa-home"></i>Accueil</a>
+                        </li>
+                         {% if ((app.user.candidatures|length ) >= 1 ) %}
                           <li class="active has-sub">
                               <a class="js-arrow" href="#">
                                   <i class="fas fa-user"></i>Données personnelles
-                                  
                               </a>
-                              <ul class="list-unstyled navbar__sub-list js-sub-list">
-                                  <li>
-                                      <a data-toggle="modal" data-target="#exampleModal" href="{{ path("etudiant_new") }}">
-                                          <p> <i class="zmdi zmdi-plus-circle"></i> Informations personnelles  </p>  
-                                      </a>
-                                  </li>
-                                  <li>
-                                      <a href="{{ path("responsable_new") }}">
-                                          <i class="zmdi zmdi-account-add"></i> Responsable  
-                                      </a>
-                                  </li>
-                              </ul>
                           </li>
                           <li class="has-sub">
                               <a class="js-arrow" href="#">
                                   <i class="fas fa-graduation-cap"></i>Baccalauréat
-                                  
-                              </a>
-                              <ul class="list-unstyled navbar__sub-list js-sub-list">
-                                  <li>
-                                      <a href="{{ path("information_bac_new") }}">
-                                          <i class="far fa-edit"></i>Saisie du baccalauréat </a>
-                                        
-                                  </li>
-                                  
-                              </ul>
+                             </a>
                           </li>
                            {% for candidat in app.user.candidatures %}
 
-                            {% if  candidat.niveau.id > 1 %}
+                            {% if  candidat.typediplome.id != 3 %}
                               <li class="has-sub">
-                                <a class="js-arrow" href="#">
+                                <a data-toggle="modal"  data-target="#cursus"  class="js-arrow" href="#">
                                     <i class="zmdi zmdi-wrench"></i>Gestion cursus
                                     
                                 </a>
                                 <ul class="list-unstyled navbar__sub-list js-sub-list">
                                    {% if  candidat.cursus == "interne" %}
-                                    <li>
-                                        <a href="{{ path("parcours_universitaire_new")}}">
-                                            <i class="fas fa-university"></i>Cursus interne</a>
-                                    </li>
+                                      <li>
+                                          <a  href="{{ path("parcours_universitaire_new")}}">
+                                              <i class="fas fa-university"></i>Cursus interne</a>
+                                      </li>
                                     {% elseif candidat.cursus == "externe" %}
-                                    <li>
-                                        <a href="{{ path("parcours_universitaire_new_externe")}}">
-                                            <i class="fas fa-graduation-cap"></i>Cursus externe</a>
-                                    </li>
+                                      <li>
+                                          <a  href="{{ path("parcours_universitaire_new_externe")}}">
+                                              <i class="fas fa-graduation-cap"></i>Cursus externe</a>
+                                      </li>
                                     {% else %}
-                                    <li>
-                                        <a href="{{ path("parcours_universitaire_new")}}">
-                                            <i class="fas fa-university"></i>Cursus interne</a>
-                                    </li>
-                                    <li>
-                                        <a href="{{ path("parcours_universitaire_new_externe")}}">
-                                            <i class="fas fa-graduation-cap"></i>Cursus externe</a>
-                                    </li>
+                                      <li>
+                                          <a href="{{ path("parcours_universitaire_new")}}">
+                                              <i class="fas fa-university"></i>Cursus interne</a>
+                                      </li>
+                                      <li>
+                                          <a href="{{ path("parcours_universitaire_new_externe")}}">
+                                              <i class="fas fa-graduation-cap"></i>Cursus externe</a>
+                                      </li>
                                     {% endif %}
-                                      
-                                    
                                 </ul>
                               </li>
-                               {% if  candidat.niveau.id > 3  %}
+                               {% if  candidat.typediplome.id != 3  %}
                               <li class="has-sub">
                                 <a class="js-arrow" href="#">
                                     <i class="zmdi zmdi-folder-person"></i>Diplomes
-                                  
                                 </a>
-                                <ul class="list-unstyled navbar__sub-list js-sub-list">
-                                    <li>
-                                        <a href="{{ path("diplome_new") }}">
-                                            <i class="zmdi zmdi-plus-square"></i>Ajouter un diplome
-                                        </a>
-                                    </li>
-                                  
-                                </ul>
+                                
                             </li>
                             {% endif %}
 
                             {% endif %}
                           {% endfor %}
-                         <li class="has-sub">
-                              <a class="js-arrow" href="#">
-                                  <i class="zmdi zmdi-collection-speaker"></i> Langues 
-                              </a>
-                              <ul class="list-unstyled navbar__sub-list js-sub-list">
-                                  <li>
-                                      <a href="{{ path("langue_new") }}">
-                                          <i class="zmdi zmdi-plus-square"></i>Ajouter une langue 
-                                      </a>
-                                  </li>
-                                
-                              </ul>
-                          </li>
                           {% for candidat in app.user.candidatures %}
                             {% if candidat.bourse =="oui" %}
                               <li class="has-sub">
-                                <a class="js-arrow" href="#">
+                                <a class="js-arrow" href="#section_bourse">
                                     <i class="far fa-credit-card"></i> Gestion Bourse 
                                 </a>
-                                <ul class="list-unstyled navbar__sub-list js-sub-list">
-                                    <li>
-                                        <a href="{{ path("bourse_new") }}">
-                                            <i class="zmdi zmdi-plus-square"></i>Bourse d'etude 
-                                        </a>
-                                    </li>
-                                  
-                                </ul>
+                                
                               </li>
                             {% endif %}
                           {% endfor %}
@@ -154,14 +115,6 @@
                                 <a class="js-arrow" href="#">
                                     <i class="fas fa-desktop"></i> Stage ou experience 
                                 </a>
-                                <ul class="list-unstyled navbar__sub-list js-sub-list">
-                                    <li>
-                                        <a href="{{ path("experience_new") }}">
-                                            <i class="zmdi zmdi-plus-circle"></i>  Experiences pro   </p>  
-                                        </a>
-                                    </li>
-                                    
-                                </ul>
                               </li>
                             {% endif %}
                           {% endfor %}
@@ -179,6 +132,12 @@
                                     <li>
                                           <a href="{{ path("flux_new") }}">
                                               <i class="zmdi zmdi-arrow-right-top"></i> flux entrant    </p>  
+                                          </a>
+                                      </li>
+                                      {% elseif  candidat.flux =="resident" %}
+                                         <li>
+                                          <a href="{{ path("flux_sortant_new") }}">
+                                              <i class="zmdi zmdi-arrow-left-bottom"></i>  flux resident    </p>  
                                           </a>
                                       </li>
                                       {% else %}
@@ -209,19 +168,20 @@
                         </li>
                         <li>
                           <a href="{{ path('niveau_bac') }}" class="nav-link">
-                            <i class="fa fa-list" aria-hidden="true"></i>
-                             Etudiant niveau Bac    
+                            <i class="zmdi zmdi-graduation-cap"></i>
+                             Niveau baccalaureat     
                           </a>
                         </li>
                         <li>
                           <a href="{{ path('niveau_universitaire') }}" class="nav-link">
-                            <i class="fa fa-list" aria-hidden="true"></i>
-                             Etudiant universitaire   
+                            <i class="fa fa-university" aria-hidden="true"></i>
+                            Niveau  universitaire   
                           </a>
                         </li>
                       </ul>
                     </li>
                 {# Gestion dossiers  #}
+                <!--
                 <li class="has-sub">
                   <a href="#" class="js-arrow">
                       <i class="fa fa-folder" aria-hidden="true"></i>
@@ -229,7 +189,7 @@
                   </a>
                   <ul class="list-unstyled navbar__sub-list js-sub-list">
                     <li>
-                      <a href="{{ path("listetudiant") }}" class="nav-link">
+                      <a href="#" class="nav-link">
                         <i class="fa fa-check-circle" aria-hidden="true"></i>
                         dossier validé  
                       </a>
@@ -248,6 +208,7 @@
                     </li>
                   </ul>
                 </li>
+                -->
                   {# Gestion des flux   #}
                 <li class="has-sub">
                 <a href="#" class="js-arrow">
@@ -282,13 +243,27 @@
                 <li class="has-sub">
                    <a href="#" class="js-arrow">
                     <i class="fa fa-university" aria-hidden="true"></i>
-                      Type d'enseignement  
+                      Gestion Etablissement 
                   </a>
                   <ul class="list-unstyled navbar__sub-list js-sub-list">
                     <li>
                       <a href="{{ path("type_universite_new") }}" class="nav-link">
                             <i class="fa fa-plus" aria-hidden="true"></i>
-                          Type d'enseignement  
+                          Type d'etablissement  
+                      </a>
+                    </li>
+                  </ul>
+                </li>
+                <li class="has-sub">
+                  <a href="#" class="js-arrow">
+                  <i class="fa fa-graduation-cap" aria-hidden="true"></i>
+                      Gestion document 
+                  </a>
+                  <ul class="list-unstyled navbar__sub-list js-sub-list">
+                    <li>
+                      <a href="{{ path("app_document_new") }}" class="nav-link">
+                        <i class="fa fa-plus-square" aria-hidden="true"></i>
+                           Ajouter document   
                       </a>
                     </li>
                   </ul>
@@ -313,7 +288,7 @@
                 <li class="has-sub">
                   <a href="#" class="js-arrow">
                   <i class="fa fa-graduation-cap" aria-hidden="true"></i>
-                      Gestion type diplomes 
+                      Gestion cycle d'etudes 
                   </a>
                   <ul class="list-unstyled navbar__sub-list js-sub-list">
                     <li>
@@ -355,6 +330,20 @@
                     </li>
                   </ul>
                 </li>
+              <li class="has-sub">
+                  <a href="#" class="js-arrow">
+                  <i class="fas fa-newspaper" aria-hidden="true"></i>
+                      Gestion actualité
+                  </a>
+                  <ul class="list-unstyled navbar__sub-list js-sub-list">
+                    <li>
+                      <a href="#" class="nav-link">
+                       <i class="fa fa-plus-square" aria-hidden="true"></i> 
+                        Ajouter Actualité
+                      </a>
+                    </li>
+                  </ul>
+                </li>
             {% endif %} 
                         
                 </ul>
@@ -376,30 +365,19 @@
                                 </a>
                             </div>
                             <div class="header-button2">
-                                <div class="header-button-item js-item-menu">
-                                    <i class="zmdi zmdi-search"></i>
-                                    <div class="search-dropdown js-dropdown">
-                                        <form action="">
-                                            <input class="au-input au-input--full au-input--h65" type="text" placeholder="Search for datas &amp; reports..." />
-                                            <span class="search-dropdown__icon">
-                                                <i class="zmdi zmdi-search"></i>
-                                            </span>
-                                        </form>
-                                    </div>
-                                </div>
+                                
                                 <div class="header-button-item has-noti js-item-menu">
-                                    <i class="zmdi zmdi-notifications"></i>
+                                   <i class="zmdi zmdi-help-outline"></i>
                                     <div class="notifi-dropdown js-dropdown">
                                         <div class="notifi__title">
-                                            <p>You have 3 Notifications</p>
+                                            <h3> Nos services  </h3>
                                         </div>
                                         <div class="notifi__item">
                                             <div class="bg-c1 img-cir img-40">
                                                 <i class="zmdi zmdi-email-open"></i>
                                             </div>
                                             <div class="content">
-                                                <p>You got a email notification</p>
-                                                <span class="date">April 12, 2018 06:50</span>
+                                               <a><p>A QUI DE DROIT</p>  </a>
                                             </div>
                                         </div>
                                         <div class="notifi__item">
@@ -407,8 +385,7 @@
                                                 <i class="zmdi zmdi-account-box"></i>
                                             </div>
                                             <div class="content">
-                                                <p>Your account has been blocked</p>
-                                                <span class="date">April 12, 2018 06:50</span>
+                                                <a><p>AUTHENTIFICATION </p>  </a>
                                             </div>
                                         </div>
                                         <div class="notifi__item">
@@ -416,13 +393,10 @@
                                                 <i class="zmdi zmdi-file-text"></i>
                                             </div>
                                             <div class="content">
-                                                <p>You got a new file</p>
-                                                <span class="date">April 12, 2018 06:50</span>
+                                                 <a><p>CERTIFICATION  </p>  </a>
                                             </div>
                                         </div>
-                                        <div class="notifi__footer">
-                                            <a href="#">All notifications</a>
-                                        </div>
+                                        
                                     </div>
                                 </div>
                                   {% if  is_granted("ROLE_ADMIN")  %}
@@ -471,9 +445,11 @@
                                     </div>
                                 </div>
                                 {% endif %}
+                                {% if not is_granted("ROLE_ADMIN")  %}
                                 <div class="header-button-item mr-0 js-sidebar-btn">
-                                   <i class="zmdi zmdi-help-outline"></i>
+                                   <i class="zmdi zmdi-settings"></i>
                                 </div>
+                              
                                 <div class="setting-menu js-right-sidebar d-none d-lg-block">
                                     <div class="account-dropdown__body">
                                         <div class="account-dropdown__item">
@@ -484,8 +460,8 @@
                                             <a href="#">
                                                 <i class="zmdi zmdi-email"></i><strong> {{ app.user.email}} </strong> </a>
                                         </div>
-                                        
-                                        <div class="account-dropdown__item">
+                                      
+                                            <div class="account-dropdown__item">
                                             <a href="#">
                                             <i class="zmdi zmdi-codepen"></i><strong> {{ app.user.nin}} </strong> </a>
                                         </div>
@@ -518,20 +494,25 @@
                                         </div>
                                         {% endfor %}
                                         <div class="account-dropdown__item">
-                                           <a href="#" class="btn btn-xs btn-danger">
+                                            <a href="{{ path('candidature')}}">
+                                           <i class="zmdi zmdi-home"></i><strong> Revenir dossier candidature   </strong> </a>
+                                        </div>
+                                        <div class="account-dropdown__item">
+                                            <a href="{{ path('candidature')}}">
+                                           <i class="zmdi zmdi-accounts-add"></i><strong> Mon compte    </strong> </a>
+                                        </div>
+                                        <div class="account-dropdown__item">
+                                           <a href="{{ path('app_logout') }}" style="color:white" class="btn btn-xs btn-danger">
                                            <i class="zmdi zmdi-power"></i><strong> Deconnexion </strong> </a>
                                         </div>
-
                                     </div>
                                 </div>
-                                
-                                
+                                {% endif %}
                             </div>
                         </div>
                     </div>
                 </div>
             </header>
-            
             <section class="au-breadcrumb m-t-75">
                 <div class="section__content section__content--p30">
                     <div class="container-fluid">
@@ -541,7 +522,7 @@
                                     <div class="au-breadcrumb-left">
                                          <ul class="list-unstyled list-inline au-breadcrumb__list">
                                             <li class="list-inline-item active">
-                                                <a href="{{ path("secure_area") }}"><strong>Home</strong> </a>
+                                                <a href="{{ path("index") }}"><strong>Home</strong> </a>
                                             </li>
                                             <li class="list-inline-item seprate">
                                                 <span>/</span>
@@ -549,22 +530,13 @@
                                             <li class="list-inline-item">Dashboard</li>
                                         </ul>
                                     </div>
-                                    {% if ((app.user.candidatures |length ) < 1 ) and not is_granted('ROLE_ADMIN') %}
-                                    
-                                   
-                                      <a  href="{{ path("candidature") }}"   class="au-btn au-btn-icon au-btn--green">
-                                        <i class="zmdi zmdi-plus"></i>creer un dossier </a>
-                                    {% endif %}
-                                     
-                                   </div>
+                                  </div>
                             </div>
                         </div>
                     </div>
                 </div>
-            </section>
-       
-
-            
+            </section>  
+             
 {% block body %}{% endblock %}
 {% include "link/link_js.html.twig" %}   
 

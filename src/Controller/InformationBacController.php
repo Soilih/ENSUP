@@ -55,7 +55,7 @@ class InformationBacController extends AbstractController
 
             $entityManager->persist($informationBac);
             $entityManager->flush();
-
+            $this->addFlash("success" , "informations baccalaureat sont bien enregistrées avec success ");
             return $this->redirectToRoute('information_bac_new', [], Response::HTTP_SEE_OTHER);
         }
 
@@ -94,15 +94,14 @@ class InformationBacController extends AbstractController
             if ($brochureFile1 || $brochureFile2 ) {
                 $brochureFileName1 = $fileUploader->upload($brochureFile1);
                 $brochureFileName2 = $fileUploader->upload($brochureFile2);
-
-                $informationBac->setAttestation($brochureFileName2);
+                 $informationBac->setAttestation($brochureFileName2);
                 $informationBac->setReleve($brochureFileName1);
             }
 
 
             $entityManager->persist($informationBac);
             $entityManager->flush();
-
+            $this->addFlash("success" , "informations  sont bien enregistrées avec success ");
             return $this->redirectToRoute('information_bac_new', [], Response::HTTP_SEE_OTHER);
         }
 
@@ -122,6 +121,6 @@ class InformationBacController extends AbstractController
             $entityManager->flush();
         }
 
-        return $this->redirectToRoute('information_bac_index', [], Response::HTTP_SEE_OTHER);
+        return $this->redirectToRoute('information_bac_new', [], Response::HTTP_SEE_OTHER);
     }
 }

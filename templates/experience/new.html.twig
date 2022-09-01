@@ -1,87 +1,73 @@
-{% extends 'base.html.twig' %}
-{% block body %}
-<div class="wrapper">
-  <div class="content-wrapper">
-     <div class="row" style="padding-left:2%;padding-top:2%">
-          <div class="col-md-12">
-            <div class="card card-success">
-              <div class="card-header">
-                <strong style="font-size:20px"> Gestion experience proffessionnelle </strong>
-                
-                  <a data-toggle="modal" data-target="#responsable" href="#" class="btn btn-primary" style="float:right">Ajouter une experience </a>
-              </div>
-              <!-- /.card-header -->
-              <div class="card-body">
-                   <div class="card-body table-responsive p-0">
-                    <table class="table table-head-fixed text-nowrap">
-                    <thead>
-                        <tr>
-                            
-                            <th>Date debut </th>
-                             <th>Date Fin  </th>
-                            <th>Poste ocupé</th>
-                            <th>Nom de l'entreprise </th>
-                            <th>Pays </th>
-                            <th>actions</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                    {% for experience in app.user.experiences %}
-                        <tr>
-                          
-                            <td>{{ experience.dateExperience ? experience.dateExperience|date('d/m/Y') : '' }}</td>
-                             <td>{{ experience.dateExperience ? experience.datefin|date('d/m/Y') : '' }}</td>
-                            <td>{{ experience.poste }}</td>
-                            <td>{{ experience.entreprise }}</td>
-                            <td>{{ experience.pays }}</td>
-                            <td>
-                             <a class="btn btn-primary btn-sm" href="{{ path('experience_show', {'id': experience.id}) }}">
-                              <i class="fas fa-eye">
-                              </i>
+<head>
+    <!-- Required meta tags-->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="au theme template">
+    <meta name="author" content="Hau Nguyen">
+    <meta name="keywords" content="au theme template">
+
+    <!-- Title Page-->
+    <title>Dashboard</title>
+    {% include "link/link_css.html.twig" %}  
+</head>
+{% include "link/header.html.twig" %}
+    <div class="page-container">
+        <div class="main-content">
+            <div class="section__content section__content--p30">
+                <div class="container-fluid">
+                    <div class="row">
+                      <div class="col-lg-10">
+                        {% for msg in app.flashes('success') %}
+                          <div class="alert alert-success alert-dismissible fade show" role="alert">
+                              <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                              <span aria-hidden="true">&times;</span>
+                              </button>
+                              <strong>  {{msg }} </strong> 
+                          </div>
+                          <script>
+                            $(".alert").alert();
+                          </script>
                               
-                          </a>
+                          </div>
+                        {% endfor %}
+                      <div class="card">
+                        <h3 class="card-header"> <strong style="font-size:20px"> Gestion experience proffessionnelle </strong> </h3> 
+                        <div class="card-body">
+                             {{ include('experience/_form.html.twig') }}
+                         
+                        </div>
+                      </div>
+                      {% if (app.user.experiences|length) >= 1   %}
+                         {% for candidatures in app.user.candidatures %}
+                          
+                            {% if (candidatures.typediplome.id != "3") %}
+                              <a class="btn btn-primary"  href="{{ path('diplome_new')}}"> <i class="fa fa-location-arrow" aria-hidden="true"></i>
+                              Passer à l'etape suivante </a>
 
-                          <a class="btn btn-info btn-sm" href="{{ path('experience_edit', {'id': experience.id}) }}">
-                              <i class="fas fa-pencil-alt">
-                              </i>
-                           </a>
-
-                            <div style="display: inline-block;padding-left:2% ; color:red">{{ include('experience/_delete_form.html.twig') }} </div> 
-                            </td>
-                        </tr>
-                    {% else %}
-                        <tr>
-                            <td colspan="7">no records found</td>
-                        </tr>
-                    {% endfor %}
-                    </tbody>
-                </table>
-              </div>
-              </div>
-              <!-- /.card-body -->
+                              {% elseif candidatures.flux == "entrant"  %}
+                                  <a class="btn btn-primary"  href="{{ path('flux_new')}}"> <i class="fa fa-location-arrow" aria-hidden="true"></i>
+                                Passer à l'etape suivante </a>
+                              {% elseif candidatures.flux == "sortant"  %}
+                              <a class="btn btn-primary"  href="{{ path('flux_sortant_new')}}"> <i class="fa fa-location-arrow" aria-hidden="true"></i>
+                                Passer à l'etape suivante </a>
+                                {% else %}
+                                <a class="btn btn-primary"  href="{{ path('flux_sortant_new')}}"> <i class="fa fa-location-arrow" aria-hidden="true"></i>
+                                Passer à l'etape suivante </a>
+                           {% endif  %}
+                          <a class="btn btn-warning"  href="{{ path('bourse_new')}}"> <i class="fa fa-location-arrow" aria-hidden="true"></i>
+                                Revenir à l'etape precedente 
+                              </a>  
+                        {% endfor %} 
+                      {% endif %}
+                         
+                           
+                      </div>
+                    </div>
+                </div>
             </div>
-          </div>  
         </div>
     </div>
-</div>
-<div class="modal fade" id="responsable" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel">Experience proffessionnelle   </h5>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
-        </div>
-        <div class="modal-body">
-           {{ include('experience/_form.html.twig') }}
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-danger" data-dismiss="modal">Quitter</button>
-         
-        </div>
-      </div>
-    </div>
-</div>
-{% endblock %}
+     
+{% include 'link/footer.html.twig' %}
+ {% include "link/link_js.html.twig" %}  
   

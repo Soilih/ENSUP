@@ -32,6 +32,11 @@ class Document
      */
     private $detail;
 
+    /**
+     * @ORM\ManyToOne(targetEntity=User::class, inversedBy="documents")
+     */
+    private $user;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -69,6 +74,18 @@ class Document
     public function setDetail(?string $detail): self
     {
         $this->detail = $detail;
+
+        return $this;
+    }
+
+    public function getUser(): ?User
+    {
+        return $this->user;
+    }
+
+    public function setUser(?User $user): self
+    {
+        $this->user = $user;
 
         return $this;
     }

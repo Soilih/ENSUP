@@ -142,10 +142,7 @@ class Etudiant
      */
     private $pays;
 
-    /**
-     * @ORM\Column(type="string", length=255, nullable=true)
-     */
-    private $cv;
+    
     public function getId(): ?int
     {
         return $this->id;
@@ -376,20 +373,4 @@ class Etudiant
 
         return $this;
     }
-   
-
-     
-
-    public function getCv(): ?string
-    {
-        return $this->cv;
-    }
-
-    public function setCv(?string $cv): self
-    {
-        $this->cv = $cv;
-
-        return $this;
-    }
-
 }

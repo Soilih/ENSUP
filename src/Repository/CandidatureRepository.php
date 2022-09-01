@@ -19,15 +19,28 @@ class CandidatureRepository extends ServiceEntityRepository
         parent::__construct($registry, Candidature::class);
     }
     
-    public function decision_admin($status , $com , $iduser , $idcan) {
-        $conn = $this->getConnection();
-        $sql = "UPADTE candidature SET status = ? , commentaire = ? 
-        date_create = NOW() , user_id = ? 
-        WHERE id = ?";
-        
-        $stmt = $conn->prepare($sql);
-        $resultSet = $stmt->execute(array($status,$com ,$iduser,$idcan));
-        return $resultSet;
+    public function status_candidature($id){
+        $queryBuilder = $this->em->createQueryBuilder();
+        $query = $queryBuilder->update('App\Entity\Candidature', 'c')
+                ->set('c.status', '1')
+                ->where('c.id = :id')
+                ->setParameter('id', $id )
+                ->getQuery();
+        $result = $query->execute();
+
+        return $result;
+    }
+
+
+
+    public function stat_diplome(){
+        $conn = $this->getEntityManager()->getConnection();
+        $sql ="SELECT COUNT(candidature.id) as diplome_count , type_diplome.color as color ,  type_diplome.libelle as libelle 
+        FROM 
+        candidature , type_diplome where candidature.typediplome_id = type_diplome.id 
+        GROUP BY   type_diplome.libelle    " ;
+        $stmt = $conn->query( $sql);
+        return $result = $stmt->fetchAllAssociative();
     }
 
     // public function soumettre_candidature( $iduser , $idcan) {
@@ -78,4 +91,5 @@ class CandidatureRepository extends ServiceEntityRepository
         ;
     }
     */
+
 }

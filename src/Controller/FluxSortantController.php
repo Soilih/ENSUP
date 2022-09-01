@@ -41,7 +41,7 @@ class FluxSortantController extends AbstractController
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($fluxSortant);
             $entityManager->flush();
-
+            $this->addFlash("success" , "informations de bourses sont bien enregistrées avec success ");
             return $this->redirectToRoute('flux_sortant_new', [], Response::HTTP_SEE_OTHER);
         }
 

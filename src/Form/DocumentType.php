@@ -18,7 +18,7 @@ class DocumentType extends AbstractType
         $builder
             ->add('titre' , TextType::class)
             ->add('file_document' ,  FileType::class, [
-                'label' => 'Brochure (PDF file)',
+                'label' => 'Joindre le fichier',
 
                 // unmapped means that this field is not associated to any entity property
                 'mapped' => false,

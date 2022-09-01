@@ -29,12 +29,7 @@ class Flux
      * @ORM\Column(name="depart", type="date", nullable=false)
      */
     private $depart;
-    /**
-     * @var string|null
-     *
-     * @ORM\Column(name="detail", type="text", length=0, nullable=true)
-     */
-    private $detail;
+   
 
     /**
      * @var \DateTime|null
@@ -60,15 +55,6 @@ class Flux
      * @ORM\Column(name="projet", type="text", length=0, nullable=true)
      */
     private $projet;
-
-    /**
-     * @var string|null
-     *
-     * @ORM\Column(name="etude_poursuite", type="text", length=0, nullable=true)
-     */
-    private $etudePoursuite;
-
-   
 
     /**
      * @var \Niveau
@@ -117,6 +103,11 @@ class Flux
      */
     private $specialite;
 
+    /**
+     * @ORM\ManyToOne(targetEntity=TypeDiplome::class, inversedBy="fluxes")
+     */
+    private $typediplome;
+
     
 
     
@@ -139,22 +130,6 @@ class Flux
     }
 
     
-
-
- 
-
-    public function getDetail(): ?string
-    {
-        return $this->detail;
-    }
-
-    public function setDetail(?string $detail): self
-    {
-        $this->detail = $detail;
-
-        return $this;
-    }
-
     public function getDateArrive(): ?\DateTimeInterface
     {
         return $this->dateArrive;
@@ -167,17 +142,7 @@ class Flux
         return $this;
     }
 
-    public function getJob(): ?string
-    {
-        return $this->job;
-    }
-
-    public function setJob(?string $job): self
-    {
-        $this->job = $job;
-
-        return $this;
-    }
+   
 
     public function getSuggestion(): ?string
     {
@@ -205,17 +170,7 @@ class Flux
         return $this;
     }
 
-    public function getEtudePoursuite(): ?string
-    {
-        return $this->etudePoursuite;
-    }
-
-    public function setEtudePoursuite(?string $etudePoursuite): self
-    {
-        $this->etudePoursuite = $etudePoursuite;
-
-        return $this;
-    }
+    
 
     public function getNiveauActuel(): ?Niveau
     {
@@ -301,6 +256,18 @@ class Flux
     public function setSpecialite(string $specialite): self
     {
         $this->specialite = $specialite;
+
+        return $this;
+    }
+
+    public function getTypediplome(): ?TypeDiplome
+    {
+        return $this->typediplome;
+    }
+
+    public function setTypediplome(?TypeDiplome $typediplome): self
+    {
+        $this->typediplome = $typediplome;
 
         return $this;
     }

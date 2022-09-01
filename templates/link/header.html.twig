@@ -1,0 +1,76 @@
+
+<header>
+    <div class="header-logo">
+    </div>
+</header>
+
+<nav id="nav" class="navbar  navbar-expand-lg navbar-light">
+    <button class="navbar-toggler d-lg-none" type="button" data-toggle="collapse" data-target="#collapsibleNavId" aria-controls="collapsibleNavId"
+        aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="collapsibleNavId">
+        <ul id="nav-ul" class="navbar-nav mr-auto mt-3 mt-lg-0">
+            <li class="nav-item active">
+                <a   class="nav-link" href="{{ path('index') }}">Accueil <span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item">
+                <a  class="nav-link" data-toggle="modal" data-target="#modelId" href="#">Notre mission </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link"  data-toggle="modal" data-target="#projet"  href="#">Nos projets  </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#">Nos documents  </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#">Nos services </a>
+            </li>
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" data-toggle="dropdown"  role="button" aria-haspopup="true" aria-expanded="false" href="#">Accreditations  </a>
+                <div class="dropdown-menu" >
+                  <a class="dropdown-item" data-toggle="modal" data-target="#enseignent"  href="#">Enseignent </a>  
+                  <a class="dropdown-item" href="#" data-toggle="modal" data-target="#enseignement" >Enseignement</a>     
+                  <a class="dropdown-item"  data-toggle="modal" data-target="#etablissement"  href="#">Etablissement</a>
+                </div>
+            </li>
+        </ul>
+       <ul  id="espace" class="nav navbar-nav  d-flex">
+                <li class="nav-item dropdown">
+                    <a style="float:right" class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false"> <i class="fa fa-user"></i> Espace etudiant</a>
+                    <div class="dropdown-menu" style="min-width:200px" >
+                    {% if app.user is null  %}
+                     <a class="dropdown-item" href="{{ path('app_login') }}"> 
+                        <i class="zmdi zmdi-sign-in"></i> Connexion  </a>
+                        <a class="dropdown-item" href="{{ path('app_register') }}"> <i class="zmdi zmdi-accounts-add"></i> Inscription</a>  
+                             
+                    {% else %}
+                    {% if app.user.candidatures is null %}
+                        <a class="dropdown-item" href="{{ path('home_accueil') }}"> <i class="zmdi zmdi-account-o"></i> Espace personnel  </a>
+                     {% else %}
+                      {% if  (app.user.candidatures|length < 1) %}
+                          <a class="dropdown-item" href="{{ path('candidature') }}"> <i class="zmdi zmdi-plus-circle-o"></i>  Deposer votre candidature  </a>
+                    {% endif %}
+                          <a class="dropdown-item" href="{{ path('home_accueil') }}"> <i class="zmdi zmdi-account-o"></i> Espace personnel  </a>
+                          <a class="dropdown-item" href="{{ path('app_logout') }}"> <i class="zmdi zmdi-power-setting"> </i>  Deconnexion   </a>
+                    {% endif %}
+
+                        
+                    {% endif %}
+                       
+                      
+                    </div>
+                </li>
+            </ul>
+    </div>
+</nav>
+
+
+    
+
+
+
+
+
+
+

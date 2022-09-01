@@ -5,12 +5,12 @@ namespace App\Entity;
 use App\Repository\InformationBacRepository;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\HttpFoundation\File\File;
-use Vich\UploaderBundle\Mapping\Annotation as Vich;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass=InformationBacRepository::class)
  * @ORM\Entity
- * @Vich\Uploadable
+ * 
  */
 class InformationBac
 {
@@ -28,7 +28,7 @@ class InformationBac
 
     /**
      * @ORM\Column(type="string", length=255)
-     */
+      */
     private $moyenne;
 
     /**
@@ -40,6 +40,7 @@ class InformationBac
 
     /**
      * @ORM\Column(type="string", length=255)
+     * 
      */
     private $attestation;
 
@@ -47,6 +48,7 @@ class InformationBac
     
     /**
      * @ORM\Column(type="string", length=255)
+     * 
      */
     private $releve;
 
@@ -55,10 +57,7 @@ class InformationBac
      */
     private $session;
 
-    /**
-     * @ORM\Column(type="text", nullable=true)
-     */
-    private $cursus;
+   
 
     /**
      * @ORM\ManyToOne(targetEntity=User::class, inversedBy="informationBacs")
@@ -69,6 +68,11 @@ class InformationBac
      * @ORM\ManyToOne(targetEntity=Serie::class, inversedBy="informationBacs")
      */
     private $serie;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $centre;
 
     public function getId(): ?int
     {
@@ -147,17 +151,7 @@ class InformationBac
         return $this;
     }
 
-    public function getCursus(): ?string
-    {
-        return $this->cursus;
-    }
-
-    public function setCursus(?string $cursus): self
-    {
-        $this->cursus = $cursus;
-
-        return $this;
-    }
+   
 
     public function getUser(): ?User
     {
@@ -179,6 +173,18 @@ class InformationBac
     public function setSerie(?Serie $serie): self
     {
         $this->serie = $serie;
+
+        return $this;
+    }
+
+    public function getCentre(): ?string
+    {
+        return $this->centre;
+    }
+
+    public function setCentre(?string $centre): self
+    {
+        $this->centre = $centre;
 
         return $this;
     }

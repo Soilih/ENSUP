@@ -25,7 +25,7 @@ class FluxType extends AbstractType
     {
         $builder
             ->add('diplome' , TextType::class , [
-                'label'=>'Dernier diplome' , 
+                'label'=>'Intitulé diplome ' , 
                 'attr'=>['class'=>'form-control']
             ])
             ->add('specialite' , TextType::class , [
@@ -34,10 +34,17 @@ class FluxType extends AbstractType
             ])
             ->add('niveauActuel' ,  EntityType::class , [
                 'class'=>Niveau::class , 
-                'label'=> "Niveau atteint", 
+                'label'=> "Niveau d'etude actuel ", 
                 'choice_label'=>'libelle', 
                 'attr'=>['class'=>'form-control']
             ])
+            ->add('typediplome' ,  EntityType::class , [
+                'class'=>TypeDiplome::class , 
+                'label'=> "cycle d'etude", 
+                'choice_label'=>'libelle', 
+                'attr'=>['class'=>'form-control']
+            ])
+            
             ->add('depart' ,  DateType::class , [
                 'label'=>"Date depart pour tes etudes ",
                 'attr'=>["class"=>"form-control"] , 
@@ -63,23 +70,19 @@ class FluxType extends AbstractType
                 'label'=>'Pays' , 
                 'attr'=>['class'=>'form-control']
             ])
-            ->add('detail' , TextareaType::class  ,[
-                'label'=>'Expliquez brievement le deroulement de tes etudes'
-            ])
+            
             ->add('probleme' , TextareaType::class,[
                 'label'=>'Citez quelles difficultés rencontreés durant tes etudes'
 
             ])
             
             ->add('projet' , TextareaType::class  ,[
-                'label'=>'Avez-vous des projets pour votre pays ? '
+                'label'=>'Quelle est votre projet proffessionnel  '
 
             ])
-            ->add('etudePoursuite' , TextareaType::class  ,[
-                'label'=>'Souhaitez-vous poursuivre les etudes encore  ? si oui pourquoi ?'
-            ])
+            
             ->add('suggestion' , TextareaType::class  ,[
-                'label'=>'Quelques suggestions pour tes etudes'
+                'label'=>'Deroulement de tes etudes , remarques , suggestions '
 
             ])
            

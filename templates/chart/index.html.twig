@@ -1,5 +1,4 @@
-
-{% extends 'base.html.twig' %}
+{% include "link/link_css.html.twig" %}  
 {% block body %}
 <div class="wrapper">
     <div class="content-wrapper">
@@ -9,8 +8,8 @@
                 <div class="col-lg-12">
                     <div class="card">
                         <div class="card-header">
+                         <a style="float:right" class="btn btn-primary" href="{{ path("secure_area") }}">Retour à l'accueil </a>
                             <h4>Statistique </h4>
-                            
                         </div>
                         <div class="card-body">
                             <div class="default-tab">
@@ -25,6 +24,9 @@
                                         </a>
                                          <a class="nav-item nav-link" id="custom-nav-resident-tab" data-toggle="tab" href="#custom-nav-resident" role="tab" aria-controls="custom-nav-resident"
                                             aria-selected="false">Flux resident 
+                                        </a>
+                                         <a class="nav-item nav-link" id="custom-nav-resident-tab" data-toggle="tab" href="#custom-nav-resident" role="tab" aria-controls="custom-nav-resident"
+                                            aria-selected="false">Baccalaureat 
                                         </a>
                                     </div>
 								</nav>
@@ -78,6 +80,7 @@
                                                             <div class="au-card-inner">
                                                                 <h3 class="title-2 m-b-40">Gestion diplome  </h3>
                                                                 <canvas id="diplome" width="350" height="200"></canvas>
+                                                              
                                                             </div>
                                                         </div>
                                                     </div>
@@ -94,7 +97,24 @@
                                                         <div class="au-card m-b-30">
                                                             <div class="au-card-inner">
                                                                 <h3 class="title-2 m-b-40">Nombre d'etudiant/an</h3>
-                                                                <canvas id="categories" width="400" height="310"></canvas>
+                                                                <canvas id="flux_anne" width="350" height="200"></canvas>
+                                                                  
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-lg-5">
+                                                        <div class="au-card m-b-30">
+                                                            <div class="au-card-inner">
+                                                                <h3 class="title-2 m-b-40">Repartition par genre </h3>
+                                                                <canvas id="sexe_flux_entrant" width="350" height="250"></canvas>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-lg-6">
+                                                        <div class="au-card m-b-30">
+                                                            <div class="au-card-inner">
+                                                                <h3 class="title-2 m-b-40">Repartition par cycle d'etude </h3>
+                                                                  <canvas id="cycle" width="350" height="200"></canvas>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -102,7 +122,7 @@
                                                         <div class="au-card m-b-30">
                                                             <div class="au-card-inner">
                                                                 <h3 class="title-2 m-b-40">Type de diplome</h3>
-                                                                <canvas id="cam" width="400" height="310"></canvas>
+                                                               <canvas id="diplome_flux_entrant" width="350" height="200"></canvas>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -110,7 +130,7 @@
                                                         <div class="au-card m-b-30">
                                                             <div class="au-card-inner">
                                                                 <h3 class="title-2 m-b-40">Repartition par pays </h3>
-                                                                <canvas id="cam" width="400" height="310"></canvas>
+                                                                <canvas id="pays" width="350" height="200"></canvas>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -122,22 +142,8 @@
                                                             </div>
                                                         </div>
                                                     </div>
-                                                    <div class="col-lg-6">
-                                                        <div class="au-card m-b-30">
-                                                            <div class="au-card-inner">
-                                                                <h3 class="title-2 m-b-40">Gestion de cycle d'etude </h3>
-                                                                <canvas id="cam" width="400" height="310"></canvas>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-lg-6">
-                                                        <div class="au-card m-b-30">
-                                                            <div class="au-card-inner">
-                                                                <h3 class="title-2 m-b-40">Repartition par genre </h3>
-                                                                <canvas id="cam" width="400" height="310"></canvas>
-                                                            </div>
-                                                        </div>
-                                                    </div>
+                                                    
+                                                    
                                                  </div>
                                             </div>
                                         </div>
@@ -266,6 +272,7 @@
     </div>
 </div>								
 {% endblock %}
+{% include "link/link_stat.html.twig" %}   
 
 
 

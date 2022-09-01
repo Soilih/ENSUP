@@ -29,6 +29,18 @@ class TypeDiplome
      */
     private $diplomes;
 
+  
+
+    /**
+     * @ORM\OneToMany(targetEntity=Candidature::class, mappedBy="typediplome")
+     */
+    private $candidatures;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $color;
+
     /**
      * @ORM\OneToMany(targetEntity=Flux::class, mappedBy="typediplome")
      */
@@ -37,6 +49,8 @@ class TypeDiplome
     public function __construct()
     {
         $this->diplomes = new ArrayCollection();
+      
+        $this->candidatures = new ArrayCollection();
         $this->fluxes = new ArrayCollection();
     }
 
@@ -87,8 +101,52 @@ class TypeDiplome
         return $this;
     }
 
+    
+
     /**
-     * @return Collection|Flux[]
+     * @return Collection<int, Candidature>
+     */
+    public function getCandidatures(): Collection
+    {
+        return $this->candidatures;
+    }
+
+    public function addCandidature(Candidature $candidature): self
+    {
+        if (!$this->candidatures->contains($candidature)) {
+            $this->candidatures[] = $candidature;
+            $candidature->setTypediplome($this);
+        }
+
+        return $this;
+    }
+
+    public function removeCandidature(Candidature $candidature): self
+    {
+        if ($this->candidatures->removeElement($candidature)) {
+            // set the owning side to null (unless already changed)
+            if ($candidature->getTypediplome() === $this) {
+                $candidature->setTypediplome(null);
+            }
+        }
+
+        return $this;
+    }
+
+    public function getColor(): ?string
+    {
+        return $this->color;
+    }
+
+    public function setColor(?string $color): self
+    {
+        $this->color = $color;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Flux>
      */
     public function getFluxes(): Collection
     {

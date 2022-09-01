@@ -7,6 +7,8 @@ use App\Form\CandidatureType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
+use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use App\Entity\Etudiant;
 use App\Entity\User;
 use App\Entity\Langue;
@@ -37,20 +39,28 @@ use   Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 
 class CandidatureController extends AbstractController
 {
-    
-    
     /**
-     * @Route("/candidature/{id_candidature}", name="candidature_valider")
+     * @Route("/{id}/edit" , name="edit_candidature" , methods={"GET" , "POST"})
      */
-    public function SommettreDossier(Request $request , EntityManagerInterface  $entityManager ,   CandidatureRepository $candidatureRepository , $id  ): Response
-    {      $candidat = new Candidature();
-           $id = $request->get('id_candidature');
-           
-         return $this->render('candidature/index.html.twig');
-    }
-   
 
-    /**
+     public function edit(Request $request , Candidature $candidature , EntityManagerInterface $entityManager ): Response {
+         //instance de classe 
+        $candidat = new Candidature();
+        $candidat->setDateCreate(new \DateTime('now'));
+        $form= $this->createForm(CandidatureType::class , $candidature);
+        $form->handleRequest($request);
+        if($form->isSubmitted() && $form->isValid()){
+            $this->getDoctrine()->getManager()->flush();
+            return $this->redirectToRoute('candidature', [], Response::HTTP_SEE_OTHER);
+    
+        }
+        return $this->renderForm('candidature/edit.html.twig' , [
+            'form'=>$form , 
+             'candidature'=> $candidature
+            ]);
+     }
+
+      /**
      * @Route("/new"  , name="candidature" , methods={"GET","POST"})
     */
     public function createDossier( EntityManagerInterface $entityManager ,    Request $request): Response 
@@ -66,7 +76,8 @@ class CandidatureController extends AbstractController
         if($form->isSubmitted() && $form->isValid()){
             $entityManager->persist($candidat);
             $entityManager->flush();
-            return $this->redirectToRoute('home_accueil', [], Response::HTTP_SEE_OTHER);
+            $this->addFlash("success" , "informations de bourses sont bien enregistrées avec success ");
+            return $this->redirectToRoute('candidature', [], Response::HTTP_SEE_OTHER);
         }
         return $this->renderForm('candidature/index.html.twig' , [
         'form'=>$form
@@ -79,11 +90,9 @@ class CandidatureController extends AbstractController
     public function mon_dossier(CandidatureRepository $candidatureRepository , Request $request):Response
     {
         $candidat = $candidatureRepository->findAll();
-        return $this->render('admin/home_user.html.twig' , [
+        return $this->render('candidature/index.html.twig' , [
             "candidatures"=> $candidat
         ]);
-
-
     }
 
     public function codeDossier(){
@@ -93,19 +102,36 @@ class CandidatureController extends AbstractController
         return $code;
     }
 
-    /**
-     * @Route("/valider_candidature" , name="decision")
-    */
-
-    public function decision_administrature():Response {
-        
-
-
-        
-        return $this->render('admin/DetailEtudiantId.html.twig' , [
-            "name"=>"salut koko"
-        ]);
-
+   /**
+     * @Route("/delete/{id}" , name="delete_candidature" )
+     * @Method({"DELETE"})
+     */
+    public function delete(Request $request, $id) {
+        $candidature = $this->getDoctrine()->getRepository(Candidature::class)->find($id);
+        $entityManager = $this->getDoctrine()->getManager();
+        $entityManager->remove($candidature);
+        $entityManager->flush();
+        $response = new Response();
+        $response->send();
+        return $this->render('candidature/index.html.twig');
     }
+
+   /**
+     * @Route("/activer/{id}", name="activer")
+     * @Method({"GET"})
+     */
+    public function activer(Candidature  $candidature)
+    {
+        $candidature->setStatus("1");
+        $em = $this->getDoctrine()->getManager();
+        $em->persist( $candidature);
+        $em->flush();
+
+        return new Response("true");
+    }
+
+   
+
+
     
 }

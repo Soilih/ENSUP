@@ -10,6 +10,7 @@ use   App\Entity\ParcoursUniversitaire;
 use   App\Entity\Responsable;
 use   App\Entity\Flux;
 use   App\Entity\Diplome;
+use   App\Entity\TypeDiplome;
 use   App\Entity\Bourse;
 use   App\Entity\FluxSortant;
 use   App\Entity\Niveau;
@@ -59,7 +60,7 @@ class EtudiantRepository extends ServiceEntityRepository
         etudiant.lieu_naissance  as lieu  , etudiant.adresse as adresse, 
         etudiant.ile as ile , user.nom  as nom , user.prenom as prenom , 
         etudiant.pays as pays , etudiant.telephone as tel  , user.email as email, 
-        etudiant.tel_urgence as urgence , etudiant.cv as cv ,
+        etudiant.tel_urgence as urgence ,
         etudiant.type_identite as typeidentite , etudiant.pieceidentite as piece , 
         etudiant.num_carteidentite as num_ca , etudiant.nationalite as nationalite , 
         user.nin as nin , user.code as code , etudiant.date_delivrance as dtliv , etudiant.date_expiration as dtEx , 
@@ -67,7 +68,7 @@ class EtudiantRepository extends ServiceEntityRepository
         information_bac.mention as mention ,  information_bac.moyenne as moy , 
         user.numerocarte 	as nutable , user.session as session , 
         information_bac.session  as sess , information_bac.releve as rele , 
-        information_bac.attestation as att
+        information_bac.attestation as att , information_bac.centre as centre 
         FROM    user , candidature , niveau , etudiant , 
         information_bac , serie
         where user.id = candidature.user_id AND  
@@ -117,9 +118,8 @@ class EtudiantRepository extends ServiceEntityRepository
         
         $sql = "SELECT   user.id as id , responsable.prenom as resp_nom , 
         responsable.nom  as nom , responsable.tel as tel , responsable.email as email ,
-        responsable.proffession as prof , responsable.adresse as ad , 
-        responsable.lieunaissance as lieu , responsable.pays as pays , 
-        responsable.detail as dt 
+        responsable.proffession as prof , responsable.adresse as ad 
+       
         FROM  user  
         LEFT JOIN responsable  ON user.id = responsable.user_id
         WHERE user.id = ?
@@ -172,7 +172,7 @@ class EtudiantRepository extends ServiceEntityRepository
         $conn = $this->getEntityManager()->getConnection();
         
         $sql = "SELECT   user.id as id , diplome.libelle as lib ,
-        diplome.id as dpid , 
+        diplome.id as dpid , diplome.moyenne as moy ,
         diplome.mention as mention , diplome.universite as universite , 
         type_diplome.libelle as type_diplome , diplome.pays as pays , 
         diplome.moyenne as moy , diplome.session as session  , 
@@ -193,7 +193,7 @@ class EtudiantRepository extends ServiceEntityRepository
          return $resultSet->fetchAll();
     }
 
-    public function Flux_sortant($id , $type_flux = null ):array 
+    public function Flux_sortant($id  ):array 
     {
         $conn = $this->getEntityManager()->getConnection();
         
@@ -202,14 +202,14 @@ class EtudiantRepository extends ServiceEntityRepository
         flux_sortant.date_depart as depart , type_universite.libelle as type_univ , 
         flux_sortant.ville as ville , flux_sortant.pays as pays , flux_sortant.cycle as cycle 
          , composant.libelle as lib_compo , flux_sortant.moyen as moyen , flux_sortant.motivation as motivation , 
-         flux_sortant.typeuniversit as type_uni , flux_sortant.type as type 
+         flux_sortant.typeuniversit as type_uni , flux_sortant.type as types 
 
         FROM  user     
         LEFT JOIN flux_sortant  ON user.id = flux_sortant.user_id
         LEFT JOIN type_universite  ON type_universite.id = flux_sortant.typeuniversite_id  
         LEFT JOIN composant  ON composant.id = flux_sortant.composant_id
         LEFT JOIN niveau ON niveau.id =   flux_sortant.niveau_id
-        WHERE user.id = ? AND type='sortant'
+        WHERE user.id = ? 
          ";
         $stmt = $conn->prepare($sql);
         $resultSet = $stmt->execute(array($id));
@@ -224,13 +224,15 @@ class EtudiantRepository extends ServiceEntityRepository
         
         $sql = "SELECT   user.id as id , flux.depart as depart , 
         flux.date_arrive  as dtArrive , flux.projet as projet , 
-        flux.etude_poursuite as etude , flux.detail as detail , 
+       
         flux.probleme as probleme , flux.suggestion as sug ,  
-        flux.cycle as cycle , flux.pays as pays , 
-        niveau.libelle as lib_niveau
+        flux.cycle as cycle , flux.pays as pays , flux.diplome as diplome , 
+        niveau.libelle as lib_niveau , flux.specialite as sp , 
+        type_diplome.libelle as typedi
         FROM  user     
         INNER JOIN flux  ON user.id = flux.user_id
-        INNER JOIN niveau ON niveau.id = flux.niveau_actuel_id 
+        INNER JOIN niveau ON niveau.id = flux.niveau_actuel_id  
+        INNER JOIN type_diplome  ON type_diplome.id = flux.typediplome_id 
         WHERE user.id = ?
          ";
         $stmt = $conn->prepare($sql);
@@ -264,7 +266,8 @@ class EtudiantRepository extends ServiceEntityRepository
 
     public function bourseEtude($id):array {
         $conn = $this->getEntityManager()->getConnection();
-        $sql ="SELECT user.id as id  ,   bourse.nature as nat , 
+        $sql ="SELECT user.id as id  ,   bourse.nature as nat ,
+        bourse.datecreate as dt ,  
         bourse.montant as mont , bourse.pays as pays_b , bourse.detail as bour_de
          FROM  user
         INNER JOIN bourse ON   bourse.user_id = user.id 
@@ -284,7 +287,7 @@ class EtudiantRepository extends ServiceEntityRepository
         user.numerocarte as num , information_bac.mention as mention , 
         information_bac.serie_id  as serie , information_bac.ecole as ecole , 
         user.session as session , serie.libelle as serie_libelle , 
-        candidature.flux as flux 
+        candidature.flux as flux , information_bac.centre as centre 
         FROM  user 
         INNER JOIN  etudiant ON   etudiant.user_id = user.id
         INNER JOIN  candidature ON   candidature.user_id = user.id

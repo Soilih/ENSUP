@@ -44,6 +44,41 @@ class FluxRepository extends ServiceEntityRepository
         return $query->getResult();
     }
 
+    public function stat_sexe(){
+    $conn = $this->getEntityManager()->getConnection();
+    $sql ="
+        SELECT count(flux.id) as count_id  , user.nom as nom  , etudiant.sexe as sexe   FROM flux , user , etudiant   where 
+        flux.user_id = user.id AND etudiant.user_id = user.id
+        GROUP by sexe , flux.id " ; 
+        $stmt = $conn->query( $sql);
+        return $result = $stmt->fetchAllAssociative();
+    }
+
+    public function stat_flux_anne(){
+        $conn = $this->getEntityManager()->getConnection();
+        $sql ="SELECT flux.id as flux_id ,    COUNT(flux.id) as ct  , DATE_FORMAT(flux.date_arrive , '%Y' ) as anne  
+         FROM flux GROUP by anne  
+        ORDER by date_arrive DESC ";
+        $stmt = $conn->query( $sql);
+         return $result = $stmt->fetchAllAssociative();
+    }
+
+    public function stat_diplome_flux(){
+        $conn = $this->getEntityManager()->getConnection();
+        $sql ="SELECT COUNT(flux.typediplome_id) as diplome_count , type_diplome.color as color ,  type_diplome.libelle as libelle FROM flux , type_diplome 
+        where flux.typediplome_id = type_diplome.id 
+        GROUP BY type_diplome.libelle  " ;
+        $stmt = $conn->query( $sql);
+        return $result = $stmt->fetchAllAssociative();
+    }
+
+    public function stat_pays_flux(){
+        $conn = $this->getEntityManager()->getConnection();
+        $sql ="SELECT  COUNT(flux.id)  as ct , flux.pays as pays 
+         FROM flux  GROUP BY flux.pays " ;
+        $stmt = $conn->query( $sql);
+        return $result = $stmt->fetchAllAssociative();
+    }
     
     
 

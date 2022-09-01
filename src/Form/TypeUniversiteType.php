@@ -14,7 +14,7 @@ class TypeUniversiteType extends AbstractType
     {
         $builder
             ->add('libelle' ,  TextType::class , [
-                "label"=> "Saisir un type d'université ..... "
+                "label"=> "Titre type d'etablissement  "
             ])
         ;
     }

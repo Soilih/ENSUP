@@ -39,7 +39,123 @@ Notes:	decreasing heading by 0.4em with every subsequent heading level
 /*-----------------------------------------------------*/
 /*                   GENERIC                           */
 /*-----------------------------------------------------*/
-/* ----- Normalize ----- */
+/* ----- Normalize mon code css  ----- */
+/*navbar***/
+
+
+/*---------------------------*/
+.header-logo{
+height:150px;
+border-radius: 10px;
+background-image: url("../images/entete.jpg");
+background-repeat: no-repeat;
+background-size: 85%;
+margin-left:5%;
+
+
+}
+#nav{
+    height:70px;
+    background-color:rgb(55 , 205 , 255);
+   width:100%;
+    margin-left:5%;
+    color:#00ad5f;
+    font-family: sans-serif;
+    position: relative;
+    font-size: 20px;
+    max-width: calc(1950px); 
+    text-align: center
+}
+
+.titre{
+    text-align: center;
+    font-family: sans-serif;
+}
+#nav-link{
+    color:white;
+}
+#nav-ul{
+    top:0;
+    left:0;
+    display: inline-flex;
+    margin-left: 2%;
+    vertical-align: auto;
+   right: 0;   
+}
+
+#nos_mission{
+    margin-top:5%;
+    padding:3%;
+}
+#text-nos-mission{
+    padding-top:2%;
+}
+#espace{
+    padding-right:8%
+   
+}
+#text-footer{
+    text-align: center;
+    padding-top:1.5%;
+}
+
+
+#img-logo , #text-navbar , #img-logo1{
+    display: inline-flex;
+    min-height:150px;
+    margin:15px ;
+    overflow: auto;
+    vertical-align:top ;
+     
+   
+    
+}
+
+#text-logo{
+    text-align: center;
+    font-size:18px;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+}
+#logo{
+  float: left;
+  height: 100px; 
+}
+#logo1{
+ height: 100px; 
+ float:right;
+}
+#img-logo1 {
+    width: 30%;
+    float: right;
+    height: 150px; 
+    margin-top:0px
+}
+#img-logo{
+    width: 30%;
+    float: left;
+    height: 150px; 
+    margin-top:0px
+}
+
+#footer{
+   height:70px;
+    background-color:rgb(55 , 205 , 255);
+    bottom:0;
+    
+    
+}
+.map{
+    height:50px
+}
+.card-text{
+  
+    color:black
+}
+#liste-ministere{
+    color:#1b1b1b
+}
+
+
 * {
     margin: 0;
     padding: 0;
@@ -103,7 +219,7 @@ body {
     font-weight: 400;
     font-size: 16px;
     line-height: 1.625;
-    color: #666;
+    background-color: #FFFFFF;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
 }
@@ -125,21 +241,21 @@ h4,
 h5,
 h6 {
     color: #333333;
-    font-weight: 700;
+    font-weight: 600;
     margin: 0;
     line-height: 1.2;
 }
 
 h1 {
-    font-size: 36px;
-}
-
-h2 {
     font-size: 30px;
 }
 
+h2 {
+    font-size: 28px;
+}
+
 h3 {
-    font-size: 24px;
+    font-size: 22px;
 }
 
 h4 {
@@ -297,7 +413,7 @@ section {
 }
 }
 .page-container {
-    background: #e5e5e5;
+    background: #FFFFFF;
     padding-left: 300px;
 }
 
@@ -326,7 +442,7 @@ section {
 }
 
 .main-content {
-    padding-top: 116px;
+    padding-top: 16px;
     min-height: 100vh;
 }
 
@@ -342,8 +458,9 @@ section {
 }
 
 .page-content--bge5 {
-    background: #e5e5e5;
-    height: 100vh;
+    background-color:#f5f6fa;
+    margin-bottom:2%;
+    
 }
 
 .login-wrap {
@@ -395,11 +512,12 @@ section {
 }
 
 .login-content {
-    background: #fff;
+    background: #fefbfb;
     padding: 30px 30px 20px;
     -webkit-border-radius: 2px;
     -moz-border-radius: 2px;
     border-radius: 2px;
+    border:1px solid rgb(23, 134, 49);
 }
 
 .social-login-content {
@@ -2171,7 +2289,7 @@ section {
 }
 
 .account2 {
-    padding: 38px;
+    padding: 13px;
     display: -webkit-box;
     display: -webkit-flex;
     display: -moz-box;
@@ -2310,13 +2428,15 @@ section {
 
 .header-desktop2 {
     height: 75px;
-    background: #4272d7;
+    background: rgb(55 , 205 , 255) ;
     position: fixed;
     z-index: 1001;
     top: 0;
     right: 0;
     left: 300px;
 }
+
+ 
 
 @media (max-width: 991px) {
     .header-desktop2 {
@@ -3405,7 +3525,7 @@ section {
 }
 
 .au-task-list {
-    height: 424px;
+    height: 220px;
     position: relative;
     overflow-y: auto;
 }
@@ -3534,6 +3654,7 @@ section {
     padding: 19px 40px;
     padding-right: 50px;
     padding-bottom: 25px;
+    border: 1px solid  #00a2e3 ;
 }
 
 @media (min-width: 992px) and (max-width: 1199px) {

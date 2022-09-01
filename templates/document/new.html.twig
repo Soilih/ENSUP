@@ -1,11 +1,20 @@
 {% extends 'base.html.twig' %}
-
-{% block title %}New Document{% endblock %}
-
 {% block body %}
-    <h1>Create new Document</h1>
-
-    {{ include('document/_form.html.twig') }}
-
-    <a href="{{ path('app_document_index') }}">back to list</a>
+<div class="wrapper">
+  <div class="content-wrapper">
+        <div class="row" style="padding-left:2%;padding-top:2%">
+          <div class="col-md-8">
+            <div class="card card-success">
+              <div class="card-header">
+               <strong> Gestion document  </strong>
+               
+              </div>
+              <!-- /.card-header -->
+              <div class="card-body">
+                 {{ include('document/_form.html.twig') }}
+             </div>
+            </div>
+        </div>
+    </div>
+</div>
 {% endblock %}

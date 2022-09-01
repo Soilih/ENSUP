@@ -38,11 +38,12 @@ class EtudiantType extends AbstractType
             ->add('dateNaissance' , DateType::class ,[
                 'attr'=>["class"=>"form-control"] , 
                 'widget' => 'single_text',
-               
                 'format' => 'yyyy-MM-dd',
             ])
              
-            ->add('telephone' , TextType::class)
+            ->add('telephone' , TextType::class , [
+                "label"=>"Telephone mobile"
+            ])
             ->add('photo' , FileType::class , [
                 'label'=>"Photo d'identité" ,
                 'mapped' =>  false , 
@@ -55,7 +56,7 @@ class EtudiantType extends AbstractType
                     'Marié(e)' => 'marié',
                     'Séparé(e)' => 'marié',
                     'Divorcé(e)' => 'Divorcé',
-                    'Veuf(ve)' => 'Veuf'
+                    'Veuf(ve)' =>  'Veuf'
                 ], 
                 'label' => 'Situation familiale et maritale', 
                  'attr' => ['class' => 'form-control']
@@ -72,8 +73,12 @@ class EtudiantType extends AbstractType
                 'label' => 'selectionner votre ile de residence ', 
                 'attr' => ['class' => 'form-control']
             ])
-            ->add('telUrgence' ,  TextareaType::class , ['label'=>"Telephone et nom de la personne à contacter en cas d'urgence "])
-            ->add('typeIdentite' , ChoiceType::class , [
+            ->add('telUrgence' ,  TextareaType::class , 
+            ['label'=>"Telephone, adresse de residence  et nom - prenom  de la personne à contacter en cas d'urgence ",
+             'attr'=>["placeholder"=>"Exemple : 3251366 , SOILIH-MOHAMED , FASSI MITSAMIOULI "]
+              
+            ])
+             ->add('typeIdentite' , ChoiceType::class , [
                 'choices'  => [
                     'Passport' => 'Passport',
                     'Titre de sejour' => 'Titre de sejour',
@@ -95,12 +100,6 @@ class EtudiantType extends AbstractType
             ])
             ->add('Pieceidentite' , FileType::class , [
                 'label'=>"Piece d'identite validé " ,
-                'mapped' =>  false , 
-                'required' => true,
-               
-            ])
-            ->add('cv' , FileType::class , [
-                'label'=>"Curriculum Vitae" ,
                 'mapped' =>  false , 
                 'required' => true,
                

@@ -42,7 +42,7 @@ class FluxController extends AbstractController
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($flux);
             $entityManager->flush();
-
+            $this->addFlash("success" , "informations de bourses sont bien enregistrées avec success ");
             return $this->redirectToRoute('flux_new', [], Response::HTTP_SEE_OTHER);
         }
 

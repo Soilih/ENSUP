@@ -1,4 +1,21 @@
 {{ form_start(form) }}
-    {{ form_widget(form) }}
+        <div class="form-row">
+    <div class="form-group col-md-6">
+       {{ form_row(form.montant) }}
+    </div>
+    <div class="form-group col-md-6">
+      {{ form_row(form.Nature) }}
+    </div>
+
+    <div class="form-group col-md-6">
+      {{ form_row(form.datecreate) }}
+    </div>
+    <div class="form-group col-md-6">
+      {{ form_row(form.pays) }}
+    </div>
+    <div class="form-group col-md-6">
+      {{ form_row(form.detail) }}
+    </div>
+  </div>
     <button class="btn btn-success btn-lg">{{ button_label|default('Enregistrer') }}</button>
 {{ form_end(form) }}

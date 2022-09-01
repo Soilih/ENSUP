@@ -38,7 +38,8 @@ class DiplomeType extends AbstractType
                 'label'=>"Pays d'etude  "
             ])
             ->add('session' , TextType::class , [
-                'label'=>"Anneé d'obtention   "
+                'label'=>"Anneé d'obtention", 
+                'attr' => ['pattern' => '/^[0-9]{8}$/', 'maxlength' => 4]
             ])
             ->add('mention' , ChoiceType::class , [
                 'choices'  => [
@@ -53,8 +54,9 @@ class DiplomeType extends AbstractType
                 'attr' => ['class' => 'form-control']
             ])
             ->add('moyenne' , NumberType::class , [
-                'label'=>"La moyenne obtenue "
-            ])
+                'label'=>"La moyenne obtenue " , 
+                'attr' => ['pattern' => '/^[0-9]{8}$/', 'maxlength' => 2] ])
+            
             ->add('typediplome' , EntityType::class ,[
                 'class'=>TypeDiplome::class , 
                 'label'=>"le type de diplome obtenu ",

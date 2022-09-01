@@ -28,6 +28,7 @@
                             <th> Numero de table   </th>
                             <th>Etablissement </th>
                             <th>Session  </th>
+                            <th>Nom centre   </th>
                             <th>Type de flux    </th>
                             <th>Actions</th>
                         </tr>
@@ -44,6 +45,7 @@
                         <td>{{ etudiant.num }}</td>
                         <td>{{ etudiant.ecole }}</td>
                         <td>{{ etudiant.session }}</td>
+                        <td>{{ etudiant.centre  }}</td>
                          <td>{{ etudiant.flux }}</td>
                         <td> <a href="{{ path('listetudiantDetailEtudiant' , {id: etudiant.id} ) }}" ><i style="color:bleu ; font-size:24px" class="fa fa-eye"></i></a>  </td>      
                     </tr>

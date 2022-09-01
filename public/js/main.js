@@ -1524,28 +1524,7 @@
     console.log(err);
   }
 })(jQuery);
-(function ($) {
-  // USE STRICT
-  "use strict";
 
-  // Scroll Bar
-  try {
-    var jscr1 = $('.js-scrollbar1');
-    if(jscr1[0]) {
-      const ps1 = new PerfectScrollbar('.js-scrollbar1');      
-    }
-
-    var jscr2 = $('.js-scrollbar2');
-    if (jscr2[0]) {
-      const ps2 = new PerfectScrollbar('.js-scrollbar2');
-
-    }
-
-  } catch (error) {
-    console.log(error);
-  }
-
-})(jQuery);
 (function ($) {
   // USE STRICT
   "use strict";
@@ -1664,61 +1643,4 @@
   } catch (error) {
     console.log(error);
   }
-})(jQuery);
-(function ($) {
-  // USE STRICT
-  "use strict";
-
-  // Load more
-  try {
-    var list_load = $('.js-list-load');
-    if (list_load[0]) {
-      list_load.each(function () {
-        var that = $(this);
-        that.find('.js-load-item').hide();
-        var load_btn = that.find('.js-load-btn');
-        load_btn.on('click', function (e) {
-          $(this).text("Loading...").delay(1500).queue(function (next) {
-            $(this).hide();
-            that.find(".js-load-item").fadeToggle("slow", 'swing');
-          });
-          e.preventDefault();
-        });
-      })
-
-    }
-  } catch (error) {
-    console.log(error);
-  }
-
-})(jQuery);
-(function ($) {
-  // USE STRICT
-  "use strict";
-
-  try {
-    
-    $('[data-toggle="tooltip"]').tooltip();
-
-  } catch (error) {
-    console.log(error);
-  }
-
-  // Chatbox
-  try {
-    var inbox_wrap = $('.js-inbox');
-    var message = $('.au-message__item');
-    message.each(function(){
-      var that = $(this);
-
-      that.on('click', function(){
-        $(this).parent().parent().parent().toggleClass('show-chat-box');
-      });
-    });
-    
-
-  } catch (error) {
-    console.log(error);
-  }
-
 })(jQuery);

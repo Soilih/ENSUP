@@ -1,4 +1,29 @@
 {{ form_start(form) }}
+        <div class="form-row">
+    
+    <div class="form-group col-md-6">
+      {{ form_row(form.flux) }}
+    </div>
+
+    <div class="form-group col-md-6">
+      {{ form_row(form.niveau) }}
+    </div>
+    <div class="form-group col-md-6">
+      {{ form_row(form.bourse) }}
+    </div>
+    <div class="form-group col-md-6">
+      {{ form_row(form.cursus) }}
+    </div>
+    <div class="form-group col-md-6">
+      {{ form_row(form.stage) }}
+    </div>
+    <div class="form-group col-md-6">
+      {{ form_row(form.type) }}
+    </div>
+    <div class="form-group col-md-6">
+      {{ form_row(form.typediplome) }}
+    </div>
+  </div>
     {{ form_widget(form) }}
     <button class="btn btn-success btn-lg">{{ button_label|default('Enregistrer') }}</button>
 {{ form_end(form) }}

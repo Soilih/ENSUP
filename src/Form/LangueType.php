@@ -20,11 +20,13 @@ class LangueType extends AbstractType
             ])
             ->add('niveau' ,  ChoiceType::class , [
                 'choices'  => [
-                    'debutant' => 'debutant',
-                    'maternelle' => 'maternelle',
-                    'Intermediaire' => 'intermediaire',
-                    'bien' => 'bien',
-                    'exellent' => 'exellent',
+                    'niveau debutant' => ' debutant',
+                    'langue maternelle' => 'langue maternelle',
+                    'niveau intermediaire' => 'niveau intermediaire',
+                    'niveau seuil' => 'niveau seuil',
+                    'niveau avancé' => 'niveau avancé',
+                    'niveau maîtrise' => 'niveau maîtrise',
+                     'niveau exellent' => 'niveau exellent',
                 ], 
                 'label' => 'selectionner votre niveau', 
                 'attr' => ['class' => 'form-control'],

@@ -1,0 +1,187 @@
+{% block javascripts  %}
+    <script src="{{ asset("vendor/jquery-3.2.1.min.js") }}"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.js" integrity="sha512-s+xg36jbIujB2S2VKfpGmlC3T5V2TF3lY48DX7u2r9XzGzgPsa6wTpOQA7J9iffvdeBN0q9tKzRxVxw1JviZPg==" crossorigin="anonymous"></script>
+     <!--datatable-->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-Fy6S3B9q64WdZWQUiU+q4/2Lc9npb8tCaSX9FK7E8HnRr0Jz8D6OP9dO5Vg3Q9ct" crossorigin="anonymous"></script>
+    <script src="{{ asset("js/ajax.js") }}"></script>
+    <script src="{{ asset("js/main.js") }}"></script>
+    <script src="{{ asset("js/mon_main.js") }}"></script>
+    <script>
+    let categories = document.querySelector("#flux")
+    let genre = document.querySelector("#genre")
+    let cursus = document.querySelector("#cursus")
+    let stage = document.querySelector("#stage")
+    let status = document.querySelector("#status")
+    let diplome = document.querySelector("#diplome");
+    let sexe_flux_entrant = document.querySelector("#sexe_flux_entrant");
+    let flux_anne = document.querySelector("#flux_anne");
+    let cycle = document.querySelector("#cycle");
+     let pays = document.querySelector("#pays");
+    let diplome_flux = document.querySelector("#diplome_flux_entrant");
+
+    let categGraph = new Chart(categories, {
+        type: "pie",
+        data: {
+              labels:  ["flux entrant", "flux sortant", "flux resident"],
+             datasets: [{
+                data: [{{ flux }} , {{sortant}} , {{resident}}],
+                label: "Répartition des catégories",
+                 backgroundColor:  [ '#6ab04c', '#eb4d4b' , '#f9ca24' ]
+            }]
+        }
+    })
+
+     let categGraph1 = new Chart(genre, {
+        type: "pie",
+        data: {
+            labels: ["Boursier" , "non boursier"],
+            datasets: [{
+                data: [{{bourse_oui}}, {{boursier_non}}],
+                label: "Repartition boursier",
+                    backgroundColor: 
+                    [ '#e67e22', '#6c5ce7'  ]
+            }]
+        }
+    }) 
+
+    let categGraph2 = new Chart(cursus, {
+        type: "pie",
+        data: {
+            labels: ["cursus interne" , "cursus externe" , "cursus interne-externe"],
+            datasets: [{
+                data: [{{cursus_interne}}, {{cursus_externe}} , {{cursus_interne_externe}}],
+                label: "Repartition boursier",
+                    backgroundColor: 
+                    [ '#e67e22', '#6c5ce7' , '#fdcb6e'  ]
+            }]
+        }
+    }) 
+
+     let categGraph3 = new Chart(stage , {
+        type: "pie",
+        data: {
+            labels: ["experience pro" , "pas d'experience pro"],
+            datasets: [{
+                data: [{{stage}}, {{stage_non}}],
+                label: "Repartition experience proffessionnelle",
+                    backgroundColor: 
+                    [ '#e67e22', '#6c5ce7'  ]
+            }]
+        }
+    }) 
+
+    let categGraph4 = new Chart(status , {
+        type: "pie",
+        data: {
+            labels: ["Etudiant" , "Employé"],
+            datasets: [{
+                data: [{{etudiant}}, {{employe}}],
+                label: "Gestion status etudiant-employé",
+                    backgroundColor: 
+                    [ '#00b894', '#6c5ce7'  ]
+            }]
+        }
+    })
+
+    let graph5 = new Chart(diplome , {
+       type: "pie",
+        data: {
+            labels: {{ diplome|raw }},
+            datasets: [{
+                   data: {{ count_diplome|raw }} ,
+                  label: "Gestion diplome",
+                   backgroundColor: {{ color|raw }}
+             }]
+        }, 
+        
+    }) 
+
+    let graph6 = new Chart(sexe_flux_entrant , {
+        type: "pie",
+        data: {
+            labels:{{sexe_flux_entrant|raw}},
+            datasets: [{
+                data: {{count_sexe|raw}},
+                label: "Genre flux entrant",
+                 backgroundColor:  [ '#00b894', '#6c5ce7'  ]
+                   
+            }]
+        }
+
+    })
+
+     let graph7 = new Chart(flux_anne , {
+        type: "bar",
+        data: {
+            labels:{{annee_flux|raw}},
+            datasets: [{
+                data: {{flux_annee|raw}},
+                label: "nombre d'etudiant:",
+                borderColor: 'rgb(255, 99, 132 , 0.4)', 
+                backgroundColor: '#55efc4',
+                fill: false,
+             }]
+        }, 
+        options: {
+       scales: {
+            x: {
+                stacked: true
+            },
+            y: {
+                stacked: true
+            }
+        }
+      }
+      })
+       //cycle d'etude flux entrant 
+       let categGraph8 = new Chart(cycle , {
+        type: "pie",
+        data: {
+            labels: ["cycle 1" , "cycle 2" , "cycle 3"],
+            datasets: [{
+                data: [{{cycle1}}, {{cycle2}} , {{cycle3}}],
+                label: "Gestion status etudiant-employé",
+                    backgroundColor: 
+                    [ '#00b894', '#6c5ce7' , '#ff7675'  ]
+            }]
+        }
+    })
+     //cycle d'etude flux entrant 
+       let categGraph9 = new Chart(diplome_flux , {
+        type: "pie",
+        data: {
+            labels: {{nom_dip_flux|raw}},
+            datasets: [{
+                data: {{count_diplome_flux|raw}},
+                label: "Nombre d'etudiant",
+                backgroundColor: {{ color_dip_flux|raw }}
+                    
+            }]
+        }
+    })
+
+     let categGraph10 = new Chart(pays , {
+        type: "line",
+        data: {
+            labels: {{nom_pays|raw}},
+            datasets: [{
+                data: {{count_pays|raw}},
+                label: "Nombre d'etudiant",
+                backgroundColor:'#00b894'
+                    
+            }]
+        }, 
+        options: {
+        scales: {
+            y: {
+                suggestedMin: 50,
+                suggestedMax: 100
+            }
+        }
+    }
+    })
+
+    
+      
+ </script>
+{% endblock %}  
