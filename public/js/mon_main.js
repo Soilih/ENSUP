@@ -43,12 +43,7 @@ $(document).ready(function() {
                     columns: ':visible' // Column index which needs to export
                 }
              },
-             {
-                extend: 'csv',
-                exportOptions: {
-                    columns: ':visible' // Column index which needs to export
-                }
-             },
+             
              {
                 extend: 'excel',
                 exportOptions: {

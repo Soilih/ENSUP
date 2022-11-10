@@ -76,7 +76,7 @@ class DiplomeController extends AbstractController
             $entityManager->persist($diplome);
             $entityManager->flush();
 
-            return $this->redirectToRoute('diplome_new', [], Response::HTTP_SEE_OTHER);
+            return $this->redirectToRoute('home_accueil', [], Response::HTTP_SEE_OTHER);
         }
 
 
@@ -87,15 +87,17 @@ class DiplomeController extends AbstractController
     }
 
     /**
-     * @Route("/{id}", name="diplome_delete", methods={"POST"})
+     * @Route("/delete/{id}", name="diplome_delete", methods={"DELETE"})
      */
-    public function delete(Request $request, Diplome $diplome, EntityManagerInterface $entityManager): Response
+    public function delete(Request $request, $id ): Response
     {
-        if ($this->isCsrfTokenValid('delete'.$diplome->getId(), $request->request->get('_token'))) {
-            $entityManager->remove($diplome);
-            $entityManager->flush();
-        }
-
-        return $this->redirectToRoute('diplome_new', [], Response::HTTP_SEE_OTHER);
+        $diplomes = $this->getDoctrine()->getRepository(Diplome::class)->find($id);
+        $entityManager = $this->getDoctrine()->getManager();
+        $entityManager->remove($diplomes);
+        $entityManager->flush();
+        $response = new Response();
+        $response->send();
+        return $this->render('admin/home_user.html.twig');
+       
     }
 }

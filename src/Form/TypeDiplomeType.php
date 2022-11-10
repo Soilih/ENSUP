@@ -15,7 +15,7 @@ class TypeDiplomeType extends AbstractType
     {
         $builder
             ->add('libelle' , TextType::class , [
-                "label"=>"Titre cycle"
+                "label"=>"Titre diplome "
             ])
             ->add('color' , ColorType::class , [
                 "label"=>"choix de la couleur pour le stat "

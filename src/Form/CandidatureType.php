@@ -33,7 +33,7 @@ class CandidatureType extends AbstractType
             ])
             ->add('typediplome' , EntityType::class , [
                 'class'=>TypeDiplome::class , 
-                 'label'=>"Diplome obtenu",
+                 'label'=>"Dernier Diplome obtenu",
                 'choice_label'=>'libelle', 
                 'attr'=>['class'=>'form-control']
             ])
@@ -52,7 +52,7 @@ class CandidatureType extends AbstractType
                 'interne'=>'interne' , 
                 'externe'=>'externe' , 
                 "les deux "=> "deux" , 
-                "autre cursus "=>"autre"
+                "j'ai pas fait de cursus universitaire"=>"autre"
                 
             ] , 
             'attr'=>['class'=>'form-control']

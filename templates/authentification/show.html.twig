@@ -1,0 +1,38 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Authentification{% endblock %}
+
+{% block body %}
+    <h1>Authentification</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ authentification.id }}</td>
+            </tr>
+            <tr>
+                <th>Diplomes</th>
+                <td>{{ authentification.diplomes }}</td>
+            </tr>
+            <tr>
+                <th>Releve</th>
+                <td>{{ authentification.releve }}</td>
+            </tr>
+            <tr>
+                <th>Bac</th>
+                <td>{{ authentification.bac }}</td>
+            </tr>
+            <tr>
+                <th>Commentaire</th>
+                <td>{{ authentification.commentaire }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_authentification_index') }}">back to list</a>
+
+    <a href="{{ path('app_authentification_edit', {'id': authentification.id}) }}">edit</a>
+
+    {{ include('authentification/_delete_form.html.twig') }}
+{% endblock %}

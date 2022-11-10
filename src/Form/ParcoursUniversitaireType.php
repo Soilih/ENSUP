@@ -56,7 +56,8 @@ class ParcoursUniversitaireType extends AbstractType
                  'mapped' => false, 
             ])
             ->add('moyenne' , NumberType::class , [
-                "label"=>"Moyenne obtenu"
+                "label"=>"Moyenne obtenu" , 
+                'attr' => [ 'maxlength' => 2  ] ,
             ])
             ->add('titreUniveriste' , TextType::class , [
                 'label'=>"Nom de l'tablissement"

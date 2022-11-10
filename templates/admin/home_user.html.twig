@@ -1,12 +1,23 @@
 {% extends "base.html.twig" %}
 {% block body %}
    <section>
-        <div class="section__content section__content--p100">
+        <div class="section__content section__content--p100" id="contenu_html">
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-lg-6 col-xl-6" id="informat-personnel">
-                        <div class="card border-primary">
-                            <h5 class="card-header text-white bg-primary mb-3">Informations personnelles </h5>
+                        <div class="card">
+                            <div class="card-header text-white bg-primary mb-3">Informations personnelles 
+                            {% for etudiants in app.user.etudiants %}
+                                {% for candidat in app.user.candidatures %}
+                                    {% if candidat.status == 0 %}
+                                     <a style="float:right" class="btn btn-success" href="{{ path('etudiant_edit', {'id': etudiants.id}) }}"><i class="zmdi zmdi-edit"></i> </a>
+                                    {% endif %}
+                                {% endfor %}
+                                
+                            {% endfor %}
+                               
+                            </div>
+                            
                             <div class="col-lg-12 col-xl-12">
                                 <div class="card-body">
                                     <div class="card mb-4">
@@ -14,8 +25,9 @@
                                             <div class="col-md-4">
                                                 <img src="images/identite.jpg" alt="...">
                                             </div>
+                                           
                                             <div class="col-md-8">
-                                                <div class="card-body">
+                                               <div class="card-body">
                                                     {% for etudiants  in app.user.etudiants %}
                                                         <h5 class="card-title"> 
                                                         {% if etudiants.sexe=="Homme" %}
@@ -48,7 +60,8 @@
                                                             <p class="card-text"> <small> E-mail : <strong> {{app.user.email}} </strong>  </small> </p>
                                                             <p class="card-text"> <small> Lieu Naissance  : <strong> {{etudiants.lieuNaissance }} </strong> </small>  </p>
                                                             <p class="card-text"> <small> Adresse de residence  : <strong> {{ etudiants.adresse }} </strong> </small>  </p>
-                                                             <p class="card-text"> <small> Personne à contacter en cas d'urgence : <br> <strong> {{ etudiants.telUrgence }} </strong> </small>  </p>
+                                                            <p class="card-text"> <small> Personne à contacter en cas d'urgence : <br> <strong> {{ etudiants.telUrgence }} </strong> </small>  </p>
+                                                            <p class="card-text"> <small> Piece d'identité  :  <strong>  <a href="{{ asset('uploads/'~ etudiants.pieceidentite) }}">consulter </a> </strong> </small>  </p>
                                                     
                                                     {% endfor %}
                                                 </div>
@@ -84,6 +97,7 @@
                                     </div>
                                 </div>
                             </div>
+                            {% if (app.user.responsables|length) >=1   %}
                             <div class="col-lg-12 col-xl-12">
                                 <div class="card-body">
                                     <div class="card mb-4">
@@ -93,13 +107,23 @@
                                             </div>
                                             <div class="col-md-8">
                                                 <div class="card-body" style="height:200px">
+                                                
                                                     {% for item in app.user.responsables %}
                                                             <p class="card-text"> <small>Nom & Prenom : <strong> {{item.nom }} {{item.prenom }} </strong> </small> </p>
                                                             <p class="card-text"> <small>Telephone mobile : <strong> {{item.tel }} </strong> </small> </p>
                                                             <p class="card-text"> <small>Adresse E-mail : <strong> {{item.email }} </strong> </small> </p>
                                                             <p class="card-text"> <small>Proffession : <strong> {{item.proffession }} </strong> </small> </p>
                                                             <p class="card-text"> <small>Adresse residence  : <strong> {{item.adresse }} </strong> </small> </p>
+                                                            {% for candidat in app.user.candidatures %}
+                                                                {% if candidat.status == 0  %}
+                                                                    <div class="">
+                                                                        <a  class="btn  btn-sm btn-success" href="{{ path('responsable_edit', {'id': item.id}) }}"> <i class="zmdi zmdi-edit"></i> </a>
+                                                                        <a  class="btn btn-sm btn-danger" href="#" data-id="{{ item.id  }}" id="responsable" onclick="delete_responsable()"> <i class="zmdi zmdi-delete"></i> </a>
+                                                                    </div>
+                                                                {% endif %}
+                                                            {% endfor %}
                                                      {% endfor %}
+                                               
                                                 </div>
                                             </div>
                                             
@@ -107,12 +131,26 @@
                                     </div>
                                 </div>
                             </div>
+                        {% endif %}
                         </div>
                     </div>
-                    <div class="col-lg-6 col-xl-6">
+                    {% if (app.user.informationBacs|length) >=1  %}
+                    <div class="col-lg-6 col-xl-6" id="contenu_baccalaureat">
                         <div class="card" >
-                            <h5 class="card-header text-white bg-primary mb-3">Information baccalaureat</h5>
-                            <div class="card-body">
+                            <div class="card-header text-white bg-primary mb-3">Information baccalaureat
+                            {% for item in app.user.informationBacs %}
+                                {% for candidat in app.user.candidatures %}
+                                    {% if candidat.status == 0  %}
+                                        <div style="float:right">
+                                            <a  class=" btn-xs btn btn-success" href="{{ path('information_bac_edit', {'id': item.id}) }}"><i class="zmdi zmdi-edit"></i></a>
+                                            <a style="color:white" onclick="delete_baccalaureat()" id="baccalaureat" class="btn btn-danger" data-id="{{ item.id }}">  <i class="zmdi zmdi-delete"></i> </a>
+                                        </div>
+                                    {% endif %}
+                                {% endfor %}
+                            {% endfor %}
+                            </div>
+                             
+                            <div class="card-body" style="height:995px">
                                 <div class="au-inbox-wrap js-inbox-wrap">
                                     <div class="au-message js-list-load">
                                         <div class="au-message-list">
@@ -247,70 +285,19 @@
                                                         </div>
                                                     </div>
                                                 </div>
+                                                
                                             </div>
-                                            
-                                           {% endfor %}
+                                        {% endfor %}
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        {% for candidatures in app.user.candidatures %}
-                            {% if candidatures.stage =="oui" %}
-                                <div class="col-lg-12">
-                                    <div class="au-card au-card--no-shadow au-card--no-pad m-b-40 au-card--border">
-                                         <h5 class="card-header text-white bg-primary mb-3">Experience professionnelle </h5>
-                                        <div class="au-task js-list-load au-task--border">
-                                            
-                                            <div class="au-task-list js-scrollbar3">
-                                                <div class="au-task__item au-task__item--danger">
-                                                    <div class="au-task__item-inner">
-                                                    
-                                                            {% for item in app.user.experiences  %}
-                                                                <a href="#" class="list-group-item list-group-item-action">
-                                                                    <div class="d-flex w-100 justify-content-between">
-                                                                    <h4 class="card-title"> {{ item.poste}} <h4>
-                                                                    <h5 class="mb-3"> {{ item.entreprise }} - {{ item.pays}} <h5>
-                                                                    </div>
-                                                                    <div class="d-flex w-100 justify-content-between">
-                                                                    <h6 class="mb-3">Du {{ item.dateExperience|date('Y-m-d') }} à {{ item.datefin|date('d/m/Y') }} </h6>
-                                                                    </div>
-                                                                    {{ item.detail}}
-                                                                </a>
-                                                            {% endfor %}
-                                                        
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            {% endif %}
-                        {% endfor %}
-                         {% for candidatures in app.user.candidatures %}
-                            {% if candidatures.bourse =="oui" %}
-                            <div class="card" id="section_bourse">
-                                <h5 class="card-header text-white bg-primary mb-3">Bourse d'etude  </h5>
-                                <div class="card-body">
-                                    <div class="list-group">
-                                        {% for bourse in app.user.bourses %}
-                                        <a href="#" class="list-group-item list-group-item-action">
-                                            <div class="d-flex w-100 justify-content-between">
-                                            <h5 class="mb-1">Bourse : {{ bourse.nature }} <h5>
-                                            <p> Pays d'obtention : {{ bourse.pays }}</p>
-                                            <small><strong> {{bourse.datecreate|date('Y-m-d')}} </strong> </small> 
-                                            </div>
-                                            <p class="mb-1">{{bourse.detail }}</p>
-                                            <small>  <strong> Montant mensuel :  <span class="badge btn-md badge-primary">{{ bourse.montant }}€</span></strong> </small> 
-                                        </a>
-                                        {% endfor %}
-                                    </div>
-                                </div>
-                            </div>
-                            {% endif %}
-                        {% endfor %}
+                    {% endif %}
                     </div>
-                    <div class="col-lg-12 col-xl-12">
+                    <!---  cursus interne ou externe -->
+                    {% if app.user.parcours_universitaires|length >= 1  %}
+                     <div class="col-lg-12 col-xl-12">
                         {% for candidatures in app.user.candidatures %}
                             {% if (candidatures.cursus=="interne" ) %}
                                 <div class="card">
@@ -326,6 +313,11 @@
                                                     <th>mention   </th>
                                                     <th>moyenne    </th>
                                                    <th>Justificatif  </th>
+                                                   {% for candidat in app.user.candidatures %}
+                                                        {% if candidat.status == 0  %}
+                                                             <td>Actions</td>
+                                                        {% endif %}
+                                                    {% endfor %}
                                                 </tr>
                                             </thead>
                                             <tbody>
@@ -339,6 +331,14 @@
                                                     <td>{{ parcours_universitaire.mention }}</td>
                                                     <td>{{ parcours_universitaire.moyenne }}</td>
                                                     <td><a href="{{ asset('uploads/'~ parcours_universitaire.fichier ) }}"><i class="zmdi zmdi-download zmdi-hc-2x"></i>  </a> </td>
+                                                    {% for candidat in app.user.candidatures %}
+                                                        {% if candidat.status == 0  %}
+                                                            <td>
+                                                                <a  class="btn  btn-sm btn-success" href="{{ path('parcours_universitaire_edit', {'id': parcours_universitaire.id}) }}"> <i class="zmdi zmdi-edit"></i> </a>
+                                                                <a  onclick="delete_cursus_interne()" id="cursus_interne" data-id ="{{ parcours_universitaire.id }}"  class="btn  btn-sm btn-danger"  href="#"> <i class="zmdi zmdi-delete"></i> </a>
+                                                            </td>
+                                                        {% endif %}
+                                                    {% endfor %}
                                                 </tr>
                                             
                                             {% endfor %}
@@ -367,6 +367,11 @@
                                                     <th>moyenne    </th>
                                                     <th>pays  </th>
                                                      <th>Justificatif  </th>
+                                                       {% for candidat in app.user.candidatures %}
+                                                        {% if candidat.status == 0  %}
+                                                             <td>Actions</td>
+                                                        {% endif %}
+                                                    {% endfor %}
                                                 </tr>
                                             </thead>
                                             <tbody>
@@ -381,7 +386,16 @@
                                                     <td>{{ parcours_universitaire.mention }}</td>
                                                     <td>{{ parcours_universitaire.moyenne }}</td>
                                                     <td>{{ parcours_universitaire.pays }}</td>
-                                                     <td><a href="{{ asset('uploads/'~ parcours_universitaire.fichier ) }}"><i class="zmdi zmdi-download zmdi-hc-2x"></i> </a> </td>
+                                                    <td><a href="{{ asset('uploads/'~ parcours_universitaire.fichier ) }}"><i class="zmdi zmdi-download zmdi-hc-2x"></i> </a> </td>
+                                                     {% for candidat in app.user.candidatures %}
+                                                        {% if candidat.status == 0  %}
+                                                            <td>
+                                                                <a  class="btn  btn-sm btn-success" href="{{ path('parcours_universitaire_edit', {'id': parcours_universitaire.id}) }}"> <i class="zmdi zmdi-edit"></i> </a>
+                                                                 <a  onclick="delete_cursus_interne()" id="cursus_interne" data-id ="{{ parcours_universitaire.id }}"  class="btn  btn-sm btn-danger"  href="#"> <i class="zmdi zmdi-delete"></i> </a>
+                                                            </td>
+                                                        {% endif %}
+                                                    {% endfor %}
+                                                
                                                 </tr>
                                             
                                             {% endfor %}
@@ -390,86 +404,69 @@
                                     </div>
                                 </div>
                                 {% elseif candidatures.cursus=="deux"  %}
-                                <div class="card">
-                                    <h5 class="card-header text-white bg-primary mb-3">Cursus externe </h5>
-                                    <div class="card-body">
-                                        <table class="table table-hover table-bordered text-nowrap">
-                                            <thead>
-                                                <tr>
-                                                    <th>Anneé</th>
-                                                    <th>Discipline </th>
-                                                    <th>niveau d'etude  </th>
-                                                    <th>Etablissement </th>
-                                                    <th>type etablissement  </th>
-                                                    <th>mention   </th>
-                                                    <th>moyenne    </th>
-                                                    <th>pays  </th>
-                                                    <td>Justificatif</td>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                            {% for parcours_universitaire in app.user.parcours_universitaires %}
-                                            
-                                                <tr>
-                                                <td>{{ parcours_universitaire.AnneInscription ? parcours_universitaire.AnneInscription|date('d-m-Y' , false) : '' }}</td>
-                                                    <td>{{ parcours_universitaire.filiere }}</td>
-                                                    <td>{{ parcours_universitaire.niveau.libelle }}</td>
+                                    <div class="card">
+                                            <h5 class="card-header text-white bg-primary mb-3">Cursus externe-interne  </h5>
+                                            <div class="card-body">
+                                                <table class="table table-hover table-bordered text-nowrap">
+                                                    <thead>
+                                                        <tr>
+                                                            
+                                                            <th>Anneé</th>
+                                                            <th>Discipline </th>
+                                                            <th>niveau d'etude  </th>
+                                                            <th>Etablissement </th>
+                                                            <th>type etablissement  </th>
+                                                            <th>mention   </th>
+                                                            <th>moyenne    </th>
+                                                            <th>pays  </th>
+                                                             <th>Type de cursus</th>
+                                                            <th>Justificatif</th>
+                                                           
+
+                                                            {% for candidat in app.user.candidatures %}
+                                                                {% if candidat.status == 0  %}
+                                                                    <th>Actions</th>
+                                                                {% endif %}
+                                                            {% endfor %}
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                    {% for parcours_universitaire in app.user.parcours_universitaires %}
                                                     
-                                                    <td>{{ parcours_universitaire.titreUniveriste }}</td>
-                                                    <td>{{ parcours_universitaire.typeuniversite.libelle }}</td>
-                                                    <td>{{ parcours_universitaire.mention }}</td>
-                                                    <td>{{ parcours_universitaire.moyenne }}</td>
-                                                    <td>{{ parcours_universitaire.pays }}</td>
-                                                    <td><a href="{{ asset('uploads/'~ parcours_universitaire.fichier ) }}"><i class="zmdi zmdi-download zmdi-hc-2x"></i> </a> </td>
-                                                </tr>
-                                            
-                                            {% endfor %}
-                                            </tbody>
-                                        </table>
+                                                        <tr>
+                                                        <td>{{ parcours_universitaire.AnneInscription ? parcours_universitaire.AnneInscription|date('d-m-Y' , false) : '' }}</td>
+                                                            <td>{{ parcours_universitaire.filiere }}</td>
+                                                            <td>{{ parcours_universitaire.niveau.libelle }}</td>
+                                                            
+                                                            <td>{{ parcours_universitaire.titreUniveriste }}</td>
+                                                            <td>{{ parcours_universitaire.typeuniversite.libelle }}</td>
+                                                            <td>{{ parcours_universitaire.mention }}</td>
+                                                            <td>{{ parcours_universitaire.moyenne }}</td>
+                                                            <td>{{ parcours_universitaire.pays }}</td>
+                                                            <td>{{ parcours_universitaire.typeCursus }}</td>
+                                                            <td><a href="{{ asset('uploads/'~ parcours_universitaire.fichier ) }}"><i class="zmdi zmdi-download zmdi-hc-2x"></i> </a> </td>
+                                                            
+                                                            {% for candidat in app.user.candidatures %}
+                                                                {% if candidat.status == 0  %}
+                                                                    <td>
+                                                                        <a  class="btn  btn-sm btn-success" href="{{ path('parcours_universitaire_edit', {'id': parcours_universitaire.id}) }}"> <i class="zmdi zmdi-edit"></i> </a>
+                                                                    <a  onclick="delete_cursus_interne()" id="cursus_interne" data-id ="{{ parcours_universitaire.id }}"  class="btn  btn-sm btn-danger"  href="#"> <i class="zmdi zmdi-delete"></i> </a>
+                                                                    </td>
+                                                                {% endif %}
+                                                            {% endfor %}
+                                                        </tr>
+                                                    
+                                                    {% endfor %}
+                                                    </tbody>
+                                                </table>
+                                            </div>
                                     </div>
-                                </div>
-                                <div class="card">
-                                    <h5 class="card-header text-white bg-primary mb-3">Cursus interne </h5>
-                                    <div class="card-body">
-                                        <table class="table table-hover table-bordered text-nowrap">
-                                            <thead>
-                                                <tr>
-                                                    <th>Anneé</th>
-                                                    <th>Discipline </th>
-                                                    <th>niveau d'etude  </th>
-                                                    <th>Etablissement </th>
-                                                    <th>type etablissement  </th>
-                                                    <th>mention   </th>
-                                                    <th>moyenne    </th>
-                                                    <th>pays  </th>
-                                                    <td>Justificatif</td>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                            {% for parcours_universitaire in app.user.parcours_universitaires %}
-                                            
-                                                <tr>
-                                                <td>{{ parcours_universitaire.AnneInscription ? parcours_universitaire.AnneInscription|date('d-m-Y' , false) : '' }}</td>
-                                                    <td>{{ parcours_universitaire.filiere }}</td>
-                                                    <td>{{ parcours_universitaire.niveau.libelle }}</td>
-                                                    <td>{{ parcours_universitaire.titreUniveriste }}</td>
-                                                    <td>{{ parcours_universitaire.typeuniversite.libelle }}</td>
-                                                    <td>{{ parcours_universitaire.mention }}</td>
-                                                    <td>{{ parcours_universitaire.moyenne }}</td>
-                                                    <td>{{ parcours_universitaire.pays }}</td>
-                                                     <td><a href="{{ asset('uploads/'~ parcours_universitaire.fichier ) }}"><i class="zmdi zmdi-download zmdi-hc-2x"></i> </a> </td>
-
-                                                </tr>
-                                            
-                                            {% endfor %}
-                                            </tbody>
-                                        </table>
-                                    </div>
-                                </div>
-
-                            {% endif %}
+                                {% endif %}
                         {% endfor %}
                     </div>
+                    {% endif %}
+                    {% if (app.user.diplomes|length >= 1)   %}
+                    
                     <div class="col-lg-12 col-xl-12">
                      {% for candidatures in app.user.candidatures %}
                         {% if candidatures.typediplome.id  !="3" %}
@@ -480,32 +477,48 @@
                                         <table   class="table table-striped table-bordered">
                                             <thead>
                                                 <tr>
-                                                <th>Diplome </th>
                                                 <th>Année d'otention  </th>
                                                 <th>Discipline </th>
                                                 <th>Intitulé diplome </th>
                                                 <th>Cycle d'études</th>
-                                                
                                                 <th>Etablissement  </th>
+                                                <th>Moyenne   </th>
                                                 <th>Mention </th>
+                                                <th>Justificatif </th>
+                                                {% for candidat in app.user.candidatures %}
+                                                    {% if candidat.status == 0  %}
+                                                        <th>Actions </th>
+                                                    {% endif %}
+                                                {% endfor %}
                                                 
                                             </tr>
                                             </thead>
                                             <tbody>
                                                 {% for diplome in app.user.diplomes %}
                                                     <tr> 
-                                                        <td><a href="{{ asset('uploads/'~ diplome.fichier ) }}"><i class="zmdi zmdi-download zmdi-hc-2x"></i> </a> </td>
+                                                       
                                                         <td>{{ diplome.session }}</td>
                                                         <td>{{ diplome.composant.libelle }}</td>
                                                         <td>{{ diplome.libelle }}</td>
                                                         <td> {{ diplome.typediplome.libelle }} </td>
-                                                        
+                                                       
                                                         <td> {{ diplome.typeuniversite.libelle }}- {{ diplome.universite }} {{ diplome.pays }}</td>
+                                                          <td>{{ diplome.moyenne }}</td>
                                                         <td> <span> {{ diplome.mention }}  </span> </td>
+                                                         <td><a href="{{ asset('uploads/'~ diplome.fichier ) }}"><i class="zmdi zmdi-download zmdi-hc-2x"></i> </a> </td>
+                                                       {% for candidat in app.user.candidatures %}
+                                                          {% if candidat.status == 0  %}
+                                                                <td>
+                                                                    <a  class="btn  btn-sm btn-success" href="{{ path('diplome_edit', {'id': diplome.id}) }}"> <i class="zmdi zmdi-edit"></i> </a>
+                                                                    <a  onclick="delete_diplomes()"  class="btn  btn-sm btn-danger" id="diplome"   data-id="{{ diplome.id }}" href="#"> <i class="zmdi zmdi-delete"></i> </a>
+                                                                </td>
+                                                            {% endif %}
+                                                        {% endfor %}
+                                                        
                                                     </tr>
                                                 {% else %}
                                                     <tr>
-                                                        <td colspan="10">Saisi </td>
+                                                        <td colspan="10" style="color:red">Inserez vos diplomes d'etudes superieur </td>
                                                     </tr>
                                                 {% endfor %}
                                                 </tbody>
@@ -516,139 +529,265 @@
                         {% endif %}
                      {% endfor %}
                     </div>
-                    {% for candidatures in app.user.candidatures %}    
-                        {% if candidatures.flux =="entrant" %}
-                            <div class="col-lg-12 col-xl-12">
-                                <div class="card mb-5">
-                                <h5 class="card-header text-white bg-primary mb-3">Flux entrant </h5>
-                                <div class="row gutters" style="margin-left:2%">
-                                    <div class="col-md-4">
-                                        {% for flux in app.user.fluxes  %}
-                                        <ul class="list-group">
-                                             <li class="list-group-item d-flex justify-content-between align-items-center">
-                                             Date depart
-                                                <span class="badge badge-primary badge-pill">{{ flux.depart ? flux.depart|date('Y-m-d') : '' }}</span>
-                                            </li>
-                                            <li class="list-group-item d-flex justify-content-between align-items-center">
-                                              Date d'arrivé
-                                                <span class="badge badge-primary badge-pill">{{ flux.dateArrive ? flux.depart|date('Y-m-d') : '' }}</span>
-                                            </li>
-                                            <li class="list-group-item d-flex justify-content-between align-items-center">
-                                               Diplome obtenu 
-                                                <span class="badge badge-primary badge-pill">{{flux.diplome}}</span>
-                                            </li>
-                                            <li class="list-group-item d-flex justify-content-between align-items-center">
-                                                specialité
-                                                <span class="badge badge-primary badge-pill">{{flux.specialite }}</span>
-                                            </li>
-                                             <li class="list-group-item d-flex justify-content-between align-items-center">
-                                               Niveau d'etude actuel
-                                                <span class="badge badge-primary badge-pill">{{ flux.niveauActuel.libelle }} </span>
-                                            </li>
-                                             <li class="list-group-item d-flex justify-content-between align-items-center">
-                                              Pays d'etude
-                                                <span class="badge badge-primary badge-pill">{{flux.pays}}</span>
-                                            </li>
-                                             <li class="list-group-item d-flex justify-content-between align-items-center">
-                                              cycle d'etude
-                                                <span class="badge badge-primary badge-pill">{{flux.typediplome.libelle}}</span>
-                                            </li>
-                                            </ul>
-                             
-                                        
-                                      {% endfor %}
-                                    </div>
-                                    <div class="col-md-8">
-                                     {% for flux in app.user.fluxes  %}
-                                        <div class="card border-primary">
-                                            <div class="card-body">
-                                                <h5 class="card-title">Projet proffessionnel </h5>
-                                                <p class="card-text">{{  flux.projet}}</p>
-                                            </div>
-                                        </div>
-                                        <div class="card border-primary">
-                                            <div class="card-body">
-                                                <h5 class="card-title">Difficultés rencontrés durant les etudes   </h5>
-                                                <p class="card-text">{{ flux.probleme}}</p>
-                                            </div>
-                                        </div>
-                                        <div class="card border-primary">
-                                            <div class="card-body">
-                                                <h5 class="card-title">Remarques , suggestions  </h5>
-                                                <p class="card-text">{{ flux.suggestion }}</p>
-                                            </div>
-                                        </div>
-                                         {% endfor %}
-                                    </div>
-                                </div>
-                            </div>
-                        {% endif %}
-                    {% endfor %}
-
-                    {% for candidatures in app.user.candidatures %}
-                      {% if candidatures.flux=="sortant" %}
-                        <div class="col-lg-12 col-xl-12">
-                            <div class="card mb-6">
-                                 <h5 class="card-header text-white bg-primary mb-3">Flux resident </h5>
-                                <div class="row no-gutters">
-                                    <div class="col-md-4" style="padding-left:2%">
-                                     {% for flux_sortant in app.user.fluxSortants %}
-                                        <h4 class="mb-2">Date depart : <small> {{ flux_sortant.dateDepart ? flux_sortant.dateDepart|date('Y-m-d') : '' }} </small> </h5>
-                                        <h4 class="mb-2">Nom etablissement  : <small>  {{ flux_sortant.universite }} </small> </h4>
-                                        <h4 class="mb-2">Niveau d'etude visé : <small> {{ flux_sortant.niveau.libelle }} </small> </h4>
-                                        <h4 class="mb-2">Type d'etablissement: <small> {{ flux_sortant.typeuniversite.libelle }} {{ flux_sortant.typeuniversit}} </small> </h4>
-                                        <h4 class="mb-2">Discipline : <small>{{ flux_sortant.filiere }} </small> </h4>
-                                        <h4 class="mb-2">composant : <small> {{ flux_sortant.composant.libelle  }} </small> </h4>
-                                        <h4 class="mb-2">cycle d'etude  : <small>{{ flux_sortant.cycle}}  </small> </h4>
-                                        <h4 class="mb-2">Pays : <small>{{ flux_sortant.pays }}  </small> </h4>
-                                        <h4 class="mb-2">adresse de l'etablissement : <small> {{ flux_sortant.ville }} </small> </h4>
-                                     
-                                     {% endfor %}
-                                    </div>
-                                    <div class="col-md-8">
-                                     {% for flux_sortant in app.user.fluxSortants %}
-                                        <div class="card border-primary">
-                                            <div class="card-body">
-                                                <h5 class="card-title">Projet proffessionnel </h5>
-                                                <p class="card-text">{{ flux_sortant.motivation   }}</p>
-                                            </div>
-                                        </div>
-                                        <div class="card border-primary">
-                                            <div class="card-body">
-                                                <h5 class="card-title">Resource financiere  </h5>
-                                                <p class="card-text">{{ flux_sortant.moyen   }}</p>
-                                            </div>
-                                        </div>
-                                    {% endfor %}
-                                    </div>
-                                </div>
-                                </div>
-                        </div>
-                    </div>
                     {% endif %}
-                    {% endfor %}
+                    <div class="col-lg-12 col-xl-12">
+                    {% if app.user.fluxes|length >= 1 %}
+                        {% for candidatures in app.user.candidatures %}    
+                            {% if candidatures.flux =="entrant" %}
+                                
+                                    <div class="card mb-5">
+                                    <div  class="card-header text-white bg-primary mb-3">Flux entrant
+                                        {% for flux in app.user.fluxes  %}
+                                            {% for candidat in app.user.candidatures %}
+                                                {% if candidat.status == 0  %}
+                                                    <div  style="float:right">
+                                                        <a  class="btn  btn-md btn-success"  href="{{ path('flux_edit', {'id': flux.id}) }}"> <i class="zmdi zmdi-edit"></i> </a>
+                                                        <a   onclick="delete_flux_entrant()"  data-id="{{flux.id}}" id="flux_entrant" class="btn  btn-md btn-danger" href="#"> <i class="zmdi zmdi-delete"></i> </a>
+                                                    </div>
+                                                {% endif %}
+                                            {% endfor %}
+                                        {% endfor %}
+                                     </div>
+                                    <div class="row gutters" style="margin-left:2%">
+                                        <div class="col-md-4">
+                                            {% for flux in app.user.fluxes  %}
+                                                <div class="list-group">
+                                                    
+                                                    <a href="#" class="list-group-item list-group-item-action">
+                                                        <div class="d-flex w-100 justify-content-between">
+                                                        <h5 class="mb-1">Date depart </h5>
+                                                        <small class="text-muted">{{ flux.depart ? flux.depart|date('Y-m-d') : '' }}</small>
+                                                        </div>
+                                                    </a>
+                                                    <a href="#" class="list-group-item list-group-item-action">
+                                                        <div class="d-flex w-100 justify-content-between">
+                                                        <h5 class="mb-1">Date d'arrivé au comores  </h5>
+                                                        <small class="text-muted">{{ flux.dateArrive ? flux.dateArrive|date('Y-m-d') : '' }}</small>
+                                                        </div>
+                                                    </a>
+                                                    <a href="#" class="list-group-item list-group-item-action">
+                                                        <div class="d-flex w-100 justify-content-between">
+                                                        <h5 class="mb-1">Diplome d'etude superieur   </h5>
+                                                        <small class="text-muted">{{flux.diplome}}</small>
+                                                        </div>
+                                                    </a>
+                                                    <a href="#" class="list-group-item list-group-item-action">
+                                                        <div class="d-flex w-100 justify-content-between">
+                                                        <h5 class="mb-1">Domainde de specialité   </h5>
+                                                        <small class="text-muted">{{flux.specialite}}</small>
+                                                        </div>
+                                                    </a>
+                                                    <a href="#" class="list-group-item list-group-item-action">
+                                                        <div class="d-flex w-100 justify-content-between">
+                                                        <h5 class="mb-1">Niveau d'etude actuel  </h5>
+                                                        <small class="text-muted">{{flux.niveauActuel.libelle    }}</small>
+                                                        </div>
+                                                    </a>
+                                                    <a href="#" class="list-group-item list-group-item-action">
+                                                        <div class="d-flex w-100 justify-content-between">
+                                                        <h5 class="mb-1">Pays d'etude  </h5>
+                                                        <small class="text-muted">{{flux.pays    }}</small>
+                                                        </div>
+                                                    </a>
+                                                    <a href="#" class="list-group-item list-group-item-action">
+                                                        <div class="d-flex w-100 justify-content-between">
+                                                        <h5 class="mb-1">Cycle d'etude superieur  </h5>
+                                                        <small class="text-muted">{{flux.typediplome.libelle   }}</small>
+                                                        </div>
+                                                    </a>
+                                                
+                                                </div>
+                                            {% endfor %}
+                                        </div>
+                                        <div class="col-md-8">
+                                        {% for flux in app.user.fluxes  %}
+                                            <div class="card border-primary">
+                                                <div class="card-body">
+                                                    <h5 class="card-title">Projet proffessionnel </h5>
+                                                    <p class="card-text">{{  flux.projet}}</p>
+                                                </div>
+                                            </div>
+                                            <div class="card border-primary">
+                                                <div class="card-body">
+                                                    <h5 class="card-title">Difficultés rencontrés durant les etudes   </h5>
+                                                    <p class="card-text">{{ flux.probleme}}</p>
+                                                </div>
+                                            </div>
+                                            <div class="card border-primary">
+                                                <div class="card-body">
+                                                    <h5 class="card-title">Remarques , suggestions  </h5>
+                                                    <p class="card-text">{{ flux.suggestion }}</p>
+                                                </div>
+                                            </div>
+                                        {% endfor %}
+                                        </div>
+                                    </div>
+                                </div>
+                            {% endif %}
+                        {% endfor %}
+                   {% endif %}
+                   </div>
+                    {% if app.user.fluxSortants|length >= 1 %}
+                        {% for candidatures in app.user.candidatures %}
+                            {% if candidatures.flux=="sortant" %}
+                                
+                                <div class="col-lg-12 col-xl-12">
+                                    <div class="card mb-6">
+                                        <div class="card-header text-white bg-primary mb-3" style="float:right">Flux sortant
+                                         {% for flux_sortant in app.user.fluxSortants %}
+                                        {% for candidat in app.user.candidatures %}
+                                            {% if candidat.status == 0  %}
+                                                <div style="float:right">
+                                                    <a  class="btn  btn-md btn-success"  href="{{ path('flux_sortant_edit', {'id': flux_sortant.id}) }}" > <i class="zmdi zmdi-edit"></i> </a>
+                                                    <a   onclick="delete_flux_sortant()"  data-id="{{flux_sortant.id}}" id="flux_sortant" class="btn  btn-md btn-danger" href="#"> <i class="zmdi zmdi-delete"></i> </a>
+                                                </div>
+                                            {% endif %}
+                                        {% endfor %}
+                                    {% endfor %}
+                                         </div>
+                                        <div class="row gutters">
+                                            <div class="col-md-4" style="padding-left:2%" style="height:400px">
+                                            {% for flux_sortant in app.user.fluxSortants %}
+                                            <div class="list-group">
+                                                    <a href="#" class="list-group-item list-group-item-action">
+                                                        <div class="d-flex w-100 justify-content-between">
+                                                        <h5 class="mb-1">Date depart </h5>
+                                                        <small class="text-muted">{{ flux_sortant.dateDepart ? flux_sortant.dateDepart|date('Y-m-d') : '' }}</small>
+                                                        </div>
+                                                    </a>
+                                                    <a href="#" class="list-group-item list-group-item-action">
+                                                        <div class="d-flex w-100 justify-content-between">
+                                                        <h5 class="mb-1">Nom etablissement  </h5>
+                                                        <small class="text-muted">{{ flux_sortant.universite }}</small>
+                                                        </div>
+                                                    </a>
+                                                    <a href="#" class="list-group-item list-group-item-action">
+                                                        <div class="d-flex w-100 justify-content-between">
+                                                        <h5 class="mb-1">Niveau d'etude visé + cycle   </h5>
+                                                        <small class="text-muted">{{ flux_sortant.niveau.libelle }} - {{ flux_sortant.cycle }} </small>
+                                                        </div>
+                                                    </a>
+                                                    <a href="#" class="list-group-item list-group-item-action">
+                                                        <div class="d-flex w-100 justify-content-between">
+                                                        <h5 class="mb-1">Type d'etablissement  </h5>
+                                                        <small class="text-muted">{{ flux_sortant.typeuniversite.libelle }} {{ flux_sortant.typeuniversit}}</small>
+                                                        </div>
+                                                    </a>
+                                                    <a href="#" class="list-group-item list-group-item-action">
+                                                        <div class="d-flex w-100 justify-content-between">
+                                                        <h5 class="mb-1">Discipline  </h5>
+                                                        <small class="text-muted">{{ flux_sortant.filiere }}</small>
+                                                        </div>
+                                                    </a>
+                                                    <a href="#" class="list-group-item list-group-item-action">
+                                                        <div class="d-flex w-100 justify-content-between">
+                                                        <h5 class="mb-1">Domainde de competence   </h5>
+                                                        <small class="text-muted">{{ flux_sortant.composant.libelle  }}</small>
+                                                        </div>
+                                                    </a>
+                                                    <a href="#" class="list-group-item list-group-item-action">
+                                                        <div class="d-flex w-100 justify-content-between">
+                                                        <h5 class="mb-1">Adresse université    </h5>
+                                                        <small class="text-muted">{{ flux_sortant.pays }} {{ flux_sortant.ville }} </small>
+                                                        </div>
+                                                    </a>
+                                                </div>
+                                            
+                                            {% endfor %}
+                                            </div>
+                                            <div class="col-md-7">
+                                            {% for flux_sortant in app.user.fluxSortants %}
+                                                <div class="card border-primary">
+                                                    <div class="card-body">
+                                                        <h5 class="card-title">Projet proffessionnel </h5>
+                                                        <p class="card-text">{{ flux_sortant.motivation   }}</p>
+                                                    </div>
+                                                </div>
+                                                <div class="card border-primary">
+                                                    <div class="card-body">
+                                                        <h5 class="card-title">Resource financiere  </h5>
+                                                        <p class="card-text">{{ flux_sortant.moyen   }}</p>
+                                                    </div>
+                                                </div>
+                                                
+                                            {% endfor %}
+                                            </div>
+                                            
+                                        </div>
+                                        </div>
+                                </div>
+                            {% endif %}
+                        {% endfor %}
+                    {% endif %}
+                     {% if app.user.fluxSortants|length >= 1   %}
                      {% for candidatures in app.user.candidatures %}
                       {% if candidatures.flux=="resident" %}
                         <div class="col-lg-12 col-xl-12">
                             <div class="card mb-6">
-                                 <h5 class="card-header text-white bg-primary mb-3">Flux resident </h5>
-                                <div class="row no-gutters">
-                                    <div class="col-md-4" style="padding-left:2%">
+                                <div  class="card-header text-white bg-primary mb-3">Flux resident 
+                                    {% for flux_sortant in app.user.fluxSortants %}
+                                        {% for candidat in app.user.candidatures %}
+                                            {% if candidat.status == 0  %}
+                                                <div style="float:right">
+                                                    <a  class="btn  btn-md btn-success"  href="{{ path('flux_sortant_edit', {'id': flux_sortant.id}) }}" > <i class="zmdi zmdi-edit"></i> </a>
+                                                    <a   onclick="delete_flux_sortant()"  data-id="{{flux_sortant.id}}" id="flux_sortant" class="btn  btn-md btn-danger" href="#"> <i class="zmdi zmdi-delete"></i> </a>
+                                                </div>
+                                            {% endif %}
+                                        {% endfor %}
+                                    {% endfor %}
+                                 </div>
+                                <div class="row gutters">
+                                    <div class="col-md-4" style="padding-left:2%" style="height:400px">
                                      {% for flux_sortant in app.user.fluxSortants %}
-                                        <h4 class="mb-2">Date depart : <small> {{ flux_sortant.dateDepart ? flux_sortant.dateDepart|date('Y-m-d') : '' }} </small> </h5>
-                                        <h4 class="mb-2">Nom etablissement  : <small>  {{ flux_sortant.universite }} </small> </h4>
-                                        <h4 class="mb-2">Niveau d'etude visé : <small> {{ flux_sortant.niveau.libelle }} </small> </h4>
-                                        <h4 class="mb-2">Type d'etablissement: <small> {{ flux_sortant.typeuniversite.libelle }} {{ flux_sortant.typeuniversit}} </small> </h4>
-                                        <h4 class="mb-2">Discipline : <small>{{ flux_sortant.filiere }} </small> </h4>
-                                        <h4 class="mb-2">composant : <small> {{ flux_sortant.composant.libelle  }} </small> </h4>
-                                        <h4 class="mb-2">cycle d'etude  : <small>{{ flux_sortant.cycle}}  </small> </h4>
-                                        <h4 class="mb-2">Pays : <small>{{ flux_sortant.pays }}  </small> </h4>
-                                        <h4 class="mb-2">adresse de l'etablissement : <small> {{ flux_sortant.ville }} </small> </h4>
+                                       <div class="list-group">
+                                            <a href="#" class="list-group-item list-group-item-action">
+                                                <div class="d-flex w-100 justify-content-between">
+                                                <h5 class="mb-1">Date depart </h5>
+                                                <small class="text-muted">{{ flux_sortant.dateDepart ? flux_sortant.dateDepart|date('Y-m-d') : '' }}</small>
+                                                </div>
+                                            </a>
+                                            <a href="#" class="list-group-item list-group-item-action">
+                                                <div class="d-flex w-100 justify-content-between">
+                                                <h5 class="mb-1">Nom etablissement  </h5>
+                                                <small class="text-muted">{{ flux_sortant.universite }}</small>
+                                                </div>
+                                            </a>
+                                            <a href="#" class="list-group-item list-group-item-action">
+                                                <div class="d-flex w-100 justify-content-between">
+                                                <h5 class="mb-1">Niveau d'etude visé + cycle   </h5>
+                                                <small class="text-muted">{{ flux_sortant.niveau.libelle }} - {{ flux_sortant.cycle }} </small>
+                                                </div>
+                                            </a>
+                                            <a href="#" class="list-group-item list-group-item-action">
+                                                <div class="d-flex w-100 justify-content-between">
+                                                <h5 class="mb-1">Type d'etablissement  </h5>
+                                                <small class="text-muted">{{ flux_sortant.typeuniversite.libelle }} {{ flux_sortant.typeuniversit}}</small>
+                                                </div>
+                                            </a>
+                                            <a href="#" class="list-group-item list-group-item-action">
+                                                <div class="d-flex w-100 justify-content-between">
+                                                <h5 class="mb-1">Discipline  </h5>
+                                                <small class="text-muted">{{ flux_sortant.filiere }}</small>
+                                                </div>
+                                            </a>
+                                            <a href="#" class="list-group-item list-group-item-action">
+                                                <div class="d-flex w-100 justify-content-between">
+                                                <h5 class="mb-1">Domainde de competence   </h5>
+                                                <small class="text-muted">{{ flux_sortant.composant.libelle  }}</small>
+                                                </div>
+                                            </a>
+                                            <a href="#" class="list-group-item list-group-item-action">
+                                                <div class="d-flex w-100 justify-content-between">
+                                                <h5 class="mb-1">Adresse université    </h5>
+                                                <small class="text-muted">{{ flux_sortant.pays }} {{ flux_sortant.ville }} </small>
+                                                </div>
+                                            </a>
+                                        </div>
                                      
                                      {% endfor %}
                                     </div>
-                                    <div class="col-md-8">
-                                     {% for flux_sortant in app.user.fluxSortants %}
+                                    <div class="col-md-7">
+                                    {% for flux_sortant in app.user.fluxSortants %}
                                         <div class="card border-primary">
                                             <div class="card-body">
                                                 <h5 class="card-title">Projet proffessionnel </h5>
@@ -661,22 +800,109 @@
                                                 <p class="card-text">{{ flux_sortant.moyen   }}</p>
                                             </div>
                                         </div>
+                                        
                                     {% endfor %}
                                     </div>
+                                    
+                                    
                                 </div>
                                 </div>
                         </div>
                         {% endif %}
                     {% endfor %}
+                  {% endif %}
+                
+                    <div class="col-lg-6 col-xl-6">
+                      {% if (app.user.bourses|length)>= 1  %}
+                        {% for candidatures in app.user.candidatures %}
+                            {% if candidatures.bourse =="oui" %}
+                            <div class="card" id="section_bourse">
+                                <h5 class="card-header text-white bg-primary mb-3">Bourse d'etude  </h5>
+                                <div class="card-body">
+                                    <div class="list-group">
+                                        {% for bourse in app.user.bourses %}
+                                        <li href="#" class="list-group-item list-group-item-action">
+                                            <div class="d-flex w-100 justify-content-between">
+                                                <h5 class="mb-1">Bourse : {{ bourse.nature }} <h5>
+                                                <p> Pays d'obtention : {{ bourse.pays }}</p>
+                                                <small><strong> {{bourse.datecreate|date('Y-m-d')}} </strong> </small> 
+                                            </div>
+                                            <p class="mb-1">{{bourse.detail }}</p>
+                                            <small>  <strong> Montant mensuel :  <span class="badge btn-md badge-primary">{{ bourse.montant }}€</span></strong> </small> 
+                                            {% for candidat in app.user.candidatures %}
+                                                {% if candidat.status == 0  %}
+                                                    <a  class="btn  btn-sm btn-success" href="{{ path('bourse_edit', {'id': bourse.id}) }}"> <i class="zmdi zmdi-edit"></i> </a>
+                                                    <a   onclick="delete_bourse()" class="btn  btn-sm btn-danger" id="bourse"  data-id="{{ bourse.id }}"  href="#"> <i class="zmdi zmdi-delete"></i> </a>
+                                                {% endif %}
+                                            {% endfor %}
+                                        </li>
+                                       
+                                        {% endfor %}
+                                    </div>
+                                </div>
+                            </div>
+                            {% endif %}
+                        {% endfor %}
+                        {% endif %}
+                    </div>
+                    <div class="col-lg-6 col-xl-6">
+                            {% if (app.user.experiences|length) >= 1  %}
+                            {% for candidatures in app.user.candidatures %}
+                                {% if candidatures.stage =="oui" %}
+                                    <div class="col-lg-12">
+                                        <div class="au-card au-card--no-shadow au-card--no-pad m-b-40 au-card--border">
+                                            <h5 class="card-header text-white bg-primary mb-3">Experience professionnelle </h5>
+                                            <div class="au-task js-list-load au-task--border">
+                                                
+                                                <div class="au-task-list js-scrollbar3">
+                                                    <div class="au-task__item au-task__item--danger">
+                                                        <div class="au-task__item-inner">
+                                                        
+                                                                {% for item in app.user.experiences  %}
+                                                                    <li href="#" class="list-group-item list-group-item-action">
+                                                                        <div class="d-flex w-100 justify-content-between">
+                                                                        <h4 class="card-title"> {{ item.poste}} <h4>
+                                                                        <h5 class="mb-3"> {{ item.entreprise }} - {{ item.pays}} <h5>
+                                                                        </div>
+                                                                        <div class="d-flex w-100 justify-content-between">
+                                                                        <h6 class="mb-3">Du {{ item.dateExperience|date('Y-m-d') }} à {{ item.datefin|date('d/m/Y') }} </h6>
+                                                                        </div>
+                                                                        {{ item.detail}}
+                                                                        <br>
+                                                                        {% for candidat in app.user.candidatures %}
+                                                                            {% if candidat.status == 0  %}
+                                                                                <a  class="btn  btn-sm btn-success" href="{{ path('experience_edit', {'id': item.id}) }}"> <i class="zmdi zmdi-edit"></i> </a>
+                                                                                <a   onclick="delete_experience()"    class="btn  btn-sm btn-danger"   id="experience"   data-id="{{ item.id }}"  href="#"> <i class="zmdi zmdi-delete"></i> </a>
+                                                                            {% endif %}
+                                                                        {% endfor %}
+                                                                    </li>
+                                                                
+                                                                {% endfor %}
+                                                            
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                {% endif %}
+                            {% endfor %}
+                        {% endif %}
+                    </div>
                 </div>
+                
             </div>
+            
         </div>
         {% for candidat in app.user.candidatures %}
-            {% if candidat.status == 0  %}
+         {% if (app.user.informationBacs|length)== 1 and (app.user.etudiants|length) ==  1 and (app.user.responsables|length == 1 )    %}
+           {% if candidat.status == 0  %}
+            
             <div style="padding-left:20%" id="btn-valider">
             <a href="#"  data-id="{{candidat.id}}"  id="valider_candidature" style="color:white"  class="btn btn-lg btn-success "> <i class="zmdi zmdi-assignment-check"></i>  valider votre candidature  </a>
             </div>
             {% endif %}
+          {% endif %}
         {% endfor %}
 </section>
 {% endblock %}

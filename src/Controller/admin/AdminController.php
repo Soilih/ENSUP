@@ -30,18 +30,12 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Session\Session; 
-
-
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+
 
 class AdminController extends AbstractController 
 {
-    public function __construct(EtudiantRepository $repo){
-        $this->repo = $repo ;
-    }
-
      /**
-     * cette controller permet de creer le profile utilisateur
      * @Route("/" , name="index")
      */
 
@@ -49,21 +43,9 @@ class AdminController extends AbstractController
     {
         return $this->render("admin/index.html.twig");
     }
-    
-     /**
-     * cette controller permet de creer le profile utilisateur
-     * @Route("/profile" , name="profile")
-     */
 
-    public function profile(): Response
-    {
-        return $this->render("admin/profile.html.twig");
-    }
-
-    //liste de tous les etudiants 
     /**
      * @route( "/admin" ,  name="listetudiant")
-     *
      */
 
     public function  listeEtudiant(EtudiantRepository $etudiantRepository ): Response {
@@ -74,7 +56,6 @@ class AdminController extends AbstractController
          );
     }
 
-     //flux entrant  
      /**
      * @route( "/etudiantsdetail/" ,  name="listetudiantdetail")
      */
@@ -89,7 +70,7 @@ class AdminController extends AbstractController
         );
     }
       
-      public function  stat(FluxRepository $fluxRepository , FluxSortantRepository $fluxSortantRepository ): Response {
+    public function  stat(FluxRepository $fluxRepository , FluxSortantRepository $fluxSortantRepository ): Response {
         return $this->render("base.html.twig" , [
             "count"=>$fluxRepository->NombreFlux(),
             "compte_flux_sortant"=> $fluxSortantRepository->NombreFlux_sortant(),
@@ -98,8 +79,6 @@ class AdminController extends AbstractController
         );
     }
 
-
-    //flux sortant 
     /**
      * @route( "/etudiantfluxsortant/" ,  name="fluxStantEtudiant")
      */
@@ -110,8 +89,6 @@ class AdminController extends AbstractController
         ]
          );
     }
-     
-    //flux resident 
 
     /**
      * @route( "/etudiantfluxresident/" ,  name="fluxresident")
@@ -123,7 +100,7 @@ class AdminController extends AbstractController
             'nos_etudiant'=>$fluxSortantRepository->listeResidentEtudiant()
         ]);
     }
-    //detail etudiant 
+
     /**
      * @route( "/etudiantsss/{id}" ,  name="listetudiantDetailEtudiant")
      * @param int $id 
@@ -152,8 +129,6 @@ class AdminController extends AbstractController
          ]);
     }
 
-
-    //ici je recupere je recupere la liste des responsable 
      /**
      * @route( "/responsables/" ,  name="listeResponsable")
      *
@@ -230,6 +205,20 @@ class AdminController extends AbstractController
        return $this->render("admin/niveau.html.twig" , [
             "etudiants"=> $etudiant
         ]);
+    }
+
+     /**
+     * @Route("/admin/delete/{id}", name="delete_user", methods={"GET"})
+     */
+    public function delete(Request $request, $id ): Response
+    {
+        $users = $this->getDoctrine()->getRepository(User::class)->find($id);
+        $entityManager = $this->getDoctrine()->getManager();
+        $entityManager->remove($users );
+        $entityManager->flush();
+        $response = new Response();
+        $response->send();
+        return $this->render('admin/home_user.html.twig');
     }
     
     

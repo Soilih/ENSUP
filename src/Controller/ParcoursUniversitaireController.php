@@ -110,7 +110,7 @@ class ParcoursUniversitaireController extends AbstractController
                 $entityManager->persist($parcoursUniversitaire);
                 $entityManager->flush();
             }
-           return $this->redirectToRoute('parcours_universitaire_new', [], Response::HTTP_SEE_OTHER);
+           return $this->redirectToRoute('home_accueil', [], Response::HTTP_SEE_OTHER);
         }
 
         return $this->renderForm('parcours_universitaire/edit.html.twig', [
@@ -120,16 +120,16 @@ class ParcoursUniversitaireController extends AbstractController
     }
 
     /**
-     * @Route("/{id}", name="parcours_universitaire_delete", methods={"POST"})
+     * @Route("/delete/{id}", name="parcours_universitaire_delete", methods={"DELETE"})
      */
-    public function delete(Request $request, ParcoursUniversitaire $parcoursUniversitaire): Response
+    public function delete(Request $request, $id ): Response
     {
-        if ($this->isCsrfTokenValid('delete'.$parcoursUniversitaire->getId(), $request->request->get('_token'))) {
-            $entityManager = $this->getDoctrine()->getManager();
-            $entityManager->remove($parcoursUniversitaire);
-            $entityManager->flush();
-        }
-
-        return $this->redirectToRoute('parcours_universitaire_new', [], Response::HTTP_SEE_OTHER);
+        $parcoursUniversitaire = $this->getDoctrine()->getRepository(ParcoursUniversitaire::class)->find($id);
+        $entityManager = $this->getDoctrine()->getManager();
+        $entityManager->remove($parcoursUniversitaire);
+        $entityManager->flush();
+        $response = new Response();
+        $response->send();
+        return $this->render('admin/home_user.html.twig');
     }
 }

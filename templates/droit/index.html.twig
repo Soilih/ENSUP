@@ -1,0 +1,86 @@
+{% extends 'base.html.twig' %}
+{% block body %}
+<div class="wrapper">
+  <div class="content-wrapper">
+      <div class="row" style="padding-left:2%;padding-top:2%">
+          <div class="col-md-12">
+            <div class="card card-success">
+              <div class="card-header" style="font-szie:24px">
+                Demande "A QUI DE DROIT" 
+              
+              </div>
+              <!-- /.card-header -->
+              <div class="card-body">
+                <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th>Date </th>
+                        <th>Reference</th>
+                        <th>Accord Inscription</th>
+                        <th>Attestation d'hebergement</th>
+                        <th>Diplomes</th>
+                        <th>Relevés de notes</th>
+                        <th>Attestation de prise en charge</th>
+                        <th>Passport</th>
+                        <th>Visa</th>
+                        <th>Actions</th>
+                        
+                    </tr>
+                </thead>
+                <tbody>
+                {% for droit in droits %}
+                    <tr> 
+                        <td>{{ droit.datecreate ?  droit.datecreate|date('y-m-d') }}</td>
+                        <td>{{ droit.reference }}</td>
+                        <td>
+                        <a href="{{ asset('uploads/'~ droit.inscription ) }}"> 
+                        <i class="fas fa-solid fa-download"></i>
+                        </a>
+                        </td>
+                        <td>
+                        <a href="{{ asset('uploads/'~ droit.hebergement ) }}"> 
+                        <i class="fas fa-solid fa-download"></i>
+                        </a>
+                        </td>
+                        <td>
+                        <a href="{{ asset('uploads/'~ droit.diplomes ) }}"> 
+                        <i class="fas fa-solid fa-download"></i>
+                        </a>
+                       </td>
+                       <td>
+                            <a href="{{ asset('uploads/'~  droit.releve  ) }}"> 
+                            <i class="fas fa-solid fa-download"></i>
+                            </a>
+                       </td>
+                        <td>
+                            <a href="{{ asset('uploads/'~ droit.charge ) }}"> 
+                            <i class="fas fa-solid fa-download"></i>
+                            </a>
+                       </td>
+                       <td>
+                       <a href="{{ asset('uploads/'~ droit.passport ) }}"> 
+                        <i class="fas fa-solid fa-download"></i>
+                        </a>
+                      </td>
+                    <td>
+                        <a href="{{ asset('uploads/'~ droit.visa ) }}"> 
+                        <i class="fas fa-solid fa-download"></i>
+                        </a>
+                    </td>   
+                    <td>
+                       <div style="display: inline-block;padding-left:2% ; color:red">{{ include('droit/_delete_form.html.twig') }} </div> 
+                    </td> 
+                        
+                    </tr>
+                {% else %}
+                    <tr>
+                        <td colspan="10">no records found</td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+       
+{% endblock %}

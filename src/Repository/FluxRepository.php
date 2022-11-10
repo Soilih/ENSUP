@@ -47,17 +47,16 @@ class FluxRepository extends ServiceEntityRepository
     public function stat_sexe(){
     $conn = $this->getEntityManager()->getConnection();
     $sql ="
-        SELECT count(flux.id) as count_id  , user.nom as nom  , etudiant.sexe as sexe   FROM flux , user , etudiant   where 
-        flux.user_id = user.id AND etudiant.user_id = user.id
-        GROUP by sexe , flux.id " ; 
+    SELECT count(flux.id) as count_id , etudiant.sexe as sexe FROM flux , user , etudiant where flux.user_id = user.id AND etudiant.user_id = user.id GROUP by sexe " ; 
         $stmt = $conn->query( $sql);
         return $result = $stmt->fetchAllAssociative();
     }
 
-    public function stat_flux_anne(){
+    public function stat_flux_anne_arrive(){
         $conn = $this->getEntityManager()->getConnection();
-        $sql ="SELECT flux.id as flux_id ,    COUNT(flux.id) as ct  , DATE_FORMAT(flux.date_arrive , '%Y' ) as anne  
-         FROM flux GROUP by anne  
+        $sql ="SELECT flux.id as flux_id ,    COUNT(flux.id) as ct  , DATE_FORMAT(flux.date_arrive , '%Y' ) as anne
+       
+        FROM flux GROUP by anne 
         ORDER by date_arrive DESC ";
         $stmt = $conn->query( $sql);
          return $result = $stmt->fetchAllAssociative();
@@ -69,7 +68,7 @@ class FluxRepository extends ServiceEntityRepository
         where flux.typediplome_id = type_diplome.id 
         GROUP BY type_diplome.libelle  " ;
         $stmt = $conn->query( $sql);
-        return $result = $stmt->fetchAllAssociative();
+        return $result = $stmt->fetchAll();
     }
 
     public function stat_pays_flux(){

@@ -1,0 +1,4 @@
+<form method="post" action="{{ path('app_droit_delete', {'id': droit.id}) }}" onsubmit="return confirm('Etes vous sure de suprimer cet A QUI DE DROIT ?');">
+    <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ droit.id) }}">
+    <button class="btn btn-danger"><i class="fas fa-trash"></i></button>
+</form>

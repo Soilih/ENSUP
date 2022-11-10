@@ -1,124 +1,38 @@
-<head>
-    <!-- Required meta tags-->
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="description" content="au theme template">
-    <meta name="author" content="Hau Nguyen">
-    <meta name="keywords" content="au theme template">
-
-    <!-- Title Page-->
-    <title>Dashboard</title>
-    {% include "link/link_css.html.twig" %}  
-</head>
-{% include "link/header.html.twig" %}
-    <div class="page-container">
-        <div class="main-content">
-            <div class="section__content section__content--p30">
-                <div class="container-fluid">
-                    <div class="row">
-                    {% if (app.user.fluxes|length) < 1  %}
-                      <div class="col-lg-10">
-                        {% for msg in app.flashes('success') %}
-                          <div class="alert alert-success alert-dismissible fade show" role="alert">
-                              <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                              <span aria-hidden="true">&times;</span>
-                              </button>
-                              <strong>  {{msg }} </strong> 
-                          </div>
-                          <script>
-                            $(".alert").alert();
-                          </script>
-                              
-                          </div>
-                        {% endfor %}
-                        <div class="card">
-                          <h3 class="card-header"> Ajouter un flux entrant  </h3>  
-                          <div class="card-body">
-                              {{ include('flux/_form.html.twig') }}
-                          </div>
-                        </div>
-                         
-                      </div>
-                      {% else %}
-                      <div class="col-lg-8">
-                          <div class="card border-primary">
-                           <div class="card-body">
-                              <h4 class="card-header">Données flux entrant </h4>
-                               {% for flux  in app.user.fluxes %}
-                                 <table class="table table-bordered table-striped">
-                                      <tbody>
-                                         <tr>
-                                              <th>Date de depart :  </th>
-                                              <td>{{ flux.depart ? flux.depart|date('Y-m-d') : '' }}</td>
-                                          </tr>
-                                          <tr>
-                                              <th>Date d'arrivé au comores  :  </th>
-                                              <td>{{ flux.dateArrive ? flux.dateArrive|date('Y-m-d') : '' }}</td>
-                                          </tr>
-                                           <tr>
-                                              <th>Dernier diplome obtenu </th>
-                                              <td>{{ flux.diplome }}</td>
-                                          </tr>
-                                          <tr>
-                                              <th>Domaine de specialité </th>
-                                              <td>{{ flux.specialite }}</td>
-                                          </tr>
-                                          <tr>
-                                              <th>Cycle d'etude  </th>
-                                              <td>{{ flux.typediplome.libelle }}</td>
-                                          </tr>
-                                          <tr>
-                                              <th>Niveau d'etude actuel  </th>
-                                              <td>{{ flux.niveauActuel.libelle }}</td> 
-                                          </tr>
-                                          <tr>
-                                              <th>Pays effectué les etudes  </th>
-                                              <td>{{ flux.pays }}</td> 
-                                          </tr>
-                                           
-                                         
-                                          <tr>
-                                              <th>Cycle  </th>
-                                              <td>{{ flux.cycle }}</td> 
-                                          </tr>
-                                         
-                                          <tr>
-                                              <th>votre projet proffessionnel ?</th>
-                                              <td>{{ flux.projet }}</td> 
-                                          </tr>
-                                          <tr>
-                                              <th>Problemes rencontreés durant les etudes  </th>
-                                              <td>{{ flux.probleme }}</td> 
-                                          </tr>
-                                          <tr>
-                                              <th>Quelques Suggestions et remarques  </th>
-                                              <td>{{ flux.suggestion }}</td> 
-                                          </tr>
-                                         
-                                      </tbody>
-                                  </table>
-                                  <br>
-                                  <a class="btn btn-primary"  href="{{ path('home_accueil')}}"> <i class="fa fa-location-arrow" aria-hidden="true"></i>
-                                    Finaliser votre inscription 
-                                    </a> 
-                                  <a class="btn btn-warning"  href="{{ path('parcours_universitaire_new')}}"> <i class="fa fa-location-arrow" aria-hidden="true"></i>
-                                      Revenir à l'etape precedente 
-                                  </a>
-                               {% endfor %}
-                            </div>
-                          </div>
-                        </div>
-
-                    </div>
-                    {% endif  %}
+{% extends 'base.html.twig' %}
+{% block body %}
+<div class="wrapper">
+  <div class="content-wrapper">
+    <div class="row" style="padding-left:2%;padding-top:2%">
+        {% if (app.user.fluxes|length) < 1  %}
+            <div class="col-lg-10">
+             <div class="card">
+                <h3 class="card-header"> Ajouter un flux entrant  </h3>  
+                <div class="card-body">
+                    {{ include('flux/_form.html.twig') }}
+                </div>
+            </div>
+            <div class="card-footer">
+             {% for msg in app.flashes('success') %}
+                <div class="alert alert-success alert-dismissible fade show" role="alert">
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                    </button>
+                    <strong>  {{msg }} </strong> 
+                </div>
+                <script>
+                $(".alert").alert();
+                </script>
+                    
+                </div>
+            {% endfor %}
+            </div>
+                
+            </div>
+        {% endif  %}
+    </div>
+ </div>
+</div>
+{% endblock %}
 
                   
 
-
-                </div>
-            </div>
-        </div>
-    </div>
-     
-{% include 'link/footer.html.twig' %}
- {% include "link/link_js.html.twig" %}  

@@ -1,226 +1,241 @@
-<!DOCTYPE html>
-<html lang="en">
 
-<head>
-    <!-- Required meta tags-->
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="description" content="au theme template">
-    <meta name="author" content="Hau Nguyen">
-    <meta name="keywords" content="au theme template">
-
-    <!-- Title Page-->
-    <title>Dashboard</title>
-    {% include "link/link_css.html.twig" %}  
-</head>
-{% include "link/header.html.twig" %}
-        <div class="page-container">
-            <div class="main-content">
-                <div class="section__content section__content--p30">
-                    <div class="container-fluid">
-                        <div class="row">
-                        {% if  (app.user.candidatures|length < 1) %}
-                        
-                            <div class="col-lg-10">
-                                <div class="au-card au-card--no-shadow au-card--no-pad m-b-40" style="border:2px solid rgb(55 , 205 , 255); ">
-                                    <div class="au-card-title" style="background-image:url('images/bg-title-01.jpg');">
-                                        <div class="bg-overlay bg-overlay--blue"></div>
-                                          <h3> <i class="zmdi zmdi-account-calendar"></i>Creation dossier </h3>
-                                        </div>
-                                        <div class="au-task js-list-load">
-                                            <div class="au-task__title">
-                                                <p style="color:red ; font-size:18px" >Tous les champs sont obligatoire * </p>
-                                            </div>
-                                               <div class="card-body">
-                                                    {{ include('candidature/_form.html.twig') }}
-                                                </div>
-                                        </div>
-                                    </div>
-                                </div>
+{% include 'link/nav.html.twig' %}
+{% include 'link/link_css.html.twig' %}
+        
+<div class="container">
+    <div class="row" style="padding-top:12%">
+        {% if  (app.user.candidatures|length < 1) %}
+        
+            <div class="col-lg-10">
+                <div class="au-card au-card--no-shadow au-card--no-pad m-b-40" style="border:2px solid rgb(55 , 205 , 255); ">
+                    <div class="au-card-title" style="background-image:url('images/bg-title-01.jpg');">
+                        <div class="bg-overlay bg-overlay--blue"></div>
+                        <h3> <i class="zmdi zmdi-account-calendar"></i>Nouvelle candidature  </h3>
+                        </div>
+                        <div class="au-task js-list-load">
+                            <div class="au-task__title">
+                                <p style="color:red ; font-size:18px" >Tous les champs sont obligatoire * </p>
                             </div>
-                                
-                            {% endif %}
-                            {% if (app.user.candidatures|length == 1) %}
-                            <div class="col-lg-10" style="padding-bottom:5%">
-                                <div class="au-card au-card--no-shadow au-card--no-pad m-b-40">
-                                    <div class="au-card-title">
-                                        <div class="bg-overlay bg-overlay--blue"></div>
-                                        <h3><i class="zmdi zmdi-info"></i>Informations du dossier </h3>
-                                    </div>
-                                    <div class="au-inbox-wrap js-inbox-wrap">
-                                        <div class="au-message js-list-load">
-                                            <div class="au-message-list">
-                                                {% for item in app.user.candidatures %}
-                                                    <div class="au-message__item">
-                                                        <div class="au-message__item-inner">
-                                                            <div class="au-message__item-text">
-                                                                <div class="avatar-wrap">
-                                                                <i class="zmdi  zmdi-swap-vertical-circle zmdi-hc-3x"></i>
-                                                                </div>
-                                                                <div class="text">
-                                                                    <h5 class="name">Flux {{item.flux}}</h5>
-                                                                    <p>le type de flux entrant , sortant , resident  </p>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="au-message__item">
-                                                        <div class="au-message__item-inner">
-                                                            <div class="au-message__item-text">
-                                                                <div class="avatar-wrap">
-                                                                    <i class="zmdi zmdi-graduation-cap zmdi-hc-3x"></i>
-                                                                </div>
-                                                                <div class="text">
-                                                                    <h5 class="name">{{item.typediplome.libelle}}</h5>
-                                                                    <p>Diplome obtenu   </p>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="au-message__item">
-                                                        <div class="au-message__item-inner">
-                                                            <div class="au-message__item-text">
-                                                                <div class="avatar-wrap">
-                                                                    <i class="zmdi zmdi-layers zmdi-hc-3x"></i>
-                                                                </div>
-                                                                <div class="text">
-                                                                    <h5 class="name">{{ item.niveau.libelle }}</h5>
-                                                                    <p>Niveau d'etude actuel    </p>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="au-message__item">
-                                                        <div class="au-message__item-inner">
-                                                            <div class="au-message__item-text">
-                                                                <div class="avatar-wrap">
-                                                                <i class="zmdi zmdi-codepen zmdi-hc-3x"></i>
-                                                                </div>
-                                                                <div class="text">
-                                                                    <h5 class="name">{{item.reference}}</h5>
-                                                                    <p>Reference de dossier </p>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="au-message__item">
-                                                        <div class="au-message__item-inner">
-                                                            <div class="au-message__item-text">
-                                                                <div class="avatar-wrap">
-                                                                    <i class="zmdi zmdi-calendar zmdi-hc-3x"></i>
-                                                                </div>
-                                                                <div class="text">
-                                                                    <h5 class="name">{{item.dateCreate | date('m-d-Y')}}</h5>
-                                                                    <p>Date d'inscription  </p>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="au-message__item">
-                                                        <div class="au-message__item-inner">
-                                                            <div class="au-message__item-text">
-                                                                <div class="avatar-wrap">
-                                                                    <i class="zmdi zmdi-accounts-alt zmdi-hc-3x"></i>
-                                                                </div>
-                                                                <div class="text">
-                                                                    <h5 class="name">{{item.type}}</h5>
-                                                                    <p>Situation actuelle    </p>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="au-message__item">
-                                                        <div class="au-message__item-inner">
-                                                            <div class="au-message__item-text">
-                                                                <div class="avatar-wrap">
-                                                                    <i class="zmdi zmdi-library zmdi-hc-3x"></i>
-                                                                </div>
-                                                                <div class="text">
-                                                                {% if item.cursus=='interne' %}
-                                                                <h5 class="name">Cursus interne </h5>
-                                                                {% elseif item.cursus=='externe' %}
-                                                                    <h5 class="name">Cursus externe </h5>
-                                                                {% elseif item.cursus=='deux' %} 
-                                                                <h5 class="name">Cursus interne et externe </h5>
-                                                                {% else %}
-                                                                    <h5 class="name">Aucun cursus universitaire  </h5>
-                                                                {% endif %}
-                                                                <p>cursus universitaire interne , externe , les deux    </p>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="au-message__item">
-                                                        <div class="au-message__item-inner">
-                                                            <div class="au-message__item-text">
-                                                                <div class="avatar-wrap">
-                                                                    <i class="fa fa-credit-card fa-3x" aria-hidden="true"></i>
-                                                                </div>
-                                                                <div class="text">
-                                                                {% if item.stage=='oui' %}
-                                                                    <h5 class="name">j'ai une experience proffessionnelle </h5>
-                                                                {% else %}
-                                                                <h5 class="name">Aucun experience proffessionnelle </h5>
-                                                                {% endif %}
-                                                                
-                                                                    <p>experience proffessionnelle , stage , aucune experience    </p>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-
-                                                    <div class="au-message__item">
-                                                        <div class="au-message__item-inner">
-                                                            <div class="au-message__item-text">
-                                                                <div class="avatar-wrap">
-                                                                    <i class="fa fa-credit-card fa-3x" aria-hidden="true"></i>
-                                                                </div>
-                                                                <div class="text">
-                                                                {% if item.bourse=='oui' %}
-                                                                    <h5 class="name">je suis boursier   </h5>
-                                                                {% else %}
-                                                                <h5 class="name">non boursier  </h5>
-                                                                {% endif %}
-                                                                <p> vous beneficiez de bourse durant vos etudes , autre moyen de subsistance   
-                                                                </p>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div style="padding-left:10% ; height:50px ; padding-top:0.9%">
-                                                 {% for candidat in app.user.candidatures %}
-                                                    {% if candidat.status == 1  %} 
-                                                        <a class="btn btn-success"  href="{{ path('home_accueil')}}"> <i class="fa fa-location-arrow" aria-hidden="true"></i>
-                                                                Mon espace personnelle  
-                                                        </a>
-                                                        {% elseif candidat.status == 0  %}
-                                                         {# les etapes  #}
-                                                        <a class="btn btn-primary"  href="{{ path('etudiant_new')}}"> <i class="fa fa-location-arrow" aria-hidden="true"></i>
-                                                             Passer à l'etape suivante 
-                                                        </a>
-                                                        <a class="btn btn-success" href="{{ path('edit_candidature' , {'id' : item.id }) }}">  <i class="fas fa-edit" aria-hidden="true"></i> modifier  </a>
-                                                        <a style="color:white" id="candidat" class="btn btn-danger delete-candidature" data-id="{{ item.id }}">  <i  style="color:white"  class="fas fa-trash" aria-hidden="true"></i> suprimer </a>
-                                                    {% endif %}
-                                                {% endfor %}
-                                                </div>
-                                                {% endfor %}
-                                            
-                                            
-                                            </div>
-                                        </div>
-                                    
-                                    </div>
+                            <div class="card-body">
+                                    {{ include('candidature/_form.html.twig') }}
                                 </div>
-                            </div>
-                            {% endif %}
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
-     {{ include('link/footer.html.twig') }}
- {% include "link/link_js.html.twig" %}      
+                
+        {% endif %}
+        {% if (app.user.candidatures|length == 1) %}
+            <div class="col-lg-10" style="padding-bottom:3%">
+                <div class="au-card au-card--no-shadow au-card--no-pad m-b-30">
+                    <div class="au-card-title">
+                        <div class="bg-overlay bg-overlay--blue"></div>
+                        <h3><i class="zmdi zmdi-info"></i>Informations du candidature  </h3>
+                    </div>
+                    <div class="au-inbox-wrap js-inbox-wrap" style="height:900px">
+                        <div class="au-message js-list-load">
+                            <div class="au-message-list">
+                                {% for item in app.user.candidatures %}
+                                    <div class="au-message__item">
+                                        <div class="au-message__item-inner">
+                                            <div class="au-message__item-text">
+                                                <div class="avatar-wrap">
+                                                <i class="zmdi  zmdi-swap-vertical-circle zmdi-hc-2x"></i>
+                                                </div>
+                                                <div class="text">
+                                                  {% if item.flux =="entrant " %}
+                                                    <h5 class="name">Flux {{item.flux}}</h5>
+                                                    <p>Flux entrant  : un etudiant qui a fini ces etudes et qui est revenu au pays </p>
+                                                {% elseif item.flux =="sortant" %}
+                                                  <h5 class="name">Flux {{item.flux}}</h5>
+                                                    <p>Flux sortant : un etudiant souhaitant continuer les etudes à l'etranger</p>
+                                                {% else %}
+                                                    <h5 class="name">Flux {{item.flux}}</h5>
+                                                    <p>Flux resident : un etudiant qui fait ses etudes au pays</p>
+                                                {% endif %}
+                                                  
+                                                   
+
+                                                    <span> </span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="au-message__item">
+                                        <div class="au-message__item-inner">
+                                            <div class="au-message__item-text">
+                                                <div class="avatar-wrap">
+                                                    <i class="zmdi zmdi-graduation-cap zmdi-hc-2x"></i>
+                                                </div>
+                                                <div class="text">
+                                                    <h5 class="name">{{item.typediplome.libelle}}</h5>
+                                                    <p>Dernier Diplome obtenu   </p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="au-message__item">
+                                        <div class="au-message__item-inner">
+                                            <div class="au-message__item-text">
+                                                <div class="avatar-wrap">
+                                                    <i class="zmdi zmdi-layers zmdi-hc-2x"></i>
+                                                </div>
+                                                <div class="text">
+                                                    <h5 class="name">{{ item.niveau.libelle }}</h5>
+                                                    <p>Niveau d'etude actuel    </p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="au-message__item">
+                                        <div class="au-message__item-inner">
+                                            <div class="au-message__item-text">
+                                                <div class="avatar-wrap">
+                                                <i class="zmdi zmdi-codepen zmdi-hc-2x"></i>
+                                                </div>
+                                                <div class="text">
+                                                    <h5 class="name">{{item.reference}}</h5>
+                                                    <p>Reference de candidature </p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="au-message__item">
+                                        <div class="au-message__item-inner">
+                                            <div class="au-message__item-text">
+                                                <div class="avatar-wrap">
+                                                    <i class="zmdi zmdi-calendar zmdi-hc-2x"></i>
+                                                </div>
+                                                <div class="text">
+                                                    <h5 class="name">{{item.dateCreate | date('m-d-Y')}}</h5>
+                                                    <p>Date d'inscription  </p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="au-message__item">
+                                        <div class="au-message__item-inner">
+                                            <div class="au-message__item-text">
+                                                <div class="avatar-wrap">
+                                                    <i class="zmdi zmdi-accounts-alt zmdi-hc-2x"></i>
+                                                </div>
+                                                <div class="text">
+                                                    <h5 class="name">{{item.type}}</h5>
+                                                    <p>Situation actuelle    </p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="au-message__item">
+                                        <div class="au-message__item-inner">
+                                            <div class="au-message__item-text">
+                                                <div class="avatar-wrap">
+                                                    <i class="zmdi zmdi-library zmdi-hc-2x"></i>
+                                                </div>
+                                                <div class="text">
+                                                {% if item.cursus=='interne' %}
+                                                <h5 class="name">Cursus interne </h5>
+                                                <span>Pour un etudiant qui a fait son parcours universitaire 
+                                                 au pays
+                                                </span>
+                                                {% elseif item.cursus=='externe' %}
+                                                    <h5 class="name">Cursus externe </h5>
+                                                <span>Pour un etudiant qui a fait son parcours universitaire 
+                                                 à l'etranger
+                                                </span>
+                                                {% elseif item.cursus=='deux' %} 
+                                                <h5 class="name">Cursus interne et externe </h5>
+                                                <span>Pour un etudiant qui a fait son parcours universitaire 
+                                                 au pays et continuer ses etudes à l'etranger.
+                                                </span>
+                                                {% else %}
+                                                    <h5 class="name">Aucun cursus universitaire  </h5>
+                                                    <span>Pour un etudiant diplomé uniquement d'un baccalaureat.
+                                                </span>
+                                                {% endif %}
+                                               
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="au-message__item">
+                                        <div class="au-message__item-inner">
+                                            <div class="au-message__item-text">
+                                                <div class="avatar-wrap">
+                                                  <i class="zmdi zmdi-tag-more"></i>
+                                                </div>
+                                                <div class="text">
+                                                {% if item.stage=='oui' %}
+                                                    <h5 class="name">j'ai une experience proffessionnelle </h5>
+                                                {% else %}
+                                                <h5 class="name">Aucun experience proffessionnelle </h5>
+                                                {% endif %}
+                                                
+                                                    <p>experience proffessionnelle , stage , aucune experience    </p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="au-message__item">
+                                        <div class="au-message__item-inner">
+                                            <div class="au-message__item-text">
+                                                <div class="avatar-wrap">
+                                                    <i class="fa fa-credit-card" aria-hidden="true"></i>
+                                                </div>
+                                                <div class="text">
+                                                {% if item.bourse=='oui' %}
+                                                    <h5 class="name">je suis boursier   </h5>
+                                                    <span>je beneficie de bourse durant mes etudes.</span>
+                                                {% else %}
+                                                <h5 class="name">non boursier  </h5>
+                                                {% endif %}
+                                                <p> vous beneficiez de bourse durant vos etudes , autre moyen de subsistance   
+                                                </p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="au-message__item" style="height:200px;padding-top:0.8%">
+                                        {% for candidat in app.user.candidatures %}
+                                            {% if candidat.status == 1  %} 
+                                                <a class="btn btn-success"  href="{{ path('home_accueil')}}"> <i class="fa fa-location-arrow" aria-hidden="true"></i>
+                                                        Mon espace personnelle  
+                                                </a>
+                                                {% elseif candidat.status == 0  %}
+                                                  {% if (app.user.etudiants|length) == 1 %}
+                                                   <a class="btn btn-primary"  href="{{ path('home_accueil')}}"> <i class="fa fa-location-arrow" aria-hidden="true"></i>
+                                                    Passer à l'etape suivante 
+                                                    </a>
+                                                    
+                                                    {% else %}
+                                                    <a class="btn btn-primary"  href="{{ path('etudiant_new')}}"> <i class="fa fa-location-arrow" aria-hidden="true"></i>
+                                                        Passer à l'etape suivante 
+                                                    </a>
+                                                  {% endif %}
+                                                
+                                                <a class="btn btn-success" href="{{ path('edit_candidature' , {'id' : item.id }) }}">  <i class="fas fa-edit" aria-hidden="true"></i> modifier  </a>
+                                                <a style="color:white" id="candidat" class="btn btn-danger delete-candidature" data-id="{{ item.id }}">  <i  style="color:white"  class="fas fa-trash" aria-hidden="true"></i> suprimer </a>
+                                            {% endif %}
+                                        {% endfor %}
+                                    </div>
+                                    
+
+                                </div>
+                            
+                                {% endfor %}
+                            
+                            
+                            </div>
+                        </div>
+                        
+                    
+                    </div>
+                </div>
+            </div>
+        {% endif %}
+    </div>
+</div>
+  {{ include('link/footer.html.twig') }}     
 
 </body>
 

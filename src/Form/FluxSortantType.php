@@ -62,7 +62,7 @@ class FluxSortantType extends AbstractType
             'attr'=>['class'=>'form-control']
             ])
             ->add('typeuniversit' , ChoiceType::class  ,[
-                'label'=>"selectionner le type d'universite ",
+                'label'=>"Cet etablissement est de type : ",
                 'choices'=>[
                 'privé'=>'privé' , 
                 'public'=>'public'

@@ -32,7 +32,7 @@ class ResponsableController extends AbstractController
             $entityManager->persist($responsable);
             $entityManager->flush();
             $this->addFlash("success" , "informations responsable  sont bien enregistrées avec success ");
-            return $this->redirectToRoute('responsable_new', [], Response::HTTP_SEE_OTHER);
+            return $this->redirectToRoute('home_accueil', [], Response::HTTP_SEE_OTHER);
         }
 
         return $this->renderForm('responsable/new.html.twig', [
@@ -63,7 +63,7 @@ class ResponsableController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $this->getDoctrine()->getManager()->flush();
 
-            return $this->redirectToRoute('responsable_new', [], Response::HTTP_SEE_OTHER);
+            return $this->redirectToRoute('home_accueil', [], Response::HTTP_SEE_OTHER);
         }
 
         return $this->renderForm('responsable/edit.html.twig', [
@@ -73,16 +73,16 @@ class ResponsableController extends AbstractController
     }
 
     /**
-     * @Route("/{id}", name="responsable_delete", methods={"POST"})
+     * @Route("/delete/{id}", name="responsable_delete", methods={"DELETE"})
      */
-    public function delete(Request $request, Responsable $responsable): Response
+    public function delete(Request $request, $id): Response
     {
-        if ($this->isCsrfTokenValid('delete'.$responsable->getId(), $request->request->get('_token'))) {
-            $entityManager = $this->getDoctrine()->getManager();
-            $entityManager->remove($responsable);
-            $entityManager->flush();
-        }
-
-        return $this->redirectToRoute('home_accueil', [], Response::HTTP_SEE_OTHER);
+        $responsable = $this->getDoctrine()->getRepository(Responsable::class)->find($id);
+        $entityManager = $this->getDoctrine()->getManager();
+        $entityManager->remove($responsable);
+        $entityManager->flush();
+        $response = new Response();
+        $response->send();
+        return $this->render('admin/home_user.html.twig');
     }
 }

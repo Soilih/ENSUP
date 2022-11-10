@@ -56,7 +56,7 @@ class InformationBacController extends AbstractController
             $entityManager->persist($informationBac);
             $entityManager->flush();
             $this->addFlash("success" , "informations baccalaureat sont bien enregistrées avec success ");
-            return $this->redirectToRoute('information_bac_new', [], Response::HTTP_SEE_OTHER);
+            return $this->redirectToRoute('home_accueil', [], Response::HTTP_SEE_OTHER);
         }
 
         return $this->renderForm('information_bac/new.html.twig', [
@@ -102,7 +102,7 @@ class InformationBacController extends AbstractController
             $entityManager->persist($informationBac);
             $entityManager->flush();
             $this->addFlash("success" , "informations  sont bien enregistrées avec success ");
-            return $this->redirectToRoute('information_bac_new', [], Response::HTTP_SEE_OTHER);
+            return $this->redirectToRoute('home_accueil', [], Response::HTTP_SEE_OTHER);
         }
 
         return $this->renderForm('information_bac/edit.html.twig', [
@@ -112,15 +112,17 @@ class InformationBacController extends AbstractController
     }
 
     /**
-     * @Route("/{id}", name="information_bac_delete", methods={"POST"})
+     * @Route("/delete/{id}", name="information_bac_delete", methods={"DELETE"})
      */
-    public function delete(Request $request, InformationBac $informationBac, EntityManagerInterface $entityManager): Response
-    {
-        if ($this->isCsrfTokenValid('delete'.$informationBac->getId(), $request->request->get('_token'))) {
-            $entityManager->remove($informationBac);
-            $entityManager->flush();
-        }
 
-        return $this->redirectToRoute('information_bac_new', [], Response::HTTP_SEE_OTHER);
+    public function delete(Request $request , $id ): Response
+    {
+        $informationBac = $this->getDoctrine()->getRepository(InformationBac::class)->find($id);
+        $entityManager = $this->getDoctrine()->getManager();
+        $entityManager->remove( $informationBac);
+        $entityManager->flush();
+        $response = new Response();
+        $response->send();
+        return $this->render('admin/home_user.html.twig');
     }
 }

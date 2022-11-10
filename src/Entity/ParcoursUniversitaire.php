@@ -64,7 +64,7 @@ class ParcoursUniversitaire
     /**
      * @var string
      *
-     * @ORM\Column(name="moyenne", type="string", length=255, nullable=false)
+     * @ORM\Column(name="moyenne", type="float" ,  nullable=false)
      */
     private $moyenne;
 

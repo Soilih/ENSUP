@@ -43,107 +43,13 @@ Notes:	decreasing heading by 0.4em with every subsequent heading level
 /*navbar***/
 
 
-/*---------------------------*/
-.header-logo{
-height:150px;
-border-radius: 10px;
-background-image: url("../images/entete.jpg");
-background-repeat: no-repeat;
-background-size: 85%;
-margin-left:5%;
+
+@import url(https://fonts.googleapis.com/css?family=Open+Sans:400,500,300,700);
 
 
-}
-#nav{
-    height:70px;
-    background-color:rgb(55 , 205 , 255);
-   width:100%;
-    margin-left:5%;
-    color:#00ad5f;
-    font-family: sans-serif;
-    position: relative;
-    font-size: 20px;
-    max-width: calc(1950px); 
-    text-align: center
-}
-
-.titre{
-    text-align: center;
-    font-family: sans-serif;
-}
-#nav-link{
-    color:white;
-}
-#nav-ul{
-    top:0;
-    left:0;
-    display: inline-flex;
-    margin-left: 2%;
-    vertical-align: auto;
-   right: 0;   
-}
-
-#nos_mission{
-    margin-top:5%;
-    padding:3%;
-}
-#text-nos-mission{
-    padding-top:2%;
-}
-#espace{
-    padding-right:8%
-   
-}
-#text-footer{
-    text-align: center;
-    padding-top:1.5%;
-}
 
 
-#img-logo , #text-navbar , #img-logo1{
-    display: inline-flex;
-    min-height:150px;
-    margin:15px ;
-    overflow: auto;
-    vertical-align:top ;
-     
-   
-    
-}
 
-#text-logo{
-    text-align: center;
-    font-size:18px;
-    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
-}
-#logo{
-  float: left;
-  height: 100px; 
-}
-#logo1{
- height: 100px; 
- float:right;
-}
-#img-logo1 {
-    width: 30%;
-    float: right;
-    height: 150px; 
-    margin-top:0px
-}
-#img-logo{
-    width: 30%;
-    float: left;
-    height: 150px; 
-    margin-top:0px
-}
-
-#footer{
-   height:70px;
-    background-color:rgb(55 , 205 , 255);
-    bottom:0;
-    
-    
-}
 .map{
     height:50px
 }
@@ -3543,7 +3449,7 @@ section {
 }
 
 .au-task__item-inner {
-    padding: 26px 15px;
+    padding: 9px 10px;
     padding-left: 40px;
 }
 
@@ -3603,8 +3509,6 @@ section {
 
 .au-message-list {
     height: 424px;
-    position: relative;
-    overflow-y: auto;
 }
 
 .au-message__noti {
@@ -3654,7 +3558,9 @@ section {
     padding: 19px 40px;
     padding-right: 50px;
     padding-bottom: 25px;
-    border: 1px solid  #00a2e3 ;
+    border: 0.3px solid  whitesmoke ;
+    border-radius: 10px;
+    height: 94px;
 }
 
 @media (min-width: 992px) and (max-width: 1199px) {
@@ -4869,20 +4775,7 @@ section {
     color: #fa4251;
 }
 
-/* ----- Footer ----- */
-.copyright {
-    text-align: center;
-    padding: 60px 0;
-    padding-top: 20px;
-}
 
-.copyright p {
-    font-size: 14px;
-    color: #666;
-    line-height: -webkit-calc(24/14);
-    line-height: -moz-calc(24/14);
-    line-height: calc(24/14);
-}
 
 /* ----- Breadcrumb ----- */
 .au-breadcrumb {

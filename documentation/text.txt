@@ -24,3 +24,9 @@ moyen dherbergement symfony
 https://www.youtube.com/watch?v=5grXvolI8Ls
 
 site pour la gestion datatable
+
+les identifiant : 
+Acceder à mon cpanel https://ensup-comores.com:2083/
+id: id_rsa
+mdp: (YVdYe6x81qi
+

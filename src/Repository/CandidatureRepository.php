@@ -35,61 +35,10 @@ class CandidatureRepository extends ServiceEntityRepository
 
     public function stat_diplome(){
         $conn = $this->getEntityManager()->getConnection();
-        $sql ="SELECT COUNT(candidature.id) as diplome_count , type_diplome.color as color ,  type_diplome.libelle as libelle 
-        FROM 
-        candidature , type_diplome where candidature.typediplome_id = type_diplome.id 
-        GROUP BY   type_diplome.libelle    " ;
+        $sql ="SELECT COUNT(candidature.id) as diplome_count , type_diplome.color as color , type_diplome.libelle as libelle
+         FROM candidature , type_diplome where
+          candidature.typediplome_id = type_diplome.id GROUP BY type_diplome.libelle , type_diplome.id " ;
         $stmt = $conn->query( $sql);
         return $result = $stmt->fetchAllAssociative();
     }
-
-    // public function soumettre_candidature( $iduser , $idcan) {
-    //     $em = $this->getDoctrine()->getManager();     
-    //     $query = $em->getRepository(Candidature::class)->createQueryBuilder('')
-    //                 ->update(Candidature::class, 'c')
-        
-    //                 ->set('c.status', '1')
-    //                 ->set('c.user_id ', ':iduser')
-                  
-    //                 ->setParameter('key', $project->key)
-    //                 ->setParameter('leader', $project->leader)
-        
-    //                 ->where('c.id = :id')
-    //                 ->setParameter('id', $project->id)
-    //                 ->getQuery();
-        
-    //     $result = $query->execute()
-    // }
-
-
-
-    // /**
-    //  * @return Candidature[] Returns an array of Candidature objects
-    //  */
-    /*
-    public function findByExampleField($value)
-    {
-        return $this->createQueryBuilder('c')
-            ->andWhere('c.exampleField = :val')
-            ->setParameter('val', $value)
-            ->orderBy('c.id', 'ASC')
-            ->setMaxResults(10)
-            ->getQuery()
-            ->getResult()
-        ;
-    }
-    */
-
-    /*
-    public function findOneBySomeField($value): ?Candidature
-    {
-        return $this->createQueryBuilder('c')
-            ->andWhere('c.exampleField = :val')
-            ->setParameter('val', $value)
-            ->getQuery()
-            ->getOneOrNullResult()
-        ;
-    }
-    */
-
 }

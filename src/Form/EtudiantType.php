@@ -47,7 +47,7 @@ class EtudiantType extends AbstractType
             ->add('photo' , FileType::class , [
                 'label'=>"Photo d'identité" ,
                 'mapped' =>  false , 
-                'required' => false,
+                'required' => true,
                
             ])
             ->add('etatcivile', ChoiceType::class , [

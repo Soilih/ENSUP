@@ -42,7 +42,7 @@ class FluxSortantController extends AbstractController
             $entityManager->persist($fluxSortant);
             $entityManager->flush();
             $this->addFlash("success" , "informations de bourses sont bien enregistrées avec success ");
-            return $this->redirectToRoute('flux_sortant_new', [], Response::HTTP_SEE_OTHER);
+            return $this->redirectToRoute('home_accueil', [], Response::HTTP_SEE_OTHER);
         }
 
         return $this->renderForm('flux_sortant/new.html.twig', [
@@ -83,16 +83,16 @@ class FluxSortantController extends AbstractController
     }
 
     /**
-     * @Route("/{id}", name="flux_sortant_delete", methods={"POST"})
+     * @Route("/delete/{id}", name="flux_sortant_delete", methods={"DELETE"})
      */
-    public function delete(Request $request, FluxSortant $fluxSortant): Response
+    public function delete(Request $request, $id): Response
     {
-        if ($this->isCsrfTokenValid('delete'.$fluxSortant->getId(), $request->request->get('_token'))) {
-            $entityManager = $this->getDoctrine()->getManager();
-            $entityManager->remove($fluxSortant);
-            $entityManager->flush();
-        }
-
-        return $this->redirectToRoute('flux_sortant_new', [], Response::HTTP_SEE_OTHER);
+        $flux_sortant = $this->getDoctrine()->getRepository(FluxSortant::class)->find($id);
+        $entityManager = $this->getDoctrine()->getManager();
+        $entityManager->remove(  $flux_sortant  );
+        $entityManager->flush();
+        $response = new Response();
+        $response->send();
+        return $this->render('admin/home_user.html.twig');
     }
 }

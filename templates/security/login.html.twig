@@ -1,36 +1,21 @@
-<!DOCTYPE html>
-<html lang="en">
 
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="">
-  <meta name="author" content="Dashboard">
-  <meta name="keyword" content="Dashboard, Bootstrap, Admin, Template, Theme, Responsive, Fluid, Retina">
-  <title>Enseignement superieuer </title>
 
-  <!-- Favicons -->
- {% include "link/link_css.html.twig" %}
-  
-</head>
+{% include 'link/nav.html.twig' %}
+  <!-- ======= Hero Section ======= -->
 
-<body class="hold-transition login-page">
-  <!-- **********************************************************************************************************************************************************
-      MAIN CONTENT
-      *********************************************************************************************************************************************************** -->
- 
-{% block body  %}
-<!-- Nav tabs -->
-{% include "link/header.html.twig" %}
-<div class="page-content--bge5">
-    <div class="container">
-        <div class="login-wrap">
-            <div class="login-content">
-              <div class="login-logo">
-                <h2> <strong> Se connecter </strong>  </h2> 
-              </div>
-                <div class="login-form">
-                    <form method="post" class="form-login">
+  <main id="main">
+  <section>
+  <section id="hero" class="d-flex justify-cntent-center align-items-center">
+    <div id="heroCarousel" data-bs-interval="5000" class="container carousel carousel-fade" data-bs-ride="carousel">
+      <div class="row" style="display:flex ; padding-top:10%;margin-left:20%">
+        <div class="col-md-6">
+          <div class="card">
+            <h3 class="card-header" style="font-family: cursive;">
+              Connexion 
+            </h3>
+            <div class="card-body">
+               
+              <form method="post" class="form-login">
                       {% if error %}
                           <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
                       {% endif %}
@@ -47,22 +32,13 @@
                             
                         </div>
                     {% endfor %}
-                     
-                        <div class="input-group mb-3">
+                          <div class="input-group mb-3">
                           <input type="email"  value="{{ last_username }}" name="email" autocomplete="email" required autofocus  id="inputEmail" class="form-control" placeholder="Adresse E-mail">
-                          <div class="input-group-append">
-                            <div class="input-group-text">
-                              <span class="fas fa-envelope"></span>
-                            </div>
-                          </div>
+                          
                         </div>
                         <div class="input-group mb-3">
                         <input type="password" name="password" id="inputPassword" class="form-control" autocomplete="current-password" required autofocus  placeholder="Mot de passe ">
-                        <div class="input-group-append">
-                          <div class="input-group-text">
-                            <span class="fas fa-lock"></span>
-                          </div>
-                        </div>
+                      
                       </div>
                       <div class="row">
                         <div class="col-12">
@@ -70,22 +46,24 @@
                           <button type="submit" class="btn btn-primary btn-block"> SE CONNECTER </button>
                         </div>
                     </div>
-                  </form>
-                  <br>
-                    <a style="text-align:center;color:red; padding-left:25%" href="{{ path("app_forgot_password_request") }}"> Mot de passe oublié    </a>
-                </div>
-                <br>
-                <br>
-                 <a href="{{ path("app_register") }}" class="btn btn-block btn-success"> Inscription  </a>
+              </form>
             </div>
+          </div>
         </div>
+      </div>
+    
     </div>
-</div>
-{{ include('link/footer.html.twig') }}
+  </section>
+    <div class="container">
+      
+    </div>
+  </section>
+  
+  
+  </main><!-- End #main -->
 
-  {% endblock %}
-
-  {% include "link/link_js.html.twig" %}
+  <!-- ======= Footer ======= -->
+  {{ include('link/footer.html.twig') }}
   
 </body>
 

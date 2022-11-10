@@ -72,10 +72,9 @@ class ChartController extends AbstractController
            $libelle = [];
            $count_diplome =[];
            $color = [];
-
            $diplome = $candidatureRepository->stat_diplome();
            foreach($diplome as $dp){
-             $libelle[]= $dp['libelle'];
+             $libelle[] = $dp['libelle'];
              $count_diplome[] =$dp['diplome_count'];
              $color[]= $dp["color"];
            }
@@ -87,10 +86,11 @@ class ChartController extends AbstractController
               $sexes[]=$sx["sexe"];
             }
             
-            $flux_annee = $fluxRepository->stat_flux_anne();
+            $flux_annee = $fluxRepository->stat_flux_anne_arrive();
             foreach( $flux_annee as $flux ){
               $count_flux_anne[] = $flux["ct"];
               $anne[] = $flux["anne"];
+             
             }
             $fux_diplome = $fluxRepository->stat_diplome_flux();
             foreach( $fux_diplome as $flux ){
@@ -134,12 +134,13 @@ class ChartController extends AbstractController
            "etudiant"=> $type_etudiant , 
            "employe"=>  $employe , 
            "diplome"=>  json_encode( $libelle) , 
-           "count_diplome" =>  json_encode($count_diplome) , 
+           "count_diplome" => json_encode($count_diplome) , 
            "color"=> json_encode($color), 
            "count_sexe"=> json_encode($count) , 
            "sexe_flux_entrant"=>json_encode($sexes) , 
            "flux_annee"=>json_encode($count_flux_anne) , 
            "annee_flux"=>json_encode($anne),
+      
            "cycle1"=>json_encode(count($cycle1)),
            "cycle2"=>json_encode(count($cycle2)) , 
            "cycle3"=>json_encode(count($cycle3)) , 

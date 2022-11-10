@@ -90,6 +90,6 @@ class SerieController extends AbstractController
             $entityManager->flush();
         }
 
-        return $this->redirectToRoute('serie_index', [], Response::HTTP_SEE_OTHER);
+        return $this->redirectToRoute('serie_new', [], Response::HTTP_SEE_OTHER);
     }
 }

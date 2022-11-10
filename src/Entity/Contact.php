@@ -17,42 +17,118 @@ class Contact
      */
     private $id;
 
+    
+
     /**
      * @ORM\Column(type="string", length=255)
      */
-    private $titre;
+    private $Nom;
 
     /**
-     * @ORM\ManyToOne(targetEntity=User::class, inversedBy="contacts")
+     * @ORM\Column(type="string", length=255, nullable=true)
      */
-    private $user;
+    private $telephone;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $email;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $objet;
+
+    /**
+     * @ORM\Column(type="text")
+     */
+    private $detail;
+
+    /**
+     * @ORM\Column(type="datetime")
+     */
+    private $datecreate;
+
+   
 
     public function getId(): ?int
     {
         return $this->id;
     }
 
-    public function getTitre(): ?string
+   
+
+    public function getNom(): ?string
     {
-        return $this->titre;
+        return $this->Nom;
     }
 
-    public function setTitre(string $titre): self
+    public function setNom(string $Nom): self
     {
-        $this->titre = $titre;
+        $this->Nom = $Nom;
 
         return $this;
     }
 
-    public function getUser(): ?User
+    public function getTelephone(): ?string
     {
-        return $this->user;
+        return $this->telephone;
     }
 
-    public function setUser(?User $user): self
+    public function setTelephone(?string $telephone): self
     {
-        $this->user = $user;
+        $this->telephone = $telephone;
 
         return $this;
     }
+
+    public function getEmail(): ?string
+    {
+        return $this->email;
+    }
+
+    public function setEmail(?string $email): self
+    {
+        $this->email = $email;
+
+        return $this;
+    }
+
+    public function getObjet(): ?string
+    {
+        return $this->objet;
+    }
+
+    public function setObjet(?string $objet): self
+    {
+        $this->objet = $objet;
+
+        return $this;
+    }
+
+    public function getDetail(): ?string
+    {
+        return $this->detail;
+    }
+
+    public function setDetail(string $detail): self
+    {
+        $this->detail = $detail;
+
+        return $this;
+    }
+
+    public function getDatecreate(): ?\DateTimeInterface
+    {
+        return $this->datecreate;
+    }
+
+    public function setDatecreate(\DateTimeInterface $datecreate): self
+    {
+        $this->datecreate = $datecreate;
+
+        return $this;
+    }
+
+   
 }

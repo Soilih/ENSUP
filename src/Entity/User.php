@@ -158,6 +158,16 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      */
     private $documents;
 
+    /**
+     * @ORM\OneToMany(targetEntity=Authentification::class, mappedBy="user")
+     */
+    private $authentifications;
+
+    /**
+     * @ORM\OneToMany(targetEntity=Droit::class, mappedBy="user")
+     */
+    private $droits;
+
     
 public function __construct()
     {
@@ -178,6 +188,8 @@ public function __construct()
        
         $this->users = new ArrayCollection();
         $this->documents = new ArrayCollection();
+        $this->authentifications = new ArrayCollection();
+        $this->droits = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -765,6 +777,66 @@ public function __construct()
             // set the owning side to null (unless already changed)
             if ($document->getUser() === $this) {
                 $document->setUser(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Authentification>
+     */
+    public function getAuthentifications(): Collection
+    {
+        return $this->authentifications;
+    }
+
+    public function addAuthentification(Authentification $authentification): self
+    {
+        if (!$this->authentifications->contains($authentification)) {
+            $this->authentifications[] = $authentification;
+            $authentification->setUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeAuthentification(Authentification $authentification): self
+    {
+        if ($this->authentifications->removeElement($authentification)) {
+            // set the owning side to null (unless already changed)
+            if ($authentification->getUser() === $this) {
+                $authentification->setUser(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Droit>
+     */
+    public function getDroits(): Collection
+    {
+        return $this->droits;
+    }
+
+    public function addDroit(Droit $droit): self
+    {
+        if (!$this->droits->contains($droit)) {
+            $this->droits[] = $droit;
+            $droit->setUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeDroit(Droit $droit): self
+    {
+        if ($this->droits->removeElement($droit)) {
+            // set the owning side to null (unless already changed)
+            if ($droit->getUser() === $this) {
+                $droit->setUser(null);
             }
         }
 

@@ -35,16 +35,16 @@ class RegistrationFormType extends AbstractType
                 "label"=>"Prenom"
             ])
             ->add('nin' , TextType::class , [
-                "label"=>"Numero de piece d'identite (nin , numero passport )" , 
+                "label"=>"Numero d'identité " , 
                 'attr' => ['maxlength' => 8] ,
             ])
             ->add('numerocarte' , TextType::class , [
                 "label"=>"Numero de table baccalaureat" , 
-                'attr' => ['pattern' => '/^[0-9]{8}$/', 'maxlength' => 4] , 
+                'attr' =>['maxlength' => 4] , 
             ])
             ->add('session' , NumberType::class , [
                 "label"=>"Année de session " , 
-                'attr' => ['pattern' => '/^[0-9]{8}$/', 'maxlength' => 4] , 
+                'attr' => [ 'maxlength' => 4] , 
                 
                 
                 
@@ -68,14 +68,7 @@ class RegistrationFormType extends AbstractType
                     ]),
                 ],
             ])
-            ->add('agreeTerms', CheckboxType::class, [
-                'mapped' => false,
-                'constraints' => [
-                    new IsTrue([
-                        'message' => 'You should agree to our terms.',
-                    ]),
-                ],
-            ])
+            
             ->add("Inscription" , SubmitType::class , [
                 'attr'=>['class'=>'btn btn-primary btn-block']
             ])

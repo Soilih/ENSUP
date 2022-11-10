@@ -18,6 +18,7 @@
     let cycle = document.querySelector("#cycle");
      let pays = document.querySelector("#pays");
     let diplome_flux = document.querySelector("#diplome_flux_entrant");
+    
 
     let categGraph = new Chart(categories, {
         type: "pie",
@@ -89,7 +90,7 @@
             labels: {{ diplome|raw }},
             datasets: [{
                    data: {{ count_diplome|raw }} ,
-                  label: "Gestion diplome",
+                   label: "Gestion diplome",
                    backgroundColor: {{ color|raw }}
              }]
         }, 
@@ -133,6 +134,8 @@
         }
       }
       })
+
+       
        //cycle d'etude flux entrant 
        let categGraph8 = new Chart(cycle , {
         type: "pie",
@@ -160,7 +163,8 @@
         }
     })
 
-     let categGraph10 = new Chart(pays , {
+     {# let categGraph10 = new Chart(pays , 
+     {
         type: "line",
         data: {
             labels: {{nom_pays|raw}},
@@ -178,8 +182,10 @@
                 suggestedMax: 100
             }
         }
-    }
-    })
+     }
+    } #}
+    
+   // )
 
     
       

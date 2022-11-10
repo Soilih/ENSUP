@@ -1,0 +1,38 @@
+
+
+{% extends 'base.html.twig' %}
+
+{% block body %}
+<div class="wrapper">
+    <div class="content-wrapper">
+        <div class="row" style="padding-left:2%;padding-top:2%">
+          <div class="col-md-9">
+                <div class="au-card au-card--no-shadow au-card--no-pad m-b-40">
+                    <div class="au-card-title" style="background-image:url('images/bg-title-01.jpg');">
+                        <div class="bg-overlay bg-overlay--blue"></div>
+                        <h3> <i class="zmdi zmdi-account-calendar"></i>Nos contactes </h3>
+                    </div>
+                    <div class="au-task js-list-load">
+                        {% for contact in contactes %}
+                            <div class="au-task__item au-task__item--danger">
+                                <div class="au-task__item-inner">
+                                    <h5 class="task">
+                                        <a href="#"> <strong> {{ contact.objet }} </strong> </a>
+                                    </h5>
+                                    <p> {{contact.detail}} </p>
+                                    <span class="time">{{ contact.datecreate ? contact.datecreate|date('Y-m-d H:i')  }}</span>
+                                    
+                                </div>
+                            </div>
+                        {% endfor %}
+                            
+                            
+                        </div>
+                    </div>
+                </div>
+          </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+

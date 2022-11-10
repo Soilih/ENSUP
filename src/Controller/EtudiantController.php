@@ -76,7 +76,7 @@ class EtudiantController extends AbstractController
             $entityManager->flush();
             $this->addFlash("success" , "informations personnelles  sont bien enregistrées avec success ");
 
-            return $this->redirectToRoute('etudiant_new', [], Response::HTTP_SEE_OTHER);
+            return $this->redirectToRoute('home_accueil', [], Response::HTTP_SEE_OTHER);
         }
 
         return $this->renderForm('etudiant/new.html.twig', [
@@ -125,7 +125,7 @@ class EtudiantController extends AbstractController
             }
             $this->getDoctrine()->getManager()->flush();
 
-            return $this->redirectToRoute('etudiant_new', [], Response::HTTP_SEE_OTHER);
+            return $this->redirectToRoute('home_accueil', [], Response::HTTP_SEE_OTHER);
         }
 
         return $this->renderForm('etudiant/edit.html.twig', [

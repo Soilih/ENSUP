@@ -64,16 +64,18 @@ class BourseController extends AbstractController
         ]);
     }
 
-    /**
-     * @Route("/{id}", name="bourse_delete", methods={"POST"})
+    /** 
+     * @Route("/delete/{id}", name="bourse_delete", methods={"DELETE"})
      */
-    public function delete(Request $request, Bourse $bourse, EntityManagerInterface $entityManager): Response
+   
+    public function delete(Request $request, $id ): Response
     {
-        if ($this->isCsrfTokenValid('delete'.$bourse->getId(), $request->request->get('_token'))) {
-            $entityManager->remove($bourse);
-            $entityManager->flush();
-        }
-
-        return $this->redirectToRoute('home_accueil', [], Response::HTTP_SEE_OTHER);
+        $bourse = $this->getDoctrine()->getRepository(Bourse::class)->find($id);
+        $entityManager = $this->getDoctrine()->getManager();
+        $entityManager->remove($bourse );
+        $entityManager->flush();
+        $response = new Response();
+        $response->send();
+        return $this->render('admin/home_user.html.twig');
     }
 }

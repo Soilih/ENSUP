@@ -2,23 +2,30 @@
 {% block body %}
 <div class="wrapper">
   <div class="content-wrapper">
-     <div class="row" style="padding-left:2%;padding-top:2%">
-          <div class="col-md-6">
-            <div class="card card-success">
-              <div class="card-header">
-                <h3 class="card-title">
-                 
-                  Editer un responsable 
-                </h3>
-              </div>
-              <!-- /.card-header -->
-              <div class="card-body">
-                  {{ include('responsable/_form.html.twig', {'button_label': 'Update'}) }}
-              </div>
-              <!-- /.card-body -->
+    <div class="row" style="padding-left:2%;padding-top:2%">
+      <div class="col-lg-10">
+          {% for msg in app.flashes('success') %}
+            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+                </button>
+                <strong>  {{msg }} </strong> 
             </div>
-          </div>  
-        </div>
+            <script>
+              $(".alert").alert();
+            </script>
+          {% endfor %}
+          <div class="card">
+            <h5 class="card-header">Informations responsables </h5>
+            <div class="card-body">
+                {{ include('responsable/_form.html.twig') }}
+            </div>
+          </div>
+      
     </div>
+  </div>
 </div>
 {% endblock %}
+                        
+                            
+                           
